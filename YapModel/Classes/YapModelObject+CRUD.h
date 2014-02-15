@@ -12,8 +12,6 @@
 
 #pragma mark - Default Transaction
 
-+ (instancetype)findWithKey:(NSString*)key;
-
 + (instancetype)find:(NSString*)key;
 
 + (NSArray*)findWithKeys:(NSArray*)keys;
@@ -37,8 +35,6 @@
 + (NSUInteger)count;
 
 #pragma mark - Custom Transaction
-
-+ (instancetype)findWithKey:(NSString*)key transaction:(YapDatabaseReadTransaction*)transaction;
 
 + (instancetype)find:(NSString*)key withTransaction:(YapDatabaseReadTransaction*)transaction;
 

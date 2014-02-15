@@ -13,23 +13,18 @@
 
 #pragma mark - Default Transaction
 
-+ (instancetype)findWithKey:(NSString *)key
++ (instancetype)find:(NSString *)key
 {
     __block YapModelObject* object;
     YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
     if (transaction) {
-        object = [self findWithKey:key transaction:transaction];
+        object = [self find:key withTransaction:transaction];
     } else {
         [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            object = [self findWithKey:key transaction:transaction];
+            object = [self find:key withTransaction:transaction];
         }];
     }
     return object;
-}
-
-+ (instancetype)find:(NSString *)key
-{
-    return [self findWithKey:key];
 }
 
 + (NSArray*)findWithKeys:(NSArray*)keys
@@ -166,14 +161,9 @@
 
 #pragma mark - Custom Transaction
 
-+ (instancetype)findWithKey:(NSString*)key transaction:(YapDatabaseReadTransaction*)transaction
-{
-    return [transaction objectForKey:key inCollection:[self collectionName]];
-}
-
 + (instancetype)find:(NSString*)key withTransaction:(YapDatabaseReadTransaction*)transaction
 {
-    return [self findWithKey:key transaction:transaction];
+    return [transaction objectForKey:key inCollection:[self collectionName]];
 }
 
 + (NSArray*)findWithKeys:(NSArray*)keys transaction:(YapDatabaseReadTransaction*)transaction

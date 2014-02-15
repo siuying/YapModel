@@ -29,7 +29,7 @@ describe(@"YapModelObject+CRUD", ^{
             }];
         });
         
-        context(@"+findWithKey:", ^{
+        context(@"+find:", ^{
             it(@"should find the object with key", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                     Person* john = [Person new];
@@ -38,7 +38,7 @@ describe(@"YapModelObject+CRUD", ^{
                     [john saveWithTransaction:transaction];
                 }];
                 
-                Person* john = [Person findWithKey:@"1"];
+                Person* john = [Person find:@"1"];
                 [[john.name should] equal:@"John"];
             });
         });
@@ -234,7 +234,7 @@ describe(@"YapModelObject+CRUD", ^{
             }];
         });
         
-        context(@"+find:transaction:", ^{
+        context(@"+find:withTransaction:", ^{
             it(@"should find the object with key", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                     Person* john = [Person new];
@@ -244,7 +244,7 @@ describe(@"YapModelObject+CRUD", ^{
                 }];
 
                 [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-                    Person* john = [Person findWithKey:@"1" transaction:transaction];
+                    Person* john = [Person find:@"1" withTransaction:transaction];
                     [[john.name should] equal:@"John"];
                 }];
             });
