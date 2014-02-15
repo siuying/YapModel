@@ -19,7 +19,7 @@ john.name = @"John";
 }];
 ```
 
-## Finders
+### Finders
 
 ```
 // Find all objects
