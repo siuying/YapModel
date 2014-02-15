@@ -41,20 +41,6 @@
     return objects;
 }
 
-+ (NSArray*)findWithFilter:(BOOL (^)(NSString *key))filter
-{
-    __block NSArray* objects;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
-    if (transaction) {
-        objects = [self findWithFilter:filter transaction:transaction];
-    } else {
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            objects = [self findWithFilter:filter transaction:transaction];
-        }];
-    }
-    return objects;
-}
-
 - (void)save
 {
     YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
@@ -174,15 +160,6 @@
     } withFilter:^BOOL(NSString *key) {
         return [keys containsObject:key];
     }];
-    return [allObjects copy];
-}
-
-+ (NSArray*)findWithFilter:(BOOL (^)(NSString *key))filter transaction:(YapDatabaseReadTransaction*)transaction
-{
-    __block NSMutableArray* allObjects = [NSMutableArray array];
-    [transaction enumerateKeysAndObjectsInCollection:[self collectionName] usingBlock:^(NSString *key, id object, BOOL *stop) {
-        [allObjects addObject:object];
-    } withFilter:filter];
     return [allObjects copy];
 }
 
