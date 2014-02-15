@@ -8,6 +8,8 @@
 
 #import "YapModelManager.h"
 
+NSString* const YapModelManagerReadWriteTransactionYey  = @"YapModelManagerReadWriteTransactionYey";
+
 @implementation YapModelManager
 
 @synthesize databaseName = _databaseName;
@@ -34,7 +36,7 @@
     return _database;
 }
 
--(YapDatabaseConnection*) databaseConnection
+-(YapDatabaseConnection*) connection
 {
     if (_connection) {
         return _connection;
@@ -56,6 +58,11 @@
    
    _databaseName = [[[self appName] stringByAppendingString:@".sqlite"] copy];
    return _databaseName;
+}
+
++ (YapDatabaseReadWriteTransaction*) transactionForCurrentThread
+{
+    return [[NSThread currentThread] threadDictionary][YapModelManagerReadWriteTransactionYey];
 }
                        
 #pragma mark - Private

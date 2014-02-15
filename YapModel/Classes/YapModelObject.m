@@ -7,7 +7,15 @@
 //
 
 #import "YapModelObject.h"
+#import "YapModelManager.h"
+#import "YapDatabase.h"
+#import "AutoCoding.h"
 
 @implementation YapModelObject
+
++(NSString*) collectionName
+{
+    return NSStringFromClass([self class]);
+}
 
 @end

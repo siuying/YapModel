@@ -25,7 +25,7 @@ john.name = @"John";
 NSArray* people = [Person all];
 
 // Get an object by Key
-Person* john = [Person get:@"uuid"];
+Person* john = [Person find:@"uuid"];
 
 // Iterate with all objects and find the object mating query
 NSArray *people = [Person where:@{ 
@@ -34,16 +34,20 @@ NSArray *people = [Person where:@{
                       @"state" : @"NY"
                   }];
 
-// Write your own NSPredicate
-NSPredicate *membersPredicate = [NSPredicate  predicateWithBlock:^BOOL(Person *person, NSDictionary *bindings) {
-    return person.isMember == YES;
-}];
-NSArray *members = [Person where:membersPredicate];
-
 // Find using secondary Index
 Person *johnDoe = [Person findWithIndex:@"idx" 
                                   query:@"name == ? AND surname == ?", @"John", @"Doe"];
 
+```
+
+### Transaction
+
+```
+Person* john = [Person transaction:^{
+  Person* john = [Person create:@{@"name": @"Leo"}];
+  john.name = @"John";
+  [john save];
+}];
 ```
 
 ### Aggregation

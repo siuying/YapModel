@@ -12,8 +12,12 @@
 @interface YapModelManager : NSObject
 
 @property (nonatomic, copy) NSString* databaseName;
+
 @property (nonatomic, readwrite) YapDatabase* database;
+
 @property (nonatomic, readonly) YapDatabaseConnection* connection;
+
+@property (nonatomic, readwrite) YapDatabaseReadWriteTransaction* transaction;
 
 + (instancetype)sharedManager;
 
