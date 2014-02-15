@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
-  s.version      = "0.0.1"
+  s.version      = "0.1.0"
   s.summary      = "YapModel is an lightweight ActiveRecord implementation on top of YapDatabase."
 
   s.description  = <<-DESC
                    YapModel is an lightweight ActiveRecord implementation on top of YapDatabase. The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
                    DESC
 
-  s.homepage     = "http://EXAMPLE/YapModel"
+  s.homepage     = "https://github.com/siuying/YapModel"
   s.license      = { :type => 'MIT', :file => 'LICENSE.txt' }
 
   s.author             = { "Francis Chong" => "francis@ignition.hk" }
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
 
-  s.source       = { :git => "http://EXAMPLE/YapModel.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/siuying/YapModel.git", :tag => s.version.to_s }
 
   s.source_files  = 'YapModel/Classes/**/*.{h,m}'
   s.requires_arc = true
