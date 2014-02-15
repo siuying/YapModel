@@ -1,6 +1,6 @@
 # YapModel
 
-YapModel is an ActiveRecord implementation on YapDatabase.
+YapModel is an lightweight ActiveRecord implementation on top of YapDatabase. The syntax is borrowed from Ruby on Rails and inspired by [ObjectiveRecord](https://github.com/mneorr/ObjectiveRecord).
 
 ## Synopsis
 
@@ -35,7 +35,7 @@ NSArray* people = [Person where:^BOOL(Person* person) {
 
 // Find using secondary Index
 Person *johnDoe = [Person findWithIndex:@"idx" 
-                                  query:@"name == ? AND surname == ?", @"John", @"Doe"];
+                                  query:@"WHERE name == ? AND surname == ?", @"John", @"Doe"];
 
 ```
 
@@ -56,5 +56,9 @@ Person* john = [Person transaction:^{
 NSUInteger personCount = [Person count];
 
 // count people named John
-NSUInteger johnCount = [Person countWhere:@"name == 'John'"];
+NSUInteger johnCount = [Person countWithIndex:@"index" query:@"WHERE name = 'John'"];
 ```
+
+## License 
+
+MIT License.
