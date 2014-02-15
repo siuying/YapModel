@@ -6,7 +6,7 @@ YapModel is an lightweight ActiveRecord implementation on top of YapDatabase. Th
 
 ### Create / Save / Delete
 
-```
+```objective-c
 Person* john = [Person create];
 john.name = @"John";
 [john save]
@@ -21,7 +21,7 @@ john.name = @"John";
 
 ### Finders
 
-```
+```objective-c
 // Find all objects
 NSArray* people = [Person all];
 
@@ -41,7 +41,7 @@ Person *johnDoe = [Person findWithIndex:@"idx"
 
 ### Transaction
 
-```
+```objective-c
 Person* john = [Person transaction:^{
   Person* john = [Person create:@{@"name": @"Leo"}];
   john.name = @"John";
@@ -51,7 +51,7 @@ Person* john = [Person transaction:^{
 
 ### Aggregation
 
-```
+```objective-c
 // count all Person entities
 NSUInteger personCount = [Person count];
 
