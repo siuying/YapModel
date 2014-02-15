@@ -22,17 +22,16 @@ john.name = @"John";
 ## Finders
 
 ```
+// Find all objects
 NSArray* people = [Person all];
 
-// Get an object by Key
+// Get an object by key
 Person* john = [Person find:@"uuid"];
 
-// Iterate with all objects and find the object mating query
-NSArray *people = [Person where:@{ 
-                      @"age" : @18,
-                      @"member" : @YES,
-                      @"state" : @"NY"
-                  }];
+// Iterate with all objects and find the object matching the filter
+NSArray* people = [Person where:^BOOL(Person* person) {
+    return person.age < 30;
+}];
 
 // Find using secondary Index
 Person *johnDoe = [Person findWithIndex:@"idx" 

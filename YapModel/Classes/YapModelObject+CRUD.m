@@ -8,6 +8,7 @@
 
 #import "YapModelObject+CRUD.h"
 #import "YapModelManager.h"
+#import "YapDatabaseSecondaryIndexTransaction.h"
 
 @implementation YapModelObject (CRUD)
 
@@ -27,6 +28,20 @@
     return object;
 }
 
++ (NSArray*)where:(BOOL (^)(id object))filter
+{
+    __block NSArray* objects;
+    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    if (transaction) {
+        objects = [self where:filter withTransaction:transaction];
+    } else {
+        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+            objects = [self where:filter withTransaction:transaction];
+        }];
+    }
+    return objects;
+}
+
 + (NSArray*)findWithKeys:(NSArray*)keys
 {
     __block NSArray* objects;
@@ -36,6 +51,20 @@
     } else {
         [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             objects = [self findWithKeys:keys transaction:transaction];
+        }];
+    }
+    return objects;
+}
+
++ (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query
+{
+    __block NSArray* objects;
+    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    if (transaction) {
+        objects = [self findWithIndex:indexName query:query transaction:transaction];
+    } else {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+            objects = [self findWithIndex:indexName query:query transaction:transaction];
         }];
     }
     return objects;
@@ -159,6 +188,29 @@
         [allObjects addObject:object];
     } withFilter:^BOOL(NSString *key) {
         return [keys containsObject:key];
+    }];
+    return [allObjects copy];
+}
+
++ (NSArray*)where:(BOOL (^)(id object))filter withTransaction:(YapDatabaseReadTransaction*)transaction
+{
+    __block NSMutableArray* allObjects = [NSMutableArray array];
+    [transaction enumerateKeysAndObjectsInCollection:[self collectionName] usingBlock:^(NSString *key, id object, BOOL *stop) {
+        [allObjects addObject:object];
+    } withFilter:^BOOL(NSString *key) {
+        id object = [transaction objectForKey:key inCollection:[self collectionName]];
+        return filter(object);
+    }];
+    return [allObjects copy];
+}
+
++ (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction
+{
+    __block NSMutableArray* allObjects = [NSMutableArray array];
+    [[transaction ext:indexName] enumerateKeysAndObjectsMatchingQuery:query usingBlock:^(NSString *collection, NSString *key, id object, BOOL *stop) {
+        if ([collection isEqualToString:[self collectionName]]) {
+            [allObjects addObject:object];
+        }
     }];
     return [allObjects copy];
 }

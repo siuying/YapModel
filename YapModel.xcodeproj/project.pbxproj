@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5475505918AF754A001C8220 /* PBXContainerItemProxy */ = {
+		543A98C318AFC27900EB5290 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5475502818AF754A001C8220 /* Project object */;
 			proxyType = 1;
@@ -256,7 +256,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				5475505A18AF754A001C8220 /* PBXTargetDependency */,
+				543A98C418AFC27900EB5290 /* PBXTargetDependency */,
 			);
 			name = YapModelTests;
 			productName = YapModelTests;
@@ -412,10 +412,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5475505A18AF754A001C8220 /* PBXTargetDependency */ = {
+		543A98C418AFC27900EB5290 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5475502F18AF754A001C8220 /* YapModel */;
-			targetProxy = 5475505918AF754A001C8220 /* PBXContainerItemProxy */;
+			targetProxy = 543A98C318AFC27900EB5290 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -538,6 +538,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YapModel/YapModel-Prefix.pch";
 				INFOPLIST_FILE = "YapModel/YapModel-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-lsqlite3",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -552,6 +559,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YapModel/YapModel-Prefix.pch";
 				INFOPLIST_FILE = "YapModel/YapModel-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-weak_library",
+					"/usr/lib/libc++.dylib",
+					"-lsqlite3",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -575,6 +589,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "YapModelTests/YapModelTests-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -595,6 +610,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YapModel/YapModel-Prefix.pch";
 				INFOPLIST_FILE = "YapModelTests/YapModelTests-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

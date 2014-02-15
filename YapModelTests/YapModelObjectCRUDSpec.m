@@ -9,13 +9,52 @@
 #import <Kiwi/Kiwi.h>
 #import "YapModel.h"
 #import "YapDatabase.h"
+#import "YapDatabaseSecondaryIndex.h"
+#import "YapDatabaseExtension.h"
 
 #import "Person.h"
 #import "Company.h"
 
+@interface YapDatabaseExtension(Private)
+- (BOOL)supportsDatabase:(YapDatabase *)database withRegisteredExtensions:(NSDictionary *)registeredExtensions;
+@end
+
 SPEC_BEGIN(YapModelObjectCRUDSpec)
 
 describe(@"YapModelObject+CRUD", ^{
+    
+    void(^SetupDatabaseIndex)(void) = ^{
+        YapDatabase* db = [YapModelManager sharedManager].database;
+        YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
+        [setup addColumn:@"age" withType:YapDatabaseSecondaryIndexTypeInteger];
+        YapDatabaseSecondaryIndexBlockType blockType = YapDatabaseSecondaryIndexBlockTypeWithObject;
+        YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
+            if ([object isKindOfClass:[Person class]]) {
+                Person *person = (Person *)object;
+                [dict setObject:@(person.age) forKey:@"age"];
+            }
+        };
+        YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
+        
+        // for some reason the method return NO in test
+        [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:@YES];
+        BOOL registered = [db registerExtension:index withName:@"index"];
+        if (!registered) {
+            NSLog(@"failed register extension: %@", index);
+        }
+    };
+    
+    void(^CreateTestRecords)(YapDatabaseReadWriteTransaction*) = ^(YapDatabaseReadWriteTransaction* transaction){
+        for(int i = 0; i < 10; i++) {
+            Person* person = [Person new];
+            person.name = [NSString stringWithFormat:@"Person%d", i];
+            person.age = i * 5;
+            [person saveWithTransaction:transaction];
+        }
+        Company* company = [Company new];
+        [company saveWithTransaction:transaction];
+    };
+
     context(@"Default Transaction", ^{
         __block YapDatabaseConnection* connection;
         beforeEach(^{
@@ -42,7 +81,23 @@ describe(@"YapModelObject+CRUD", ^{
                 [[john.name should] equal:@"John"];
             });
         });
-        
+
+        context(@"+where:", ^{
+            beforeEach(^{
+                // create some people
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    CreateTestRecords(transaction);
+                }];
+            });
+
+            it(@"should find the object with filter", ^{
+                NSArray* people = [Person where:^BOOL(Person* person) {
+                    return person.age < 30;
+                }];
+                [[theValue([people count]) should] equal:theValue(6)];
+            });
+        });
+
         context(@"+findWithKeys:", ^{
             it(@"should find the object with key", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -62,6 +117,30 @@ describe(@"YapModelObject+CRUD", ^{
                 
                 [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                     [[@[@"John"] should] containObjects:person.name, nil];
+                }];
+            });
+        });
+        
+        context(@"-findWithIndex:", ^{
+            beforeEach(^{
+                SetupDatabaseIndex();
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    CreateTestRecords(transaction);
+                }];
+            });
+
+            afterEach(^{
+                YapDatabase* db = [YapModelManager sharedManager].database;
+                [db unregisterExtension:@"index"];
+            });
+
+            it(@"should find people with age < 16",  ^{
+                NSArray* people = [Person findWithIndex:@"index"
+                                                  query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]];
+                [[theValue([people count]) should] equal:theValue(4)];
+
+                [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
+                    [[theValue(person.age) should] beLessThan:theValue(16)];
                 }];
             });
         });
@@ -141,14 +220,7 @@ describe(@"YapModelObject+CRUD", ^{
             beforeEach(^{
                 // create some people
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    for(int i = 0; i < 10; i++) {
-                        Person* person = [Person new];
-                        person.name = [NSString stringWithFormat:@"Person%d", i];
-                        [person saveWithTransaction:transaction];
-                    }
-                    
-                    Company* company = [Company new];
-                    [company saveWithTransaction:transaction];
+                    CreateTestRecords(transaction);
                 }];
             });
             
@@ -200,15 +272,9 @@ describe(@"YapModelObject+CRUD", ^{
         
         context(@"-all", ^{
             beforeEach(^{
-                // create some people
-                for(int i = 0; i < 10; i++) {
-                    Person* person = [Person new];
-                    person.name = [NSString stringWithFormat:@"Person%d", i];
-                    [person save];
-                }
-                
-                Company* company = [Company new];
-                [company save];
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    CreateTestRecords(transaction);
+                }];
             });
             
             it(@"should get all objects of the class in database", ^{
@@ -271,6 +337,51 @@ describe(@"YapModelObject+CRUD", ^{
                     [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                         [[@[@"John"] should] containObjects:person.name, nil];
                     }];
+                }];
+            });
+        });
+        
+        context(@"-findWithIndex:query:transaction:", ^{
+            beforeEach(^{
+                SetupDatabaseIndex();
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    CreateTestRecords(transaction);
+                }];
+            });
+            
+            afterEach(^{
+                YapDatabase* db = [YapModelManager sharedManager].database;
+                [db unregisterExtension:@"index"];
+            });
+            
+            it(@"should find people with age < 16",  ^{
+                [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+                    NSArray* people = [Person findWithIndex:@"index"
+                                                      query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]
+                                                transaction:transaction];
+                    [[theValue([people count]) should] equal:theValue(4)];
+                    
+                    [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
+                        [[theValue(person.age) should] beLessThan:theValue(16)];
+                    }];
+                }];
+            });
+        });
+        
+        context(@"+where:withTransaction:", ^{
+            beforeEach(^{
+                // create some people
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    CreateTestRecords(transaction);
+                }];
+            });
+            
+            it(@"should find the object with filter", ^{
+                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    NSArray* people = [Person where:^BOOL(Person* person) {
+                        return person.age < 30;
+                    } withTransaction:transaction];
+                    [[theValue([people count]) should] equal:theValue(6)];
                 }];
             });
         });
@@ -430,14 +541,7 @@ describe(@"YapModelObject+CRUD", ^{
             beforeEach(^{
                 // create some people
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    for(int i = 0; i < 10; i++) {
-                        Person* person = [Person new];
-                        person.name = [NSString stringWithFormat:@"Person%d", i];
-                        [person saveWithTransaction:transaction];
-                    }
-                    
-                    Company* company = [Company new];
-                    [company saveWithTransaction:transaction];
+                    CreateTestRecords(transaction);
                 }];
             });
 

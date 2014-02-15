@@ -7,6 +7,7 @@
 //
 
 #import "YapModelObject.h"
+#import "YapDatabaseQuery.h"
 
 @interface YapModelObject (CRUD)
 
@@ -21,12 +22,28 @@
 + (instancetype)find:(NSString*)key;
 
 /**
+ * Find all objects in the collection matching the filter in a new transaction.
+ *
+ * @param filter a block that check if an object should be returned.
+ * @return all objects in the collection matching the filter.
+ */
++ (NSArray*)where:(BOOL (^)(id object))filter;
+
+/**
  * Find all objects in the collection having the given keys in a new transaction.
  *
  * @param keys array of keys
  * @return all objects in the collection having the keys.
  */
 + (NSArray*)findWithKeys:(NSArray*)keys;
+
+/**
+ * Find all objects in the collection matching the filter, in a new transaction.
+ *
+ * @param filter a block that check if an object should be returned.
+ * @return all objects in the collection matching the filter.
+ */
++ (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query;
 
 /**
  * Create or update current object in a new transaction.
@@ -97,6 +114,24 @@
  * @return all objects in the collection having the keys.
  */
 + (NSArray*)findWithKeys:(NSArray*)keys transaction:(YapDatabaseReadTransaction*)transaction;
+
+/**
+ * Find all objects in the collection matching the filter, in given transaction.
+ *
+ * @param filter a block that check if an object should be returned.
+ * @param transaction The transaction.
+ * @return all objects in the collection matching the filter.
+ */
++ (NSArray*)where:(BOOL (^)(id object))filter withTransaction:(YapDatabaseReadTransaction*)transaction;
+
+/**
+ * Find all objects in the collection matching the filter, in given transaction.
+ *
+ * @param filter a block that check if an object should be returned.
+ * @param transaction The transaction.
+ * @return all objects in the collection matching the filter.
+ */
++ (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction;
 
 /**
  * Create or update this object in given transaction.

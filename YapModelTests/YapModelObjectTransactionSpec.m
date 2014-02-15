@@ -12,10 +12,20 @@
 
 #import "Person.h"
 #import "Company.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
 
 SPEC_BEGIN(YapModelObjectTransactionSpec)
 
 describe(@"YapModelObject+Transaction", ^{
+    beforeAll(^{
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    });
+    
+    afterAll(^{
+        [DDLog removeAllLoggers];
+    });
+    
     context(@"Default Transaction", ^{
         __block YapDatabaseConnection* connection;
         beforeEach(^{
@@ -36,7 +46,7 @@ describe(@"YapModelObject+Transaction", ^{
                     john.name = @"John";
                     [john save];
                 }];
-                Person* john = [Person findWithKey:@"1"];
+                Person* john = [Person find:@"1"];
                 [[john.name should] equal:@"John"];
             });
         });
