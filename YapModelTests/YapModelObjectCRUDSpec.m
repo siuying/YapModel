@@ -44,15 +44,23 @@ describe(@"YapModelObject+CRUD", ^{
         }
     };
     
-    void(^CreateTestRecords)(YapDatabaseReadWriteTransaction*) = ^(YapDatabaseReadWriteTransaction* transaction){
-        for(int i = 0; i < 10; i++) {
-            Person* person = [Person new];
-            person.name = [NSString stringWithFormat:@"Person%d", i];
-            person.age = i * 5;
-            [person saveWithTransaction:transaction];
-        }
-        Company* company = [Company new];
-        [company saveWithTransaction:transaction];
+    void(^CreateTestRecords)(void) = ^{
+        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+            for(int i = 0; i < 10; i++) {
+                Person* person = [Person new];
+                person.name = [NSString stringWithFormat:@"Person%d", i];
+                person.age = i * 5;
+                [person saveWithTransaction:transaction];
+            }
+            Company* company = [Company new];
+            [company saveWithTransaction:transaction];
+        }];
+    };
+    
+    void(^ResetDatabase)(void) = ^{
+        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+            [transaction removeAllObjectsInAllCollections];
+        }];
     };
 
     context(@"Default Transaction", ^{
@@ -63,9 +71,7 @@ describe(@"YapModelObject+CRUD", ^{
         });
         
         afterEach(^{
-            [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                [transaction removeAllObjectsInAllCollections];
-            }];
+            ResetDatabase();
         });
         
         context(@"+find:", ^{
@@ -85,9 +91,11 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"+where:", ^{
             beforeEach(^{
                 // create some people
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                ResetDatabase();
             });
 
             it(@"should find the object with filter", ^{
@@ -124,12 +132,12 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"-findWithIndex:", ^{
             beforeEach(^{
                 SetupDatabaseIndex();
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
             });
 
             afterEach(^{
+                ResetDatabase();
+
                 YapDatabase* db = [YapModelManager sharedManager].database;
                 [db unregisterExtension:@"index"];
             });
@@ -219,9 +227,11 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"+deleteAllWithTransaction:", ^{
             beforeEach(^{
                 // create some people
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                ResetDatabase();
             });
             
             it(@"should delete all objects of the class", ^{
@@ -272,9 +282,11 @@ describe(@"YapModelObject+CRUD", ^{
         
         context(@"-all", ^{
             beforeEach(^{
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                ResetDatabase();
             });
             
             it(@"should get all objects of the class in database", ^{
@@ -283,6 +295,30 @@ describe(@"YapModelObject+CRUD", ^{
                 [all enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                     [[[person name] shouldNot] beNil];
                 }];
+            });
+        });
+        
+        context(@"-countWithIndex:query:", ^{
+            beforeEach(^{
+                SetupDatabaseIndex();
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                ResetDatabase();
+
+                YapDatabase* db = [YapModelManager sharedManager].database;
+                [db unregisterExtension:@"index"];
+            });
+
+            it(@"should return 0 when no objects match",  ^{
+                NSUInteger count = [Person countWithIndex:@"index" query:[YapDatabaseQuery queryWithFormat:@"WHERE age > ?", @100]];
+                [[theValue(count) should] equal:theValue(0U)];
+            });
+
+            it(@"should return 1 when there is one object", ^{
+                NSUInteger count = [Person countWithIndex:@"index" query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @16]];
+                [[theValue(count) should] equal:theValue(4U)];
             });
         });
     });
@@ -344,9 +380,7 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"-findWithIndex:query:transaction:", ^{
             beforeEach(^{
                 SetupDatabaseIndex();
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
             });
             
             afterEach(^{
@@ -371,9 +405,7 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"+where:withTransaction:", ^{
             beforeEach(^{
                 // create some people
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
             });
             
             it(@"should find the object with filter", ^{
@@ -540,9 +572,7 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"-allWithTransaction:", ^{
             beforeEach(^{
                 // create some people
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    CreateTestRecords(transaction);
-                }];
+                CreateTestRecords();
             });
 
             it(@"should get all objects of the class in database", ^{

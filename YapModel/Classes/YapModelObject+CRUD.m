@@ -174,6 +174,20 @@
     return count;
 }
 
++ (NSUInteger)countWithIndex:(NSString*)index query:(YapDatabaseQuery*)query
+{
+    __block NSUInteger count = 0;
+    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    if (transaction) {
+        [[transaction ext:index] getNumberOfRows:&count matchingQuery:query];
+    } else {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+            [[transaction ext:index] getNumberOfRows:&count matchingQuery:query];
+        }];
+    }
+    return count;
+}
+
 #pragma mark - Custom Transaction
 
 + (instancetype)find:(NSString*)key withTransaction:(YapDatabaseReadTransaction*)transaction
@@ -269,6 +283,13 @@
 + (NSUInteger)countWithTransaction:(YapDatabaseReadTransaction*)transaction
 {
     return [transaction numberOfKeysInCollection:[self collectionName]];
+}
+
++ (NSUInteger)countWithIndex:(NSString*)index query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction
+{
+    NSUInteger count;
+    [[transaction ext:index] getNumberOfRows:&count matchingQuery:query];
+    return count;
 }
 
 @end

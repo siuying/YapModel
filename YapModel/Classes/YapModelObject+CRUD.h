@@ -95,6 +95,14 @@
  */
 + (NSUInteger)count;
 
+/**
+ * Count objects matching the query from the collection in a new transaction.
+ *
+ * @param index Index name
+ * @param query The query used to find items.
+ */
++ (NSUInteger)countWithIndex:(NSString*)index query:(YapDatabaseQuery*)query;
+
 #pragma mark - Custom Transaction
 
 /**
@@ -195,5 +203,14 @@
  * @param transaction the transaction.
  */
 + (NSUInteger)countWithTransaction:(YapDatabaseReadTransaction*)transaction;
+
+/**
+ * Count objects matching the query from the collection in given transaction.
+ *
+ * @param index Index name
+ * @param query The query used to find items.
+ * @param transaction the transaction.
+ */
++ (NSUInteger)countWithIndex:(NSString*)index query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction;
 
 @end
