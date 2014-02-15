@@ -13,7 +13,7 @@ You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDat
 ```objective-c
 Person* john = [Person create];
 john.name = @"John";
-[john save]
+[john save];
 [john delete];
 
 [Person create:@{
