@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "http://EXAMPLE/YapModel"
-  s.license      = { :type => 'MIT', :file => 'FILE_LICENSE' }
+  s.license      = { :type => 'MIT', :file => 'LICENSE.txt' }
 
   s.author             = { "Francis Chong" => "francis@ignition.hk" }
   s.social_media_url = "http://twitter.com/siuying"
@@ -22,5 +22,6 @@ Pod::Spec.new do |s|
   s.source_files  = 'YapModel/Classes/**/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'YapDatabase', '~> 2.1'
+  s.dependency 'YapDatabase', '>= 2.3'
+  s.dependency 'AutoCoding', '~> 2.1'
 end

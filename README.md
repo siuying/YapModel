@@ -59,6 +59,11 @@ NSUInteger personCount = [Person count];
 NSUInteger johnCount = [Person countWithIndex:@"index" query:@"WHERE name = 'John'"];
 ```
 
+## NSCoding
+
+YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you
+should check [AutoCoding](https://github.com/nicklockwood/AutoCoding) to understand how it work, and override the NSCoding/NSCopying methods if needed.
+
 ## License 
 
 MIT License.
