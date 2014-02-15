@@ -13,6 +13,13 @@
 
 @implementation YapModelObject
 
+-(instancetype) init
+{
+    self = [super init];
+    _key = [[NSUUID UUID] UUIDString];
+    return self;
+}
+
 +(NSString*) collectionName
 {
     return NSStringFromClass([self class]);
