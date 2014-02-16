@@ -1,5 +1,10 @@
 # Changelog
 
+0.2.1 2014-02-16
+------------------
+
++ Add ``[YapModelObject findFirstWithIndex:query:]``.
+
 0.2.0 2014-02-16
 ------------------
 
