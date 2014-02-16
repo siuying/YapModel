@@ -37,7 +37,7 @@ NSArray* people = [Person where:^BOOL(Person* person) {
     return person.age < 30;
 }];
 
-// Find using secondary Index
+// Find using Secondary Index
 Person *johnDoe = [Person findWithIndex:@"idx" 
                                   query:@"WHERE name == ? AND surname == ?", @"John", @"Doe"];
 
