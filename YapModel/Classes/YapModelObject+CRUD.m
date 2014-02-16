@@ -17,11 +17,11 @@
 + (instancetype)find:(NSString *)key
 {
     __block YapModelObject* object;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         object = [self find:key withTransaction:transaction];
     } else {
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             object = [self find:key withTransaction:transaction];
         }];
     }
@@ -31,11 +31,11 @@
 + (NSArray*)where:(BOOL (^)(id object))filter
 {
     __block NSArray* objects;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         objects = [self where:filter withTransaction:transaction];
     } else {
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             objects = [self where:filter withTransaction:transaction];
         }];
     }
@@ -45,11 +45,11 @@
 + (NSArray*)findWithKeys:(NSArray*)keys
 {
     __block NSArray* objects;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         objects = [self findWithKeys:keys transaction:transaction];
     } else {
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             objects = [self findWithKeys:keys transaction:transaction];
         }];
     }
@@ -59,7 +59,7 @@
 + (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query
 {
     __block NSArray* objects;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         objects = [self findWithIndex:indexName query:query transaction:transaction];
     } else {
@@ -72,7 +72,7 @@
 
 - (void)save
 {
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         [self saveWithTransaction:transaction];
     } else {
@@ -84,7 +84,7 @@
 
 - (void)delete
 {
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         [self deleteWithTransaction:transaction];
     } else {
@@ -96,7 +96,7 @@
 
 + (void)deleteAll
 {
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         [self deleteAllWithTransaction:transaction];
     } else {
@@ -109,7 +109,7 @@
 + (instancetype)create
 {
     __block YapModelObject* object;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         object = [self createWithTransaction:transaction];
     } else {
@@ -123,7 +123,7 @@
 + (instancetype)create:(NSDictionary *)attributes
 {
     __block YapModelObject* object;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         object = [self create:attributes withTransaction:transaction];
     } else {
@@ -136,7 +136,7 @@
 
 - (void)update:(NSDictionary *)attributes
 {
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         [self update:attributes withTransaction:transaction];
     } else {
@@ -149,7 +149,7 @@
 + (NSArray *)all
 {
     __block NSArray* allObjects;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         allObjects = [self allWithTransaction:transaction];
     } else {
@@ -163,7 +163,7 @@
 + (NSUInteger)count
 {
     __block NSUInteger count;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         count = [self countWithTransaction:transaction];
     } else {
@@ -177,7 +177,7 @@
 + (NSUInteger)countWithIndex:(NSString*)index query:(YapDatabaseQuery*)query
 {
     __block NSUInteger count = 0;
-    YapDatabaseReadWriteTransaction* transaction = [[YapModelManager sharedManager] transaction];
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         [[transaction ext:index] getNumberOfRows:&count matchingQuery:query];
     } else {
