@@ -15,6 +15,8 @@
 
 + (instancetype)sharedManager;
 
++ (void)setSharedManager:(YapModelManager*)sharedManager;
+
 + (YapDatabaseReadWriteTransaction*)transactionForCurrentThread;
 
 + (void)setTransactionForCurrentThread:(YapDatabaseReadWriteTransaction*)transaction;

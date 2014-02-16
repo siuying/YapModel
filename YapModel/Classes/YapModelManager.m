@@ -19,22 +19,30 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
 
 @implementation YapModelManager
 
+static YapModelManager * _sharedYapModelManager;
+
 @synthesize databaseName = _databaseName;
 
 + (instancetype)sharedManager
 {
-    static YapModelManager *singleton;
-    static dispatch_once_t singletonToken;
-    dispatch_once(&singletonToken, ^{
-        singleton = [[self alloc] init];
-    });
-    return singleton;
+    if (!_sharedYapModelManager) {
+        _sharedYapModelManager = [[self alloc] init];
+    }
+    return _sharedYapModelManager;
+}
+
++ (void)setSharedManager:(YapModelManager*)sharedManager
+{
+    _sharedYapModelManager = sharedManager;
 }
 
 -(YapDatabase*) database
 {
     if (!_database) {
         _database = [[YapDatabase alloc] initWithPath:[self sqliteStorePath]];
+        if (!_database) {
+            [NSException raise:NSInternalInconsistencyException format:@"cannot load database: %@", [self sqliteStorePath]];
+        }
     }
     return _database;
 }
