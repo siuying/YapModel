@@ -17,8 +17,10 @@
 
 @property (nonatomic, readonly) YapDatabaseConnection* connection;
 
-@property (nonatomic, readwrite) YapDatabaseReadWriteTransaction* transaction;
-
 + (instancetype)sharedManager;
+
++ (YapDatabaseReadWriteTransaction*)transactionForCurrentThread;
+
++ (void)setTransactionForCurrentThread:(YapDatabaseReadWriteTransaction*)transaction;
 
 @end

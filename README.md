@@ -37,7 +37,7 @@ NSArray* people = [Person where:^BOOL(Person* person) {
     return person.age < 30;
 }];
 
-// Find using Secondary Index
+// Find using Sgecondary Index
 Person *johnDoe = [Person findWithIndex:@"idx" 
                                   query:@"WHERE name == ? AND surname == ?", @"John", @"Doe"];
 
@@ -60,7 +60,7 @@ You can simply use the shorthand methods, or use your own transaction.
 Using `trasaction:` method on ``YapModelObject`` you can run multiple shorthands method in the same transaction:
 
 ```objective-c
-Person* john = [Person transaction:^{
+Person* john = [Person transaction:^(YapDatabaseReadWriteTransaction* transaction){
   Person* john = [Person create:@{@"name": @"Leo"}];
   john.name = @"John";
   [john save];

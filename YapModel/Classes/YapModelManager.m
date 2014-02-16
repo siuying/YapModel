@@ -8,7 +8,8 @@
 
 #import "YapModelManager.h"
 
-NSString* const YapModelManagerReadWriteTransactionYey  = @"YapModelManagerReadWriteTransactionYey";
+NSString* const YapModelManagerReadTransactionKey       = @"YapModelManagerReadTransactionKey";
+NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadWriteTransactionKey";
 
 @implementation YapModelManager
 
@@ -62,9 +63,18 @@ NSString* const YapModelManagerReadWriteTransactionYey  = @"YapModelManagerReadW
 
 + (YapDatabaseReadWriteTransaction*) transactionForCurrentThread
 {
-    return [[NSThread currentThread] threadDictionary][YapModelManagerReadWriteTransactionYey];
+    return [[NSThread currentThread] threadDictionary][YapModelManagerReadWriteTransactionKey];
 }
-                       
+
++(void) setTransactionForCurrentThread:(YapDatabaseReadWriteTransaction*)transaction
+{
+    if (transaction) {
+        [[NSThread currentThread] threadDictionary][YapModelManagerReadWriteTransactionKey] = transaction;
+    } else {
+        [[[NSThread currentThread] threadDictionary] removeObjectForKey:YapModelManagerReadWriteTransactionKey];
+    }
+}
+
 #pragma mark - Private
 
 - (NSString *)appName {
