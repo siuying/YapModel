@@ -162,7 +162,7 @@
 
 + (NSUInteger)count
 {
-    __block NSUInteger count;
+    __block NSUInteger count = 0;
     YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
     if (transaction) {
         count = [self countWithTransaction:transaction];
