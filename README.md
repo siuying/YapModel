@@ -45,6 +45,20 @@ Person *johnDoe = [Person findWithIndex:@"idx"
 
 ### Transaction
 
+You can simply use the shorthand methods, or use your own transaction.
+
+```objective-c
+// Shorthand method
+[Person create:@{@"name": @"Leo"}];
+
+// equivalent
+[[[YapModelManager sharedManager] connection] readWriteTransactionWithBlock:^(YapDatabaseReadWriteTransaction* transaction){
+  [Person create:@{@"name": @"Leo"} withTransaction:transaction];
+}];
+```
+
+Using `trasaction:` method on ``YapModelObject`` you can run multiple shorthands method in the same transaction:
+
 ```objective-c
 Person* john = [Person transaction:^{
   Person* john = [Person create:@{@"name": @"Leo"}];
