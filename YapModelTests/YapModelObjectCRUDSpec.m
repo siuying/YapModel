@@ -57,21 +57,26 @@ describe(@"YapModelObject+CRUD", ^{
         }];
     };
     
-    void(^ResetDatabase)(void) = ^{
+    beforeAll(^{
+        [YapModelManager sharedManager].databaseName = @"CURD.sqlite";
+    });
+    
+    afterEach(^{
         [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             [transaction removeAllObjectsInAllCollections];
         }];
-    };
+    });
+    
+    afterAll(^{
+        NSString* dbPath = [[[YapModelManager sharedManager] database] databasePath];
+        [[NSFileManager defaultManager] removeItemAtPath:dbPath error:nil];
+        [[YapModelManager sharedManager] setDatabase:nil];
+    });
 
     context(@"Default Transaction", ^{
         __block YapDatabaseConnection* connection;
         beforeEach(^{
             connection = [[YapModelManager sharedManager] connection];
-            [[connection shouldNot] beNil];
-        });
-        
-        afterEach(^{
-            ResetDatabase();
         });
         
         context(@"+find:", ^{
@@ -92,10 +97,6 @@ describe(@"YapModelObject+CRUD", ^{
             beforeEach(^{
                 // create some people
                 CreateTestRecords();
-            });
-            
-            afterEach(^{
-                ResetDatabase();
             });
 
             it(@"should find the object with filter", ^{
@@ -136,8 +137,6 @@ describe(@"YapModelObject+CRUD", ^{
             });
 
             afterEach(^{
-                ResetDatabase();
-
                 YapDatabase* db = [YapModelManager sharedManager].database;
                 [db unregisterExtension:@"index"];
             });
@@ -230,10 +229,6 @@ describe(@"YapModelObject+CRUD", ^{
                 CreateTestRecords();
             });
             
-            afterEach(^{
-                ResetDatabase();
-            });
-            
             it(@"should delete all objects of the class", ^{
                 [[theValue([Person count]) should] equal:theValue(10)];
                 [Person deleteAll];
@@ -284,11 +279,7 @@ describe(@"YapModelObject+CRUD", ^{
             beforeEach(^{
                 CreateTestRecords();
             });
-            
-            afterEach(^{
-                ResetDatabase();
-            });
-            
+
             it(@"should get all objects of the class in database", ^{
                 NSArray* all = [Person all];
                 [[theValue(all.count) should] equal:theValue(10)];
@@ -305,8 +296,6 @@ describe(@"YapModelObject+CRUD", ^{
             });
             
             afterEach(^{
-                ResetDatabase();
-
                 YapDatabase* db = [YapModelManager sharedManager].database;
                 [db unregisterExtension:@"index"];
             });
@@ -325,15 +314,9 @@ describe(@"YapModelObject+CRUD", ^{
 
     context(@"Custom Transaction", ^{
         __block YapDatabaseConnection* connection;
+
         beforeEach(^{
             connection = [[YapModelManager sharedManager] connection];
-            [[connection shouldNot] beNil];
-        });
-        
-        afterEach(^{
-            [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                [transaction removeAllObjectsInAllCollections];
-            }];
         });
         
         context(@"+find:withTransaction:", ^{

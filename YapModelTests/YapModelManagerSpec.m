@@ -9,9 +9,22 @@
 #import <Kiwi/Kiwi.h>
 #import "YapModelManager.h"
 
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+
 SPEC_BEGIN(YapModelManagerSpec)
 
 describe(@"YapModelManager", ^{
+    beforeAll(^{
+        [DDLog removeAllLoggers];
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    });
+    
+    afterAll(^{
+        [DDLog flushLog];
+        [DDLog removeAllLoggers];
+    });
+
     describe(@"+sharedManager", ^{
         it(@"should return shared instance of database manager", ^{
             YapModelManager* dbm = [YapModelManager sharedManager];
@@ -33,6 +46,37 @@ describe(@"YapModelManager", ^{
             [[db should] equal:db2];
 
             [[[db databasePath] should] containString:@"YapModel.sqlite"];
+        });
+    });
+    
+    describe(@"-database", ^{
+        it(@"should return default database", ^{
+            YapModelManager* manager = [YapModelManager sharedManager];
+            YapDatabase* db = [manager database];
+            [[db shouldNot] beNil];
+            [[[db databasePath] should] containString:@"YapModel.sqlite"];
+        });
+        
+        it(@"should return database based on databaseName", ^{
+            YapModelManager* manager = [[YapModelManager alloc] init];
+            manager.databaseName = @"Hello.sqlite";
+            YapDatabase* db = [manager database];
+            [[db shouldNot] beNil];
+            [[[db databasePath] should] containString:@"Hello.sqlite"];
+        });
+    });
+    
+    describe(@"-setDatabase:", ^{
+        it(@"should set the db to a new db", ^{
+            YapModelManager* manager = [[YapModelManager alloc] init];
+            manager.databaseName = @"TestSetDatabase.sqlite";
+            NSString* dbPath = [manager sqliteStorePath];
+            YapDatabase* database = [[YapDatabase alloc] initWithPath:dbPath];
+            manager.database = database;
+
+            [[manager.database shouldNot] beNil];
+            [[[manager.database databasePath] should] containString:@"TestSetDatabase.sqlite"];
+            [[manager.connection shouldNot] beNil];
         });
     });
 });

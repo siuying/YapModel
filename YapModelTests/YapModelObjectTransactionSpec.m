@@ -14,6 +14,7 @@
 #import "Company.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "YapDatabaseManager.h"
 
 SPEC_BEGIN(YapModelObjectTransactionSpec)
 
@@ -21,14 +22,21 @@ describe(@"YapModelObject+Transaction", ^{
     __block YapDatabaseConnection* connection;
 
     beforeAll(^{
+        [YapModelManager sharedManager].databaseName = @"Transaction.sqlite";
         connection = [[YapModelManager sharedManager] connection];
         [[connection shouldNot] beNil];
     });
     
-    afterAll(^{
+    afterEach(^{
         [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             [transaction removeAllObjectsInAllCollections];
         }];
+    });
+
+    afterAll(^{
+        NSString* dbPath = [[[YapModelManager sharedManager] database] databasePath];
+        [[NSFileManager defaultManager] removeItemAtPath:dbPath error:nil];
+        [[YapModelManager sharedManager] setDatabase:nil];
     });
 
     context(@"+transaction:", ^{

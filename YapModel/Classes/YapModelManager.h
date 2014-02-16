@@ -23,4 +23,6 @@
 
 + (void)setTransactionForCurrentThread:(YapDatabaseReadWriteTransaction*)transaction;
 
+- (NSString*) sqliteStorePath;
+
 @end

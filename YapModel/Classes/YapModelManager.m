@@ -75,20 +75,19 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
     }
 }
 
+- (NSString*) sqliteStorePath {
+    NSURL *directory = [self isOSX] ? self.applicationSupportDirectory : self.applicationDocumentsDirectory;
+    NSString *databaseDir = [[directory path] stringByAppendingPathComponent:[self databaseName]];
+    
+    [self createApplicationSupportDirIfNeeded:directory];
+    return databaseDir;
+}
+
 #pragma mark - Private
 
 - (NSString *)appName {
     return [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleName"];
 }
-
-- (NSString*) sqliteStorePath {
-    NSURL *directory = [self isOSX] ? self.applicationSupportDirectory : self.applicationDocumentsDirectory;
-    NSString *databaseDir = [[directory path] stringByAppendingPathComponent:[self databaseName]];
-
-    [self createApplicationSupportDirIfNeeded:directory];
-    return databaseDir;
-}
-
 - (BOOL)isOSX {
     if (NSClassFromString(@"UIDevice")) return NO;
     return YES;
