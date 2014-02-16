@@ -68,15 +68,17 @@ describe(@"YapModelManager", ^{
     
     describe(@"-setDatabase:", ^{
         it(@"should set the db to a new db", ^{
+            NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentPath = [searchPaths lastObject];
+            NSString *databasePath = [documentPath stringByAppendingPathComponent:@"TestSetDatabase.sqlite"];
+            YapDatabase* database = [[YapDatabase alloc] initWithPath:databasePath];
             YapModelManager* manager = [[YapModelManager alloc] init];
-            manager.databaseName = @"TestSetDatabase.sqlite";
-            NSString* dbPath = [manager sqliteStorePath];
-            YapDatabase* database = [[YapDatabase alloc] initWithPath:dbPath];
-            manager.database = database;
+            [manager setDatabase:database];
 
             [[manager.database shouldNot] beNil];
             [[[manager.database databasePath] should] containString:@"TestSetDatabase.sqlite"];
             [[manager.connection shouldNot] beNil];
+            [[[[[manager connection] database] databasePath] should] containString:@"TestSetDatabase.sqlite"];
         });
     });
 });

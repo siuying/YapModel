@@ -11,11 +11,15 @@
 NSString* const YapModelManagerReadTransactionKey       = @"YapModelManagerReadTransactionKey";
 NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadWriteTransactionKey";
 
+@interface YapModelManager(){
+    YapDatabaseConnection* _connection;
+    YapDatabase* _database;
+}
+@end
+
 @implementation YapModelManager
 
 @synthesize databaseName = _databaseName;
-@synthesize database = _database;
-@synthesize connection = _connection;
 
 + (instancetype)sharedManager
 {
@@ -29,21 +33,17 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
 
 -(YapDatabase*) database
 {
-    if (_database) {
-        return _database;
+    if (!_database) {
+        _database = [[YapDatabase alloc] initWithPath:[self sqliteStorePath]];
     }
-    
-    _database = [[YapDatabase alloc] initWithPath:[self sqliteStorePath]];
     return _database;
 }
 
 -(YapDatabaseConnection*) connection
 {
-    if (_connection) {
-        return _connection;
+    if (!_connection) {
+        _connection = [[self database] newConnection];
     }
-
-    _connection = [[self database] newConnection];
     return _connection;
 }
 
@@ -55,10 +55,10 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
 
 - (NSString *)databaseName
 {
-   if (_databaseName != nil) return _databaseName;
-   
-   _databaseName = [[[self appName] stringByAppendingString:@".sqlite"] copy];
-   return _databaseName;
+    if (!_databaseName) {
+        _databaseName = [[[self appName] stringByAppendingString:@".sqlite"] copy];
+    }
+    return _databaseName;
 }
 
 + (YapDatabaseReadWriteTransaction*) transactionForCurrentThread
@@ -88,6 +88,7 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
 - (NSString *)appName {
     return [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleName"];
 }
+
 - (BOOL)isOSX {
     if (NSClassFromString(@"UIDevice")) return NO;
     return YES;

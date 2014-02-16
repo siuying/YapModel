@@ -13,15 +13,17 @@
 
 @property (nonatomic, copy) NSString* databaseName;
 
-@property (nonatomic, readwrite) YapDatabase* database;
-
-@property (nonatomic, readonly) YapDatabaseConnection* connection;
-
 + (instancetype)sharedManager;
 
 + (YapDatabaseReadWriteTransaction*)transactionForCurrentThread;
 
 + (void)setTransactionForCurrentThread:(YapDatabaseReadWriteTransaction*)transaction;
+
+- (YapDatabaseConnection*) connection;
+
+- (void) setDatabase:(YapDatabase *)database;
+
+- (YapDatabase*) database;
 
 - (NSString*) sqliteStorePath;
 
