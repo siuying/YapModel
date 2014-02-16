@@ -70,6 +70,20 @@
     return objects;
 }
 
++ (instancetype)findFirstWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query
+{
+    __block YapModelObject* firstObject = nil;
+    YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
+    if (transaction) {
+        firstObject = [self findFirstWithIndex:indexName query:query transaction:transaction];
+    } else {
+        [[[YapModelManager sharedManager] connection] readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+            firstObject = [self findFirstWithIndex:indexName query:query transaction:transaction];
+        }];
+    }
+    return firstObject;
+}
+
 - (void)save
 {
     YapDatabaseReadWriteTransaction* transaction = [YapModelManager transactionForCurrentThread];
@@ -227,6 +241,18 @@
         }
     }];
     return [allObjects copy];
+}
+
++ (instancetype)findFirstWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction
+{
+    __block YapModelObject* firstObject = nil;
+    [[transaction ext:indexName] enumerateKeysAndObjectsMatchingQuery:query usingBlock:^(NSString *collection, NSString *key, id object, BOOL *stop) {
+        if ([collection isEqualToString:[self collectionName]]) {
+            firstObject = object;
+            *stop = YES;
+        }
+    }];
+    return firstObject;
 }
 
 - (void)saveWithTransaction:(YapDatabaseReadWriteTransaction*)transaction

@@ -46,6 +46,15 @@
 + (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query;
 
 /**
+ * Find first object in the collection matching the filter, in given transaction.
+ *
+ * @param indexName name of index registered.
+ * @param query the query.
+ * @return first object returned by query.
+ */
++ (instancetype)findFirstWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query;
+
+/**
  * Create or update current object in a new transaction.
  *
  * If the key is set, update the current object in database.
@@ -140,6 +149,16 @@
  * @return all objects in the collection matching the filter.
  */
 + (NSArray*)findWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction;
+
+/**
+ * Find first object in the collection matching the filter, in given transaction.
+ *
+ * @param indexName name of index registered.
+ * @param query the query.
+ * @param transaction The transaction.
+ * @return first object returned by query.
+ */
++ (instancetype)findFirstWithIndex:(NSString*)indexName query:(YapDatabaseQuery*)query transaction:(YapDatabaseReadTransaction*)transaction;
 
 /**
  * Create or update this object in given transaction.

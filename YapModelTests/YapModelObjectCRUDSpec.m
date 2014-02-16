@@ -130,7 +130,7 @@ describe(@"YapModelObject+CRUD", ^{
             });
         });
         
-        context(@"-findWithIndex:", ^{
+        context(@"-findWithIndex:query:", ^{
             beforeEach(^{
                 SetupDatabaseIndex();
                 CreateTestRecords();
@@ -152,6 +152,24 @@ describe(@"YapModelObject+CRUD", ^{
             });
         });
         
+        context(@"-findFirstWithIndex:query", ^{
+            beforeEach(^{
+                SetupDatabaseIndex();
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                YapDatabase* db = [YapModelManager sharedManager].database;
+                [db unregisterExtension:@"index"];
+            });
+            
+            it(@"should find first person with age < 16",  ^{
+                Person* person = [Person findFirstWithIndex:@"index"
+                                                       query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]];
+                [[theValue(person.age) should] equal:theValue(0)];
+            });
+        });
+
         context(@"-count", ^{
             it(@"should return 0 when no objects",  ^{
                 [[theValue([Person count]) should] equal:theValue(0)];
@@ -381,6 +399,27 @@ describe(@"YapModelObject+CRUD", ^{
                     [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                         [[theValue(person.age) should] beLessThan:theValue(16)];
                     }];
+                }];
+            });
+        });
+        
+        context(@"-findFirstWithIndex:query:transaction:", ^{
+            beforeEach(^{
+                SetupDatabaseIndex();
+                CreateTestRecords();
+            });
+            
+            afterEach(^{
+                YapDatabase* db = [YapModelManager sharedManager].database;
+                [db unregisterExtension:@"index"];
+            });
+            
+            it(@"should find first person with age < 16",  ^{
+                [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+                    Person* person = [Person findFirstWithIndex:@"index"
+                                                          query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]
+                                                    transaction:transaction];
+                    [[theValue(person.age) should] equal:theValue(0)];
                 }];
             });
         });
