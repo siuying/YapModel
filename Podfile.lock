@@ -16,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - AutoCoding (~> 2.1)
+  - CocoaLumberjack
   - Kiwi/XCTest
   - YapDatabase
 

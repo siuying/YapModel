@@ -11,7 +11,7 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
-
+#import "TestHelpers.h"
 #import "Person.h"
 #import "Company.h"
 
@@ -22,7 +22,8 @@
 SPEC_BEGIN(YapModelObjectCRUDSpec)
 
 describe(@"YapModelObject+CRUD", ^{
-    
+    __block YapModelManager* manager;
+
     void(^SetupDatabaseIndex)(void) = ^{
         YapDatabase* db = [YapModelManager sharedManager].database;
         YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
@@ -57,26 +58,25 @@ describe(@"YapModelObject+CRUD", ^{
         }];
     };
     
-    beforeAll(^{
-        [YapModelManager sharedManager].databaseName = @"CURD.sqlite";
+    beforeEach(^{
+        manager = CreateTestYapModelManager();
+        [YapModelManager setSharedManager:manager];
     });
     
     afterEach(^{
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            [transaction removeAllObjectsInAllCollections];
-        }];
-    });
-    
-    afterAll(^{
-        NSString* dbPath = [[[YapModelManager sharedManager] database] databasePath];
-        [[NSFileManager defaultManager] removeItemAtPath:dbPath error:nil];
-        [[YapModelManager sharedManager] setDatabase:nil];
+        CleanupYapModelManager(manager);
+        [YapModelManager setSharedManager:nil];
+        manager = nil;
     });
 
     context(@"Default Transaction", ^{
         __block YapDatabaseConnection* connection;
         beforeEach(^{
             connection = [[YapModelManager sharedManager] connection];
+        });
+
+        afterEach(^{
+            connection = nil;
         });
         
         context(@"+find:", ^{
@@ -336,7 +336,11 @@ describe(@"YapModelObject+CRUD", ^{
         beforeEach(^{
             connection = [[YapModelManager sharedManager] connection];
         });
-        
+
+        afterEach(^{
+            connection = nil;
+        });
+
         context(@"+find:withTransaction:", ^{
             it(@"should find the object with key", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
