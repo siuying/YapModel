@@ -11,6 +11,8 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
+#import "YapDatabaseManager.h"
+
 #import "TestHelpers.h"
 #import "Person.h"
 #import "Company.h"
@@ -60,13 +62,11 @@ describe(@"YapModelObject+CRUD", ^{
     
     beforeEach(^{
         manager = CreateTestYapModelManager();
-        [YapModelManager setSharedManager:manager];
     });
     
     afterEach(^{
-        CleanupYapModelManager(manager);
-        [YapModelManager setSharedManager:nil];
         manager = nil;
+        CleanupTestYapModelManager();
     });
 
     context(@"Default Transaction", ^{

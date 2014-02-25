@@ -47,6 +47,12 @@ static YapModelManager * _sharedYapModelManager;
     return _database;
 }
 
+-(void) dealloc {
+    _connection = nil;
+    _database = nil;
+    _databaseName = nil;
+}
+
 -(YapDatabaseConnection*) connection
 {
     if (!_connection) {

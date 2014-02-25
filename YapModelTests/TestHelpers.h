@@ -11,7 +11,7 @@
 #import "YapModelManager.h"
 
 extern YapModelManager* CreateTestYapModelManager();
-extern void CleanupYapModelManager(YapModelManager* manager);
+extern void CleanupTestYapModelManager();
 
 @interface TestHelpers : NSObject
 

@@ -8,20 +8,33 @@
 
 #import "TestHelpers.h"
 #import <math.h>
+#import "YapDatabaseManager.h"
 
 YapModelManager* CreateTestYapModelManager() {
     YapModelManager* manager = [[YapModelManager alloc] init];
     manager.databaseName = [NSString stringWithFormat:@"testing-%d.sqlite", arc4random()];
+    [YapModelManager setSharedManager:manager];
     return manager;
 }
 
-void CleanupYapModelManager(YapModelManager* manager) {
+void CleanupTestYapModelManager() {
+    YapModelManager* manager = [YapModelManager sharedManager];
+    NSString* path = manager.database.databasePath;
+    [YapModelManager setSharedManager:nil];
+    [YapDatabaseManager deregisterDatabaseForPath:path];
+
     NSError* error;
-    YapDatabase* database = manager.database;
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:[database databasePath] error:&error];
-    if (error) {
-        NSLog(@"error: %@", error);
+    NSString* directory = [path stringByDeletingLastPathComponent];
+    NSString* filenamePrefix = [[path lastPathComponent] stringByDeletingPathExtension];
+    NSArray *contents = [fileManager contentsOfDirectoryAtPath:directory
+                                                         error:&error];
+   
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self CONTAINS %@", filenamePrefix];
+    for (NSString *filename in [contents filteredArrayUsingPredicate:predicate]) {
+        NSLog(@"filename = %@", filename);
+        [fileManager removeItemAtPath:[directory stringByAppendingPathComponent:filename]
+                                error:&error];
     }
 }
 
