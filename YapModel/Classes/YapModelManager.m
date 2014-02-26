@@ -8,7 +8,6 @@
 
 #import "YapModelManager.h"
 
-NSString* const YapModelManagerReadTransactionKey       = @"YapModelManagerReadTransactionKey";
 NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadWriteTransactionKey";
 
 @interface YapModelManager(){
