@@ -8,6 +8,7 @@
 
 #import "YapModelManager.h"
 
+NSString* const YapModelManagerSharedManagerKey         = @"YapModelManagerSharedManagerKey";
 NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadWriteTransactionKey";
 
 @interface YapModelManager(){
@@ -18,21 +19,27 @@ NSString* const YapModelManagerReadWriteTransactionKey  = @"YapModelManagerReadW
 
 @implementation YapModelManager
 
-static YapModelManager * _sharedYapModelManager;
-
 @synthesize databaseName = _databaseName;
 
 + (instancetype)sharedManager
 {
-    if (!_sharedYapModelManager) {
-        _sharedYapModelManager = [[self alloc] init];
+    YapModelManager* manager = [[NSThread mainThread] threadDictionary][YapModelManagerSharedManagerKey];
+    if (manager) {
+        return manager;
     }
-    return _sharedYapModelManager;
+
+    manager = [[self alloc] init];
+    [self setSharedManager:manager];
+    return [[NSThread mainThread] threadDictionary][YapModelManagerSharedManagerKey];
 }
 
 + (void)setSharedManager:(YapModelManager*)sharedManager
 {
-    _sharedYapModelManager = sharedManager;
+    if (sharedManager) {
+        [[NSThread mainThread] threadDictionary][YapModelManagerSharedManagerKey] = sharedManager;
+    } else {
+        [[[NSThread mainThread] threadDictionary] removeObjectForKey:YapModelManagerSharedManagerKey];
+    }
 }
 
 -(YapDatabase*) database
