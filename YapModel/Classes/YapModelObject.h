@@ -9,11 +9,17 @@
 #import <Foundation/Foundation.h>
 
 #import "YapDatabase.h"
+#import "AutoCoding.h"
 
 @interface YapModelObject : NSObject
 
 @property (nonatomic, copy) NSString* key;
 
 +(NSString*) collectionName;
+
+/**
+ * Override 
+ */
++(NSDictionary*) codableProperties;
 
 @end
