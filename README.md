@@ -77,6 +77,32 @@ NSUInteger personCount = [Person count];
 NSUInteger johnCount = [Person countWithIndex:@"index" query:@"WHERE name = 'John'"];
 ```
 
+### Relation
+
+**(Work in progress, not yet available).**
+
+```
+@interface Person : YapModel
+
+@has_one(Person, @"company-edge-name", @"company-collection-name");
+@property (nonatomic, strong) Company *company;
+
+@has_many(Person, @"project-edge-name", @"project-collection-name");
+@property (nonatomic, strong) NSArray *projects;
+
+@end
+
+@implementation Person
+@dynamic company, projects;
+@end
+```
+
+```
+Person* peter = [Person create:@{@"name": @"peter"}];
+peter.company = company1;
+[peter save];
+```
+
 ## NSCoding
 
 YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you

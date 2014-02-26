@@ -11,19 +11,24 @@ PODS:
   - Kiwi/XCTest (2.2.3):
     - Kiwi/ARC
     - Kiwi/NonARC
-  - YapDatabase (2.3.1):
+  - YapDatabase (2.4):
     - CocoaLumberjack (~> 1.6.3)
 
 DEPENDENCIES:
   - AutoCoding (~> 2.1)
   - CocoaLumberjack
   - Kiwi/XCTest
-  - YapDatabase
+  - YapDatabase (from `git@github.com:yaptv/YapDatabase.git`, commit `bdf8bcc1cb941c6dd5b41645532a82017426d229`)
+
+EXTERNAL SOURCES:
+  YapDatabase:
+    :commit: bdf8bcc1cb941c6dd5b41645532a82017426d229
+    :git: git@github.com:yaptv/YapDatabase.git
 
 SPEC CHECKSUMS:
   AutoCoding: 1cb0f7373249cefc73aa22cc3a7cc62ba4b886a7
   CocoaLumberjack: 17803afbade3126a377d32b8d23367264b44ced6
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
-  YapDatabase: 033ee47f7116fd6092787771169045a5bad89c87
+  YapDatabase: 3e1159ee9540859342bf2869a86dd9e434548c45
 
 COCOAPODS: 0.29.0
