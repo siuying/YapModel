@@ -30,9 +30,9 @@
         if ([object isMemberOfClass:clazz]) {
             [properties enumerateObjectsUsingBlock:^(NSString* property, NSUInteger idx, BOOL *stop) {
                 id indexedValue = [object valueForKey:property];
-                if ([indexedValue isMemberOfClass:[NSDate class]]) {
+                if ([indexedValue isKindOfClass:[NSDate class]]) {
                     [dict setObject:@([(NSDate*)indexedValue timeIntervalSince1970]) forKey:property];
-                } else if ([indexedValue isMemberOfClass:[NSNumber class]] || [indexedValue isMemberOfClass:[NSString class]]) {
+                } else if ([indexedValue isKindOfClass:[NSNumber class]] || [indexedValue isKindOfClass:[NSString class]]) {
                     [dict setObject:indexedValue forKey:property];
                 } else {
                     [dict setObject:[indexedValue description] forKey:property];
