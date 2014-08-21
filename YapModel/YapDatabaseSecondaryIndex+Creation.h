@@ -10,6 +10,7 @@
 
 @interface YapDatabaseSecondaryIndex (Creation)
 
-+(YapDatabaseSecondaryIndex*) indexWithClass:(Class)clazz selector:(SEL)selector type:(YapDatabaseSecondaryIndexType)type;
++(YapDatabaseSecondaryIndex*) indexWithClass:(Class)clazz
+                                  properties:(NSArray*)properties;
 
 @end

@@ -63,26 +63,21 @@ You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDat
 }];
 ```
 
-### Helpers
-
-#### View
-
-Create simple view:
-
-```objective-c
-YapDatabaseView* view = [YapDatabaseView viewWithCollection:@"Person" groupBy:@selector(age) sortBy:@selector(age) version:1];
-[database registerExtension:view withName:viewName];
-```
-
-#### Secondary Index
+### Indexes
 
 Create simple index:
 
 ```objective-c
-YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                    selector:@selector(age)
-                                                                        type:YapDatabaseSecondaryIndexTypeInteger];
-[database registerExtension:index withName:ageIndexName];
+// Your Class Definition
+@interface Car : YapModelObject
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, assign) NSNumber* age;
+@property (nonatomic, assign) NSNumber* price;
+@index(Car, CarAgePriceIndex, @"age", @"price");
+@end
+
+// Configure the Index:
+[YapDatabaseSecondaryIndexConfigurator configureWithDatabase:database];
 ```
 
 ## NSCoding

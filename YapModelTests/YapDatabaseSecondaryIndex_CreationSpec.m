@@ -32,6 +32,7 @@ describe(@"YapDatabaseSecondaryIndex_Creation", ^{
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
                 person.age = 30 + i;
+                person.salary = 150 * i;
                 [person saveWithTransaction:transaction];
             }
             Company* company = [Company new];
@@ -51,34 +52,31 @@ describe(@"YapDatabaseSecondaryIndex_Creation", ^{
     context(@"indexes", ^{
         __block YapDatabaseConnection* connection;
         __block NSString* ageIndex;
-        __block NSString* ageIndex2;
+        __block NSString* salaryIndex;
         __block NSString* nameIndex;
         beforeEach(^{
             connection = [database newConnection];
             ageIndex = @"index-age";
-            ageIndex2 = @"index-age2";
+            salaryIndex = @"index-salary";
             nameIndex = @"index-name";
             CreateTestRecords(connection);
         });
         
-        context(@"+indexWithClass:selector:type", ^{
+        context(@"+indexWithClass:properties:", ^{
             __block Person* person;
             
-            it(@"should create a view with the specific model class", ^{
+            it(@"should create index using a property", ^{
                 YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                    selector:@selector(age)
-                                                                                        type:YapDatabaseSecondaryIndexTypeInteger];
+                                                                                  properties:@[@"age"]];
                 [database registerExtension:index withName:ageIndex];
                 
                 YapDatabaseSecondaryIndex* index2 = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                     selector:@selector(name)
-                                                                                         type:YapDatabaseSecondaryIndexTypeText];
+                                                                                   properties:@[@"name"]];
                 [database registerExtension:index2 withName:nameIndex];
                 
                 YapDatabaseSecondaryIndex* index3 = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                     selector:@selector(age)
-                                                                                         type:YapDatabaseSecondaryIndexTypeReal];
-                [database registerExtension:index3 withName:ageIndex2];
+                                                                                   properties:@[@"salary"]];
+                [database registerExtension:index3 withName:salaryIndex];
 
                 // find by age
                 [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
@@ -99,15 +97,31 @@ describe(@"YapDatabaseSecondaryIndex_Creation", ^{
                 [[theValue(person.age) should] equal:theValue(38)];
                 [[person.name should] equal:@"Person8"];
                 
-                // find by age (using Real number index)
+                // find by salary
                 [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-                    YapDatabaseQuery* query = [YapDatabaseQuery queryWithFormat:@"WHERE age = ?", @33];
-                    person = [Person findFirstWithIndex:ageIndex2 query:query transaction:transaction];
+                    YapDatabaseQuery* query = [YapDatabaseQuery queryWithFormat:@"WHERE salary > ?", @1000];
+                    person = [Person findFirstWithIndex:salaryIndex query:query transaction:transaction];
                 }];
                 
                 [[person should] beNonNil];
-                [[theValue(person.age) should] equal:theValue(33)];
-                [[person.name should] equal:@"Person3"];
+                [[theValue(person.salary) should] equal:theValue(1050)];
+                [[person.name should] equal:@"Person7"];
+            });
+            
+            it(@"should create index using two property", ^{
+                YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
+                                                                                  properties:@[@"age", @"salary"]];
+                [database registerExtension:index withName:@"age-salary"];
+
+                // find by age
+                [connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+                    YapDatabaseQuery* query = [YapDatabaseQuery queryWithFormat:@"WHERE age > ? and salary > ?", @38, @1000];
+                    person = [Person findFirstWithIndex:@"age-salary" query:query transaction:transaction];
+                }];
+                
+                [[person should] beNonNil];
+                [[theValue(person.age) should] equal:theValue(39)];
+                [[person.name should] equal:@"Person9"];
             });
         });
     });

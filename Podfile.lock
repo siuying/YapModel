@@ -7,6 +7,41 @@ PODS:
   - CocoaLumberjack/Extensions (1.6.5.1):
     - CocoaLumberjack/Core
   - Kiwi (2.3.0)
+  - libextobjc (0.4):
+    - libextobjc/EXTADT
+    - libextobjc/EXTConcreteProtocol
+    - libextobjc/EXTKeyPathCoding
+    - libextobjc/EXTNil
+    - libextobjc/EXTSafeCategory
+    - libextobjc/EXTScope
+    - libextobjc/EXTSelectorChecking
+    - libextobjc/EXTSynthesize
+    - libextobjc/NSInvocation+EXT
+    - libextobjc/NSMethodSignature+EXT
+    - libextobjc/RuntimeExtensions
+    - libextobjc/UmbrellaHeader
+  - libextobjc/EXTADT (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTConcreteProtocol (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTKeyPathCoding (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTNil (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSafeCategory (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTScope (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSelectorChecking (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSynthesize (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSInvocation+EXT (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSMethodSignature+EXT (0.4):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4)
+  - libextobjc/UmbrellaHeader (0.4)
   - YapDatabase (2.3.1):
     - CocoaLumberjack (~> 1.6.3)
 
@@ -14,12 +49,14 @@ DEPENDENCIES:
   - AutoCoding (~> 2.1)
   - CocoaLumberjack
   - Kiwi
+  - libextobjc
   - YapDatabase
 
 SPEC CHECKSUMS:
   AutoCoding: b67afacf4a80ac2bd9ee9f69b473e562fd06ab7d
   CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
   Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+  libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
   YapDatabase: e28b0c5d36d7d566b4126d2fb8d996d6defc78c7
 
 COCOAPODS: 0.33.1

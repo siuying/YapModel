@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YapModelMetaprogramming.h"
 #import "YapDatabase.h"
 #import "AutoCoding.h"
 
