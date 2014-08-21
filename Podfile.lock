@@ -1,5 +1,5 @@
 PODS:
-  - AutoCoding (2.1)
+  - AutoCoding (2.2)
   - CocoaLumberjack (1.6.5.1):
     - CocoaLumberjack/Core
     - CocoaLumberjack/Extensions
@@ -46,14 +46,14 @@ PODS:
     - CocoaLumberjack (~> 1.6.3)
 
 DEPENDENCIES:
-  - AutoCoding (~> 2.1)
+  - AutoCoding (>= 2.2)
   - CocoaLumberjack
   - Kiwi
   - libextobjc
   - YapDatabase
 
 SPEC CHECKSUMS:
-  AutoCoding: b67afacf4a80ac2bd9ee9f69b473e562fd06ab7d
+  AutoCoding: 2a15d57acf78912b72cc3b3a472e614b2f112a18
   CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
   Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
   libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f

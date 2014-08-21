@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency 'YapDatabase', '>= 2.3'
-  s.dependency 'AutoCoding', '~> 2.1'
+  s.dependency 'AutoCoding', '>= 2.2'
 end

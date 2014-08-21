@@ -1,11 +1,12 @@
 platform :ios, 6.1
 
-pod 'YapDatabase'
-pod 'AutoCoding', '~> 2.1'
-pod 'CocoaLumberjack'
-pod 'libextobjc'
+target 'YapModel' do
+  pod 'YapDatabase'
+  pod 'AutoCoding', '>= 2.2'
+  pod 'CocoaLumberjack'
+  pod 'libextobjc'
+end
 
 target "YapModelTests" do
   pod 'Kiwi'
 end
-
