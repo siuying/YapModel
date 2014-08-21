@@ -17,37 +17,13 @@
 
 #import "Person.h"
 #import "Company.h"
-
-@interface YapDatabaseExtension(Private)
-- (BOOL)supportsDatabase:(YapDatabase *)database withRegisteredExtensions:(NSDictionary *)registeredExtensions;
-@end
+#import "TestHelper.h"
 
 SPEC_BEGIN(YapModelObjectCRUDSpec)
 
 describe(@"YapModelObject+CRUD", ^{
     __block YapDatabase* database;
 
-    void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
-        YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
-        [setup addColumn:@"age" withType:YapDatabaseSecondaryIndexTypeInteger];
-
-        YapDatabaseSecondaryIndexBlockType blockType = YapDatabaseSecondaryIndexBlockTypeWithObject;
-        YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
-            if ([object isKindOfClass:[Person class]]) {
-                Person *person = (Person *)object;
-                [dict setObject:@(person.age) forKey:@"age"];
-            }
-        };
-        YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
-        
-        // for some reason the method return NO in test
-        [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:@YES];
-        BOOL registered = [database registerExtension:index withName:@"index"];
-        if (!registered) {
-            NSLog(@"failed register extension: %@", index);
-        }
-    };
-    
     void(^CreateTestRecords)(YapDatabaseConnection*) = ^(YapDatabaseConnection* connection){
         [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             for(int i = 0; i < 10; i++) {
@@ -60,34 +36,14 @@ describe(@"YapModelObject+CRUD", ^{
             [company saveWithTransaction:transaction];
         }];
     };
-    
-    YapDatabase*(^CreateDatabase)(void) = ^{
-        NSString* databaseName = [NSString stringWithFormat:@"testing-%d.sqlite", arc4random()];
-        NSURL* documentDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                                                                           inDomains:NSUserDomainMask] lastObject];
-        NSString *databaseDir = [[documentDirectory path] stringByAppendingPathComponent:databaseName];
-        return [[YapDatabase alloc] initWithPath:databaseDir];
-    };
-    
+
     beforeEach(^{
         database = CreateDatabase();
     });
     
     afterEach(^{
-        NSError* error;
-        NSString* path = database.databasePath;
-        NSFileManager* fileManager = [NSFileManager defaultManager];
-        NSString* directory = [path stringByDeletingLastPathComponent];
-        NSString* filenamePrefix = [[path lastPathComponent] stringByDeletingPathExtension];
-        NSArray *contents = [fileManager contentsOfDirectoryAtPath:directory
-                                                             error:&error];
-
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self CONTAINS %@", filenamePrefix];
-        for (NSString *filename in [contents filteredArrayUsingPredicate:predicate]) {
-            NSLog(@"filename = %@", filename);
-            [fileManager removeItemAtPath:[directory stringByAppendingPathComponent:filename]
-                                    error:&error];
-        }
+        CleanupDatabase(database);
+        database = nil;
     });
 
     context(@"Custom Transaction", ^{
