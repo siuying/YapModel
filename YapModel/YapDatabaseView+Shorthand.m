@@ -15,37 +15,35 @@
 
 -(instancetype) initWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortBy:(SEL)sortBySelector version:(int)version
 {
+    if (!groupBySelector) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"groupBySelector cannot be nil" userInfo:nil];
+    }
+
+    if (!sortBySelector) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"sortBySelector cannot be nil" userInfo:nil];
+    }
+    
     YapDatabaseViewBlockType groupingBlockType;
     YapDatabaseViewGroupingWithObjectBlock groupingBlock;
     YapDatabaseViewBlockType sortingBlockType;
     YapDatabaseViewSortingWithObjectBlock sortingBlock;
     YapDatabaseViewOptions* options;
 
-    if (groupBySelector) {
-        groupingBlockType = YapDatabaseViewBlockTypeWithObject;
-        groupingBlock = ^NSString*(NSString *collection, NSString *key, id object){
-            id group = [object valueForKey:NSStringFromSelector(groupBySelector)];
-            if ([group isMemberOfClass:[NSString class]]) {
-                return group;
-            } else {
-                return [group description];
-            }
-        };
-    } else {
-        groupingBlockType = 0;
-        groupingBlock = nil;
-    }
+    groupingBlockType = YapDatabaseViewBlockTypeWithObject;
+    groupingBlock = ^NSString*(NSString *collection, NSString *key, id object){
+        id group = [object valueForKey:NSStringFromSelector(groupBySelector)];
+        if ([group isMemberOfClass:[NSString class]]) {
+            return group;
+        } else {
+            return [group description];
+        }
+    };
 
-    if (groupBySelector) {
-        sortingBlockType = YapDatabaseViewBlockTypeWithObject;
-        sortingBlock = ^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1,
-                                           NSString *collection2, NSString *key2, id object2) {
-            return [[object1 valueForKey:NSStringFromSelector(sortBySelector)] compare:[object2 valueForKey:NSStringFromSelector(sortBySelector)]];
-        };
-    } else {
-        sortingBlockType = 0;
-        sortingBlock = nil;
-    }
+    sortingBlockType = YapDatabaseViewBlockTypeWithObject;
+    sortingBlock = ^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1,
+                                       NSString *collection2, NSString *key2, id object2) {
+        return [[object1 valueForKey:NSStringFromSelector(sortBySelector)] compare:[object2 valueForKey:NSStringFromSelector(sortBySelector)]];
+    };
 
     options = [[YapDatabaseViewOptions alloc] init];
     options.allowedCollections = [NSSet setWithArray:@[collection]];

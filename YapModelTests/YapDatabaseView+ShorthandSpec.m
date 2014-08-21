@@ -29,7 +29,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
             for(int i = 0; i < 30; i++) {
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
-                person.age = @(30 - i % 10);
+                person.age = @(30 - i % 2);
                 [person saveWithTransaction:transaction];
             }
             Company* company = [Company new];
@@ -62,11 +62,15 @@ describe(@"YapDatabaseView+Shorthand", ^{
             
             __block Person* person;
             [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                person = [[transaction ext:viewName] objectAtIndex:0 inGroup:@"30"];
+                person = [[transaction ext:viewName] objectAtIndex:1 inGroup:@"30"];
             }];
 
             [[expectFutureValue(person.age) shouldEventually] equal:@30];
-            [[expectFutureValue(person.name) shouldEventuallyBeforeTimingOutAfter(0.2)] equal:@"Person0"];
+            [[expectFutureValue(person.name) shouldEventuallyBeforeTimingOutAfter(0.2)] equal:@"Person2"];
+        });
+        
+        it(@"should ignore groupBy if it is nil", ^{
+            
         });
     });
 });
