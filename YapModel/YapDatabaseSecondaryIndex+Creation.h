@@ -12,6 +12,4 @@
 
 +(YapDatabaseSecondaryIndex*) indexWithClass:(Class)clazz selector:(SEL)selector type:(YapDatabaseSecondaryIndexType)type;
 
-+(YapDatabaseSecondaryIndex*) indexWithClass:(Class)clazz selector:(SEL)selector;
-
 @end
