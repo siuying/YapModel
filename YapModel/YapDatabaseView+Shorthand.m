@@ -13,6 +13,28 @@
 
 @implementation YapDatabaseView (Shorthand)
 
++(instancetype) viewWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version
+{
+    return [[self alloc] initWithCollection:collection sortBy:sortBySelector version:version];
+}
+
++(instancetype) viewWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortBy:(SEL)sortBySelector version:(int)version
+{
+    return [[self alloc] initWithCollection:collection groupBy:groupBySelector sortBy:sortBySelector version:version];
+}
+
++(instancetype) viewtWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version
+{
+    return [[self alloc] initWithCollection:collection sortByDescriptor:sortDescriptor version:version];
+}
+
++(instancetype) viewWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version
+{
+    return [[self alloc] initWithCollection:collection groupBy:groupBySelector sortByDescriptor:sortDescriptor version:version];
+}
+
+#pragma mark - Private
+
 -(instancetype) initWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version
 {
     return [self initWithCollection:collection groupBy:nil sortBy:sortBySelector version:version];

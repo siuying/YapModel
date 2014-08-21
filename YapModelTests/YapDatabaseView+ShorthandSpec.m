@@ -55,7 +55,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
 
         it(@"should create a view with the specific model class", ^{
             NSString* viewName = @"viewByPerson";
-            YapDatabaseView* view = [[YapDatabaseView alloc] initWithCollection:[Person collectionName] groupBy:@selector(age) sortBy:@selector(age) version:1];
+            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName] groupBy:@selector(age) sortBy:@selector(age) version:1];
             [database registerExtension:view withName:viewName];
             
             CreateTestRecords(connection);
@@ -73,7 +73,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
         it(@"should create a view with the specific model class, using a sort descriptor", ^{
             NSString* viewName = @"viewByPerson2";
             NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:NO];
-            YapDatabaseView* view = [[YapDatabaseView alloc] initWithCollection:[Person collectionName] groupBy:nil sortByDescriptor:sortDescriptor version:1];
+            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName] groupBy:nil sortByDescriptor:sortDescriptor version:1];
             [database registerExtension:view withName:viewName];
             
             CreateTestRecords(connection);
