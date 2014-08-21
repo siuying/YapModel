@@ -7,7 +7,6 @@
 //
 
 #import "YapModelObject.h"
-#import "YapModelManager.h"
 #import "YapDatabase.h"
 #import "AutoCoding.h"
 #import <objc/runtime.h>

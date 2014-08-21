@@ -25,14 +25,12 @@
 		5475505718AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
 		5475505818AF754A001C8220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503718AF754A001C8220 /* UIKit.framework */; };
 		5475506018AF754A001C8220 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5475505E18AF754A001C8220 /* InfoPlist.strings */; };
-		5475506E18AF78A7001C8220 /* YapModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475506D18AF78A7001C8220 /* YapModelManager.m */; };
 		5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507318AF7B7B001C8220 /* YapModelObject.m */; };
 		5475507618AF7E67001C8220 /* YapModelManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507518AF7E67001C8220 /* YapModelManagerSpec.m */; };
 		5475507818AF847A001C8220 /* YapModelObjectCRUDSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */; };
 		5475507B18AF85C9001C8220 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507A18AF85C9001C8220 /* Person.m */; };
 		5475507F18AF8878001C8220 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507E18AF8878001C8220 /* Company.m */; };
 		5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */; };
-		5475508518AFA49D001C8220 /* YapModelObject+Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508418AFA49D001C8220 /* YapModelObject+Transaction.m */; };
 		5475508818AFA573001C8220 /* YapModelObjectTransactionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508718AFA573001C8220 /* YapModelObjectTransactionSpec.m */; };
 		E86946581BE2489790C5810E /* libPods-YapModelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */; };
 /* End PBXBuildFile section */
@@ -73,8 +71,6 @@
 		5475505518AF754A001C8220 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5475505D18AF754A001C8220 /* YapModelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YapModelTests-Info.plist"; sourceTree = "<group>"; };
 		5475505F18AF754A001C8220 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5475506C18AF78A7001C8220 /* YapModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelManager.h; path = Classes/YapModelManager.h; sourceTree = "<group>"; };
-		5475506D18AF78A7001C8220 /* YapModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelManager.m; path = Classes/YapModelManager.m; sourceTree = "<group>"; };
 		5475507218AF7B7B001C8220 /* YapModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelObject.h; path = Classes/YapModelObject.h; sourceTree = "<group>"; };
 		5475507318AF7B7B001C8220 /* YapModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelObject.m; path = Classes/YapModelObject.m; sourceTree = "<group>"; };
 		5475507518AF7E67001C8220 /* YapModelManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelManagerSpec.m; sourceTree = "<group>"; };
@@ -85,8 +81,6 @@
 		5475507E18AF8878001C8220 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapModelObject+CRUD.h"; path = "Classes/YapModelObject+CRUD.h"; sourceTree = "<group>"; };
 		5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapModelObject+CRUD.m"; path = "Classes/YapModelObject+CRUD.m"; sourceTree = "<group>"; };
-		5475508318AFA49D001C8220 /* YapModelObject+Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapModelObject+Transaction.h"; path = "Classes/YapModelObject+Transaction.h"; sourceTree = "<group>"; };
-		5475508418AFA49D001C8220 /* YapModelObject+Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapModelObject+Transaction.m"; path = "Classes/YapModelObject+Transaction.m"; sourceTree = "<group>"; };
 		5475508618AFA4E6001C8220 /* YapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YapModel.h; path = Classes/YapModel.h; sourceTree = "<group>"; };
 		5475508718AFA573001C8220 /* YapModelObjectTransactionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelObjectTransactionSpec.m; sourceTree = "<group>"; };
 		6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -209,14 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				5475508618AFA4E6001C8220 /* YapModel.h */,
-				5475506C18AF78A7001C8220 /* YapModelManager.h */,
-				5475506D18AF78A7001C8220 /* YapModelManager.m */,
 				5475507218AF7B7B001C8220 /* YapModelObject.h */,
 				5475507318AF7B7B001C8220 /* YapModelObject.m */,
 				5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */,
 				5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */,
-				5475508318AFA49D001C8220 /* YapModelObject+Transaction.h */,
-				5475508418AFA49D001C8220 /* YapModelObject+Transaction.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -401,8 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5475504418AF754A001C8220 /* IGAppDelegate.m in Sources */,
-				5475508518AFA49D001C8220 /* YapModelObject+Transaction.m in Sources */,
-				5475506E18AF78A7001C8220 /* YapModelManager.m in Sources */,
 				5475504018AF754A001C8220 /* main.m in Sources */,
 				5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */,
 				5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */,
