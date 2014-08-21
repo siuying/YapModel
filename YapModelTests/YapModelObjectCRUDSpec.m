@@ -29,7 +29,7 @@ describe(@"YapModelObject+CRUD", ^{
             for(int i = 0; i < 10; i++) {
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
-                person.age = @(i * 5);
+                person.age = i * 5;
                 [person saveWithTransaction:transaction];
             }
             Company* company = [Company new];
@@ -116,7 +116,7 @@ describe(@"YapModelObject+CRUD", ^{
                     [[theValue([people count]) should] equal:theValue(4)];
                     
                     [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
-                        [[person.age should] beLessThan:@16];
+                        [[theValue(person.age) should] beLessThan:theValue(16)];
                     }];
                 }];
             });
@@ -137,7 +137,7 @@ describe(@"YapModelObject+CRUD", ^{
                     Person* person = [Person findFirstWithIndex:@"index"
                                                           query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]
                                                     transaction:transaction];
-                    [[person.age should] equal:@0];
+                    [[theValue(person.age) should] equal:theValue(0)];
                 }];
             });
         });
@@ -151,7 +151,7 @@ describe(@"YapModelObject+CRUD", ^{
             it(@"should find the object with filter", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                     NSArray* people = [Person where:^BOOL(Person* person) {
-                        return person.age.longLongValue < 30;
+                        return person.age < 30;
                     } withTransaction:transaction];
                     [[people should] haveCountOf:6];
                 }];
@@ -183,8 +183,8 @@ describe(@"YapModelObject+CRUD", ^{
                     [[theBlock(^{
                         Person* john = [Person new];
                         john.name = @"John";
-                        john.age = @22;
-                        john.member = @NO;
+                        john.age = 22;
+                        john.member = NO;
                         [john saveWithTransaction:transaction];
                         
                         [[john.key shouldNot] beNil];
@@ -199,8 +199,8 @@ describe(@"YapModelObject+CRUD", ^{
                     [[theBlock(^{
                         Person* john = [Person new];
                         john.name = @"John";
-                        john.age = @22;
-                        john.member = @NO;
+                        john.age = 22;
+                        john.member = NO;
                         [john saveWithTransaction:transaction];
                         
                         NSString* key = john.key;
@@ -220,8 +220,8 @@ describe(@"YapModelObject+CRUD", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                     john = [Person new];
                     john.name = @"John";
-                    john.age = @22;
-                    john.member = @NO;
+                    john.age = 22;
+                    john.member = NO;
                     [john saveWithTransaction:transaction];
                 }];
             });
@@ -283,7 +283,7 @@ describe(@"YapModelObject+CRUD", ^{
                         [[john shouldNot] beNil];
                         [[john.key shouldNot] beNil];
                         [[john.name should] equal:@"John"];
-                        [[john.age should] equal:@20];
+                        [[theValue(john.age) should] equal:theValue(20)];
                     }) should] change:^NSInteger{
                         return [Person countWithTransaction:transaction];
                     } by:1];
@@ -305,7 +305,7 @@ describe(@"YapModelObject+CRUD", ^{
                 [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                     [john update:@{@"age": @21} withTransaction:transaction];
                 }];
-                [[john.age should] equal:@21];
+                [[theValue(john.age) should] equal:theValue(21)];
             });
         });
         

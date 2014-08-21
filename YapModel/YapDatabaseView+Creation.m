@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import "YapDatabaseView+Shorthand.h"
+#import "YapDatabaseView+Creation.h"
 #import "YapModelObject.h"
 
 #define YapDatabaseViewCreate(collection, groupBy, sortBy, version)
 
-@implementation YapDatabaseView (Shorthand)
+@implementation YapDatabaseView (Creation)
 
-+(instancetype) viewWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version
++(instancetype) viewWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version 
 {
     return [[self alloc] initWithCollection:collection sortBy:sortBySelector version:version];
 }
@@ -23,7 +23,7 @@
     return [[self alloc] initWithCollection:collection groupBy:groupBySelector sortBy:sortBySelector version:version];
 }
 
-+(instancetype) viewtWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version
++(instancetype) viewWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version
 {
     return [[self alloc] initWithCollection:collection sortByDescriptor:sortDescriptor version:version];
 }

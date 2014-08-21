@@ -8,13 +8,13 @@
 
 #import "YapDatabaseView.h"
 
-@interface YapDatabaseView (Shorthand)
+@interface YapDatabaseView (Creation)
 
 +(instancetype) viewWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version;
 
 +(instancetype) viewWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortBy:(SEL)sortBySelector version:(int)version;
 
-+(instancetype) viewtWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version;
++(instancetype) viewWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version;
 
 +(instancetype) viewWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version;
 

@@ -11,7 +11,7 @@
 @interface Person : YapModelObject
 
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, strong) NSNumber* age;
-@property (nonatomic, strong) NSNumber* member;
+@property (nonatomic, assign) NSUInteger age;
+@property (nonatomic, assign) BOOL member;
 
 @end

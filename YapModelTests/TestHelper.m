@@ -23,7 +23,7 @@ void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
     YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
         if ([object isKindOfClass:[Person class]]) {
             Person *person = (Person *)object;
-            [dict setObject:person.age forKey:@"age"];
+            [dict setObject:@(person.age) forKey:@"age"];
         }
     };
     YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
@@ -55,7 +55,6 @@ void(^CleanupDatabase)(YapDatabase*) = ^(YapDatabase* database){
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self CONTAINS %@", filenamePrefix];
     for (NSString *filename in [contents filteredArrayUsingPredicate:predicate]) {
-        NSLog(@"filename = %@", filename);
         [fileManager removeItemAtPath:[directory stringByAppendingPathComponent:filename]
                                 error:&error];
     }

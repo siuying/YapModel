@@ -7,7 +7,7 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import "YapDatabaseView+Shorthand.h"
+#import "YapDatabaseView+Creation.h"
 
 #import "YapModel.h"
 #import "YapDatabase.h"
@@ -29,7 +29,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
             for(int i = 0; i < 10; i++) {
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
-                person.age = @(30 + i);
+                person.age = 30 + i;
                 [person saveWithTransaction:transaction];
             }
             Company* company = [Company new];
@@ -46,7 +46,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
         database = nil;
     });
 
-    context(@"-initWithModelClass:groupBy:sortBy:version:", ^{
+    context(@"+viewWithCollection:groupBy:sortBy:version:", ^{
         __block YapDatabaseConnection* connection;
 
         beforeEach(^{
@@ -66,7 +66,7 @@ describe(@"YapDatabaseView+Shorthand", ^{
             }];
 
             [[person should] beNonNil];
-            [[person.age should] equal:@30];
+            [[theValue(person.age) should] equal:theValue(30)];
             [[person.name should] equal:@"Person0"];
         });
         
