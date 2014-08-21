@@ -10,6 +10,12 @@
 
 @interface YapDatabaseView (Shorthand)
 
+-(instancetype) initWithCollection:(NSString*)collection sortBy:(SEL)sortBySelector version:(int)version;
+
 -(instancetype) initWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortBy:(SEL)sortBySelector version:(int)version;
+
+-(instancetype) initWithCollection:(NSString*)collection sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version;
+
+-(instancetype) initWithCollection:(NSString*)collection groupBy:(SEL)groupBySelector sortByDescriptor:(NSSortDescriptor*)sortDescriptor version:(int)version;
 
 @end

@@ -26,10 +26,10 @@ describe(@"YapDatabaseView+Shorthand", ^{
 
     void(^CreateTestRecords)(YapDatabaseConnection*) = ^(YapDatabaseConnection* connection){
         [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            for(int i = 0; i < 30; i++) {
+            for(int i = 0; i < 10; i++) {
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
-                person.age = @(30 - i % 2);
+                person.age = @(30 + i);
                 [person saveWithTransaction:transaction];
             }
             Company* company = [Company new];
@@ -62,15 +62,32 @@ describe(@"YapDatabaseView+Shorthand", ^{
             
             __block Person* person;
             [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                person = [[transaction ext:viewName] objectAtIndex:1 inGroup:@"30"];
+                person = [[transaction ext:viewName] objectAtIndex:0 inGroup:@"30"];
             }];
 
-            [[expectFutureValue(person.age) shouldEventually] equal:@30];
-            [[expectFutureValue(person.name) shouldEventuallyBeforeTimingOutAfter(0.2)] equal:@"Person2"];
+            [[person should] beNonNil];
+            [[person.age should] equal:@30];
+            [[person.name should] equal:@"Person0"];
         });
         
-        it(@"should ignore groupBy if it is nil", ^{
+        it(@"should create a view with the specific model class, using a sort descriptor", ^{
+            NSString* viewName = @"viewByPerson2";
+            NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:NO];
+            YapDatabaseView* view = [[YapDatabaseView alloc] initWithCollection:[Person collectionName] groupBy:nil sortByDescriptor:sortDescriptor version:1];
+            [database registerExtension:view withName:viewName];
             
+            CreateTestRecords(connection);
+            
+            __block NSArray* groups = nil;
+            __block Person* person = nil;
+            [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                groups = [[transaction ext:viewName] allGroups];
+                person = [[transaction ext:viewName] firstObjectInGroup:@"all"];
+            }];
+            
+            [[person should] beNonNil];
+            [[groups should] equal:@[@"all"]];
+            [[person.name should] equal:@"Person9"];
         });
     });
 });
