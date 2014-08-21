@@ -68,6 +68,8 @@ describe(@"YapDatabaseView+Shorthand", ^{
             [[person should] beNonNil];
             [[theValue(person.age) should] equal:theValue(30)];
             [[person.name should] equal:@"Person0"];
+            
+            [database unregisterExtension:viewName];
         });
         
         it(@"should create a view with the specific model class, using a sort descriptor", ^{
@@ -88,6 +90,8 @@ describe(@"YapDatabaseView+Shorthand", ^{
             [[person should] beNonNil];
             [[groups should] equal:@[@"all"]];
             [[person.name should] equal:@"Person9"];
+
+            [database unregisterExtension:viewName];
         });
     });
 });

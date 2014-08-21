@@ -113,7 +113,7 @@ describe(@"YapModelObject+CRUD", ^{
                     NSArray* people = [Person findWithIndex:@"index"
                                                       query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]
                                                 transaction:transaction];
-                    [[theValue([people count]) should] equal:theValue(4)];
+                    [[people should] haveCountOf:4];
                     
                     [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                         [[theValue(person.age) should] beLessThan:theValue(16)];
