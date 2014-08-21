@@ -1,6 +1,7 @@
 # YapModel
 
-YapModel is an lightweight ActiveRecord implementation on top of [YapDatabase](https://github.com/yaptv/YapDatabase). The syntax is borrowed from Ruby on Rails and inspired by [ObjectiveRecord](https://github.com/mneorr/ObjectiveRecord).
+YapModel is an lightweight ActiveRecord implementation on top of [YapDatabase](https://github.com/yaptv/YapDatabase).
+The syntax is borrowed from Ruby on Rails and inspired by [ObjectiveRecord](https://github.com/mneorr/ObjectiveRecord).
 
 ## Prerequisite
 
@@ -11,70 +12,77 @@ You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDat
 ### Create / Save / Delete
 
 ```objective-c
-Person* john = [Person create];
-john.name = @"John";
-[john save];
-[john delete];
+[connection readWriteTransaction:^(YapDatabaseReadWriteTransaction* transaction){
+    Person* john = [Person create];
+    john.name = @"John";
+    [john saveWithTransaction:transaction];
+    [john deleteWithTransaction:transaction];
 
-[Person create:@{
-  @"name": @"John",
-  @"age": @12,
-  @"member": @NO
+    [Person create:@{
+      @"name": @"John",
+      @"age": @12,
+      @"member": @NO
+    } withTransaction:transaction];
 }];
 ```
 
 ### Finders
 
 ```objective-c
-// Find all objects
-NSArray* people = [Person all];
+[connection readWriteTransaction:^(YapDatabaseReadWriteTransaction* transaction){
+  // Find all objects
+  NSArray* people = [Person allWithTransaction:transaction];
 
-// Get an object by key
-Person* john = [Person find:@"uuid"];
+  // Get an object by key
+  Person* john = [Person find:@"uuid" withTransaction:transaction];
 
-// Iterate with all objects and find the object matching the filter
-NSArray* people = [Person where:^BOOL(Person* person) {
-    return person.age < 30;
+  // Iterate with all objects and find the object matching the filter
+  NSArray* people = [Person where:^BOOL(Person* person) {
+      return person.age < 30;
+  } withTransaction:transaction];
+
+  // Find using Sgecondary Index
+  Person *johnDoe = [Person findWithIndex:@"idx"
+                                    query:[YapDatabaseQuery queryWithFormat:@"WHERE name == ? AND surname == ?", @"John", @"Doe"]
+                          withTransaction:transaction];
 }];
 
-// Find using Sgecondary Index
-Person *johnDoe = [Person findWithIndex:@"idx" 
-                                  query:@"WHERE name == ? AND surname == ?", @"John", @"Doe"];
-
-```
-
-### Transaction
-
-You can simply use the shorthand methods, or use your own transaction.
-
-```objective-c
-// Shorthand method
-[Person create:@{@"name": @"Leo"}];
-
-// equivalent
-[[[YapModelManager sharedManager] connection] readWriteTransactionWithBlock:^(YapDatabaseReadWriteTransaction* transaction){
-  [Person create:@{@"name": @"Leo"} withTransaction:transaction];
-}];
-```
-
-Using `trasaction:` method on ``YapModelObject`` you can run multiple shorthands method in the same transaction:
-
-```objective-c
-Person* john = [Person transaction:^(YapDatabaseReadWriteTransaction* transaction){
-  Person* john = [Person create:@{@"name": @"Leo"}];
-  john.name = @"John";
-  [john save];
-}];
 ```
 
 ### Aggregation
 
 ```objective-c
-// count all Person entities
-NSUInteger personCount = [Person count];
+[connection readWriteTransaction:^(YapDatabaseReadWriteTransaction* transaction){
+  // count all Person entities
+  NSUInteger personCount = [Person countWithTransaction:transaction];
 
-// count people named John
-NSUInteger johnCount = [Person countWithIndex:@"index" query:@"WHERE name = 'John'"];
+  // count people named John
+  NSUInteger johnCount = [Person countWithIndex:@"index"
+                                          query:[YapDatabaseQuery queryWithFormat:@"WHERE name = 'John'"]
+                                withTransaction:transaction];
+}];
+```
+
+### Helpers
+
+#### View
+
+Create simple view:
+
+```objective-c
+YapDatabaseView* view = [YapDatabaseView viewWithCollection:@"Person" groupBy:@selector(age) sortBy:@selector(age) version:1];
+[database registerExtension:view withName:viewName];
+```
+
+#### Secondary Index
+
+Create simple index:
+
+```objective-c
+YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
+                                                                    selector:@selector(age)
+                                                                        type:YapDatabaseSecondaryIndexTypeInteger];
+[database registerExtension:index withName:ageIndexName];
 ```
 
 ## NSCoding
@@ -82,6 +90,10 @@ NSUInteger johnCount = [Person countWithIndex:@"index" query:@"WHERE name = 'Joh
 YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you
 should check [AutoCoding](https://github.com/nicklockwood/AutoCoding) to understand how it work, and override the NSCoding/NSCopying methods if needed.
 
-## License 
+## Breaking Changes
+
+- 0.5.0 - Remove YapModelManager and methods using managed transactions.
+
+## License
 
 MIT License.
