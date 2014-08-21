@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AutoCoding.h"
 #import "YapModelMetaprogramming.h"
 #import "YapDatabase.h"
-#import "AutoCoding.h"
 
 @interface YapModelObject : NSObject
 
@@ -18,9 +17,6 @@
 
 +(NSString*) collectionName;
 
-/**
- * Override 
- */
-+(NSDictionary*) codableProperties;
-
 @end
+
+#import "YapModelObject+CRUD.h"

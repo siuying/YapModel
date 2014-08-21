@@ -10,7 +10,6 @@
 #define YapModel_YapModel_h
 
 #import "YapModelObject.h"
-#import "YapModelObject+CRUD.h"
 #import "YapDatabaseView+Creation.h"
 #import "YapDatabaseSecondaryIndex+Creation.h"
 
