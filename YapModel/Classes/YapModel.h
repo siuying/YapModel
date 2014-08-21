@@ -11,5 +11,6 @@
 
 #import "YapModelObject.h"
 #import "YapModelObject+CRUD.h"
+#import "YapDatabaseView+Shorthand.h"
 
 #endif
