@@ -92,7 +92,7 @@ should check [AutoCoding](https://github.com/nicklockwood/AutoCoding) to underst
 
 ## Breaking Changes
 
-- 0.5.0 - Remove YapModelManager and methods using managed transactions.
+- 0.4.0 - Removed YapModelManager and methods using managed transactions.
 
 ## License
 
