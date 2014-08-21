@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		036CC8A66D8B46F1854AE31C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C51613289C2469D802FC96C /* libPods.a */; };
-		540594A518BC875B009CB612 /* TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 540594A418BC875B009CB612 /* TestHelpers.m */; };
 		5427C3F118BDDC2D00A1B48C /* YapModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */; };
 		5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F318BDDF2E00A1B48C /* Employee.m */; };
 		5475503418AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
@@ -26,12 +25,10 @@
 		5475505818AF754A001C8220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503718AF754A001C8220 /* UIKit.framework */; };
 		5475506018AF754A001C8220 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5475505E18AF754A001C8220 /* InfoPlist.strings */; };
 		5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507318AF7B7B001C8220 /* YapModelObject.m */; };
-		5475507618AF7E67001C8220 /* YapModelManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507518AF7E67001C8220 /* YapModelManagerSpec.m */; };
 		5475507818AF847A001C8220 /* YapModelObjectCRUDSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */; };
 		5475507B18AF85C9001C8220 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507A18AF85C9001C8220 /* Person.m */; };
 		5475507F18AF8878001C8220 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507E18AF8878001C8220 /* Company.m */; };
 		5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */; };
-		5475508818AFA573001C8220 /* YapModelObjectTransactionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508718AFA573001C8220 /* YapModelObjectTransactionSpec.m */; };
 		E86946581BE2489790C5810E /* libPods-YapModelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +44,6 @@
 
 /* Begin PBXFileReference section */
 		3C51613289C2469D802FC96C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		540594A318BC875B009CB612 /* TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelpers.h; sourceTree = "<group>"; };
-		540594A418BC875B009CB612 /* TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpers.m; sourceTree = "<group>"; };
 		5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelSpec.m; sourceTree = "<group>"; };
 		5427C3F218BDDF2E00A1B48C /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
 		5427C3F318BDDF2E00A1B48C /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
@@ -73,7 +68,6 @@
 		5475505F18AF754A001C8220 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5475507218AF7B7B001C8220 /* YapModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelObject.h; path = Classes/YapModelObject.h; sourceTree = "<group>"; };
 		5475507318AF7B7B001C8220 /* YapModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelObject.m; path = Classes/YapModelObject.m; sourceTree = "<group>"; };
-		5475507518AF7E67001C8220 /* YapModelManagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelManagerSpec.m; sourceTree = "<group>"; };
 		5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelObjectCRUDSpec.m; sourceTree = "<group>"; };
 		5475507918AF85C9001C8220 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		5475507A18AF85C9001C8220 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
@@ -82,7 +76,6 @@
 		5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapModelObject+CRUD.h"; path = "Classes/YapModelObject+CRUD.h"; sourceTree = "<group>"; };
 		5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapModelObject+CRUD.m"; path = "Classes/YapModelObject+CRUD.m"; sourceTree = "<group>"; };
 		5475508618AFA4E6001C8220 /* YapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YapModel.h; path = Classes/YapModel.h; sourceTree = "<group>"; };
-		5475508718AFA573001C8220 /* YapModelObjectTransactionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelObjectTransactionSpec.m; sourceTree = "<group>"; };
 		6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.xcconfig"; path = "Pods/Pods-YapModelTests.xcconfig"; sourceTree = "<group>"; };
 		EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModelTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,11 +173,7 @@
 			children = (
 				5475507C18AF85CD001C8220 /* TestClasses */,
 				5475505C18AF754A001C8220 /* Supporting Files */,
-				5475507518AF7E67001C8220 /* YapModelManagerSpec.m */,
 				5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */,
-				5475508718AFA573001C8220 /* YapModelObjectTransactionSpec.m */,
-				540594A318BC875B009CB612 /* TestHelpers.h */,
-				540594A418BC875B009CB612 /* TestHelpers.m */,
 				5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */,
 			);
 			path = YapModelTests;
@@ -404,11 +393,8 @@
 			files = (
 				5475507B18AF85C9001C8220 /* Person.m in Sources */,
 				5427C3F118BDDC2D00A1B48C /* YapModelSpec.m in Sources */,
-				540594A518BC875B009CB612 /* TestHelpers.m in Sources */,
 				5475507818AF847A001C8220 /* YapModelObjectCRUDSpec.m in Sources */,
-				5475507618AF7E67001C8220 /* YapModelManagerSpec.m in Sources */,
 				5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */,
-				5475508818AFA573001C8220 /* YapModelObjectTransactionSpec.m in Sources */,
 				5475507F18AF8878001C8220 /* Company.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,13 +7,14 @@
 //
 
 #import <Kiwi/Kiwi.h>
+#import <math.h>
+
 #import "YapModel.h"
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
 #import "YapDatabaseManager.h"
 
-#import "TestHelpers.h"
 #import "Person.h"
 #import "Company.h"
 
@@ -24,12 +25,12 @@
 SPEC_BEGIN(YapModelObjectCRUDSpec)
 
 describe(@"YapModelObject+CRUD", ^{
-    __block YapModelManager* manager;
+    __block YapDatabase* database;
 
-    void(^SetupDatabaseIndex)(void) = ^{
-        YapDatabase* db = [YapModelManager sharedManager].database;
+    void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
         YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
         [setup addColumn:@"age" withType:YapDatabaseSecondaryIndexTypeInteger];
+
         YapDatabaseSecondaryIndexBlockType blockType = YapDatabaseSecondaryIndexBlockTypeWithObject;
         YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
             if ([object isKindOfClass:[Person class]]) {
@@ -41,14 +42,14 @@ describe(@"YapModelObject+CRUD", ^{
         
         // for some reason the method return NO in test
         [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:@YES];
-        BOOL registered = [db registerExtension:index withName:@"index"];
+        BOOL registered = [database registerExtension:index withName:@"index"];
         if (!registered) {
             NSLog(@"failed register extension: %@", index);
         }
     };
     
-    void(^CreateTestRecords)(void) = ^{
-        [[[YapModelManager sharedManager] connection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+    void(^CreateTestRecords)(YapDatabaseConnection*) = ^(YapDatabaseConnection* connection){
+        [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             for(int i = 0; i < 10; i++) {
                 Person* person = [Person new];
                 person.name = [NSString stringWithFormat:@"Person%d", i];
@@ -60,281 +61,40 @@ describe(@"YapModelObject+CRUD", ^{
         }];
     };
     
+    YapDatabase*(^CreateDatabase)(void) = ^{
+        NSString* databaseName = [NSString stringWithFormat:@"testing-%d.sqlite", arc4random()];
+        NSURL* documentDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                           inDomains:NSUserDomainMask] lastObject];
+        NSString *databaseDir = [[documentDirectory path] stringByAppendingPathComponent:databaseName];
+        return [[YapDatabase alloc] initWithPath:databaseDir];
+    };
+    
     beforeEach(^{
-        manager = CreateTestYapModelManager();
+        database = CreateDatabase();
     });
     
     afterEach(^{
-        manager = nil;
-        CleanupTestYapModelManager();
-    });
+        NSError* error;
+        NSString* path = database.databasePath;
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        NSString* directory = [path stringByDeletingLastPathComponent];
+        NSString* filenamePrefix = [[path lastPathComponent] stringByDeletingPathExtension];
+        NSArray *contents = [fileManager contentsOfDirectoryAtPath:directory
+                                                             error:&error];
 
-    context(@"Default Transaction", ^{
-        __block YapDatabaseConnection* connection;
-        beforeEach(^{
-            connection = [[YapModelManager sharedManager] connection];
-        });
-
-        afterEach(^{
-            connection = nil;
-        });
-        
-        context(@"+find:", ^{
-            it(@"should find the object with key", ^{
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    Person* john = [Person new];
-                    john.name = @"John";
-                    john.key = @"1";
-                    [john saveWithTransaction:transaction];
-                }];
-                
-                Person* john = [Person find:@"1"];
-                [[john.name should] equal:@"John"];
-            });
-        });
-
-        context(@"+where:", ^{
-            beforeEach(^{
-                // create some people
-                CreateTestRecords();
-            });
-
-            it(@"should find the object with filter", ^{
-                NSArray* people = [Person where:^BOOL(Person* person) {
-                    return person.age < 30;
-                }];
-                [[theValue([people count]) should] equal:theValue(6)];
-            });
-        });
-
-        context(@"+findWithKeys:", ^{
-            it(@"should find the object with key", ^{
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    Person* john = [Person new];
-                    john.name = @"John";
-                    john.key = @"1";
-                    [john saveWithTransaction:transaction];
-                    
-                    Person* peter = [Person new];
-                    peter.name = @"Peter";
-                    peter.key = @"2";
-                    [peter saveWithTransaction:transaction];
-                }];
-                
-                NSArray* people = [Person findWithKeys:@[@"1"]];
-                [[theValue([people count]) should] equal:theValue(1)];
-                
-                [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
-                    [[@[@"John"] should] containObjects:person.name, nil];
-                }];
-            });
-        });
-        
-        context(@"-findWithIndex:query:", ^{
-            beforeEach(^{
-                SetupDatabaseIndex();
-                CreateTestRecords();
-            });
-
-            afterEach(^{
-                YapDatabase* db = [YapModelManager sharedManager].database;
-                [db unregisterExtension:@"index"];
-            });
-
-            it(@"should find people with age < 16",  ^{
-                NSArray* people = [Person findWithIndex:@"index"
-                                                  query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]];
-                [[theValue([people count]) should] equal:theValue(4)];
-
-                [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
-                    [[theValue(person.age) should] beLessThan:theValue(16)];
-                }];
-            });
-        });
-        
-        context(@"-findFirstWithIndex:query", ^{
-            beforeEach(^{
-                SetupDatabaseIndex();
-                CreateTestRecords();
-            });
-            
-            afterEach(^{
-                YapDatabase* db = [YapModelManager sharedManager].database;
-                [db unregisterExtension:@"index"];
-            });
-            
-            it(@"should find first person with age < 16",  ^{
-                Person* person = [Person findFirstWithIndex:@"index"
-                                                       query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]];
-                [[theValue(person.age) should] equal:theValue(0)];
-            });
-        });
-
-        context(@"-count", ^{
-            it(@"should return 0 when no objects",  ^{
-                [[theValue([Person count]) should] equal:theValue(0)];
-            });
-            
-            it(@"should return 1 when there is one object", ^{
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    Person* john = [[Person alloc] init];
-                    john.key = [[NSUUID UUID] UUIDString];
-                    [transaction setObject:john forKey:john.key inCollection:[Person collectionName]];
-                }];
-
-                NSUInteger count = [Person count];
-                [[theValue(count) should] equal:theValue(1)];
-            });
-        });
-        
-        context(@"-save", ^{
-            it(@"should save an object with a new key", ^{
-                [[theBlock(^{
-                    Person* john = [Person new];
-                    john.name = @"John";
-                    john.age = 22;
-                    john.member = NO;
-                    [john save];
-                    
-                    [[john.key shouldNot] beNil];
-                }) should] change:^NSInteger{
-                    return [Person count];
-                } by:1];
-            });
-            
-            it(@"should update an object with existing UUID", ^{
-                [[theBlock(^{
-                    Person* john = [Person new];
-                    john.name = @"John";
-                    john.age = 22;
-                    john.member = NO;
-                    [john save];
-                    
-                    NSString* key = john.key;
-                    [john save];
-                    [[key should] equal:john.key];
-                }) should] change:^NSInteger{
-                    return [Person count];
-                } by:1];
-            });
-        });
-        
-        context(@"-deleteWithTransaction:", ^{
-            __block Person* john;
-            
-            beforeEach(^{
-                [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    john = [Person new];
-                    john.name = @"John";
-                    john.age = 22;
-                    john.member = NO;
-                    [john saveWithTransaction:transaction];
-                }];
-            });
-            
-            it(@"should delete an object", ^{
-                [[theBlock(^{
-                    [john delete];
-                }) should] change:^NSInteger{
-                    return [Person count];
-                } by:-1];
-            });
-        });
-        
-        context(@"+deleteAllWithTransaction:", ^{
-            beforeEach(^{
-                // create some people
-                CreateTestRecords();
-            });
-            
-            it(@"should delete all objects of the class", ^{
-                [[theValue([Person count]) should] equal:theValue(10)];
-                [Person deleteAll];
-                [[theValue([Person count]) should] equal:theValue(0)];
-                [[theValue([Company count]) should] equal:theValue(1)];
-            });
-        });
-        
-        context(@"-create", ^{
-            it(@"should create a new object with key set", ^{
-                [[theBlock(^{
-                    Person* newPerson = [Person create];
-                    [[newPerson.key shouldNot] beNil];
-                }) should] change:^NSInteger{
-                    return [Person count];
-                } by:1];
-            });
-        });
-        
-        context(@"-create:", ^{
-            it(@"should create a new object with parameters", ^{
-                [[theBlock(^{
-                    Person* john = [Person create:@{@"name": @"John", @"age": @20}];
-                    [[john shouldNot] beNil];
-                    [[john.key shouldNot] beNil];
-                    [[john.name should] equal:@"John"];
-                    [[theValue(john.age) should] equal:theValue(20)];
-                }) should] change:^NSInteger{
-                    return [Person count];
-                } by:1];
-            });
-        });
-        
-        context(@"-update:", ^{
-            __block Person* john;
-            beforeEach(^{
-                john = [Person create:@{@"name": @"John", @"age": @20}];
-            });
-            
-            it(@"should update existing object", ^{
-                // create object
-                [john update:@{@"age": @21}];
-                [[theValue(john.age) should] equal:theValue(21)];
-            });
-        });
-        
-        context(@"-all", ^{
-            beforeEach(^{
-                CreateTestRecords();
-            });
-
-            it(@"should get all objects of the class in database", ^{
-                NSArray* all = [Person all];
-                [[theValue(all.count) should] equal:theValue(10)];
-                [all enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
-                    [[[person name] shouldNot] beNil];
-                }];
-            });
-        });
-        
-        context(@"-countWithIndex:query:", ^{
-            beforeEach(^{
-                SetupDatabaseIndex();
-                CreateTestRecords();
-            });
-            
-            afterEach(^{
-                YapDatabase* db = [YapModelManager sharedManager].database;
-                [db unregisterExtension:@"index"];
-            });
-
-            it(@"should return 0 when no objects match",  ^{
-                NSUInteger count = [Person countWithIndex:@"index" query:[YapDatabaseQuery queryWithFormat:@"WHERE age > ?", @100]];
-                [[theValue(count) should] equal:theValue(0U)];
-            });
-
-            it(@"should return 1 when there is one object", ^{
-                NSUInteger count = [Person countWithIndex:@"index" query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @16]];
-                [[theValue(count) should] equal:theValue(4U)];
-            });
-        });
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self CONTAINS %@", filenamePrefix];
+        for (NSString *filename in [contents filteredArrayUsingPredicate:predicate]) {
+            NSLog(@"filename = %@", filename);
+            [fileManager removeItemAtPath:[directory stringByAppendingPathComponent:filename]
+                                    error:&error];
+        }
     });
 
     context(@"Custom Transaction", ^{
         __block YapDatabaseConnection* connection;
 
         beforeEach(^{
-            connection = [[YapModelManager sharedManager] connection];
+            connection = [database newConnection];
         });
 
         afterEach(^{
@@ -384,13 +144,12 @@ describe(@"YapModelObject+CRUD", ^{
         
         context(@"-findWithIndex:query:transaction:", ^{
             beforeEach(^{
-                SetupDatabaseIndex();
-                CreateTestRecords();
+                SetupDatabaseIndex(database);
+                CreateTestRecords(connection);
             });
             
             afterEach(^{
-                YapDatabase* db = [YapModelManager sharedManager].database;
-                [db unregisterExtension:@"index"];
+                [database unregisterExtension:@"index"];
             });
             
             it(@"should find people with age < 16",  ^{
@@ -409,13 +168,12 @@ describe(@"YapModelObject+CRUD", ^{
         
         context(@"-findFirstWithIndex:query:transaction:", ^{
             beforeEach(^{
-                SetupDatabaseIndex();
-                CreateTestRecords();
+                SetupDatabaseIndex(database);
+                CreateTestRecords(connection);
             });
             
             afterEach(^{
-                YapDatabase* db = [YapModelManager sharedManager].database;
-                [db unregisterExtension:@"index"];
+                [database unregisterExtension:@"index"];
             });
             
             it(@"should find first person with age < 16",  ^{
@@ -431,7 +189,7 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"+where:withTransaction:", ^{
             beforeEach(^{
                 // create some people
-                CreateTestRecords();
+                CreateTestRecords(connection);
             });
             
             it(@"should find the object with filter", ^{
@@ -598,7 +356,7 @@ describe(@"YapModelObject+CRUD", ^{
         context(@"-allWithTransaction:", ^{
             beforeEach(^{
                 // create some people
-                CreateTestRecords();
+                CreateTestRecords(connection);
             });
 
             it(@"should get all objects of the class in database", ^{

@@ -6,24 +6,20 @@ PODS:
   - CocoaLumberjack/Core (1.6.5.1)
   - CocoaLumberjack/Extensions (1.6.5.1):
     - CocoaLumberjack/Core
-  - Kiwi/ARC (2.2.3)
-  - Kiwi/NonARC (2.2.3)
-  - Kiwi/XCTest (2.2.3):
-    - Kiwi/ARC
-    - Kiwi/NonARC
+  - Kiwi (2.3.0)
   - YapDatabase (2.3.1):
     - CocoaLumberjack (~> 1.6.3)
 
 DEPENDENCIES:
   - AutoCoding (~> 2.1)
   - CocoaLumberjack
-  - Kiwi/XCTest
+  - Kiwi
   - YapDatabase
 
 SPEC CHECKSUMS:
-  AutoCoding: 1cb0f7373249cefc73aa22cc3a7cc62ba4b886a7
-  CocoaLumberjack: 17803afbade3126a377d32b8d23367264b44ced6
-  Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
-  YapDatabase: 033ee47f7116fd6092787771169045a5bad89c87
+  AutoCoding: b67afacf4a80ac2bd9ee9f69b473e562fd06ab7d
+  CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+  YapDatabase: e28b0c5d36d7d566b4126d2fb8d996d6defc78c7
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1

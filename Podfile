@@ -5,6 +5,6 @@ pod 'AutoCoding', '~> 2.1'
 pod 'CocoaLumberjack'
 
 target "YapModelTests" do
-  pod 'Kiwi/XCTest'
+  pod 'Kiwi'
 end
 
