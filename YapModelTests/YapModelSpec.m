@@ -18,14 +18,15 @@ describe(@"YapModel", ^{
         context(@"+codableProperties", ^{
             it(@"should include key and other properties", ^{
                 NSDictionary* properties = [Person codableProperties];
-                [[[properties allKeys] should] containObjects:@"name", @"age", @"member", nil];
-                [[[properties allKeys] should] containObjects:@"key", nil];
+                [[[properties allKeys] should] containObjects:@"name", @"age", @"member", @"salary", nil];
+                [[[properties allKeys] shouldNot] containObjects:@"key", nil];
             });
             
             it(@"should include key and other properties from super class", ^{
                 NSDictionary* properties = [Employee codableProperties];
-                [[[properties allKeys] should] containObjects:@"name", @"age", @"member", nil];
-                [[[properties allKeys] should] containObjects:@"key", nil];
+                [[[properties allKeys] shouldNot] containObjects:@"name", nil];
+                [[[properties allKeys] shouldNot] containObjects:@"age", @"member", nil];
+                [[[properties allKeys] shouldNot] containObjects:@"key", nil];
                 [[[properties allKeys] should] containObjects:@"employeeID", nil];
             });
         });
