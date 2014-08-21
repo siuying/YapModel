@@ -16,13 +16,13 @@
     __attribute__((constructor)) \
     static void metamacro_concat(ym_index_apply, NAME) (void) { \
         Class targetClass = objc_getClass(# CLASS); \
-        id indexSpec = @[ __VA_ARGS__ ]; \
+        NSDictionary* indexSpecs = @{ __VA_ARGS__ }; \
         \
-        if (!ym_addIndexToClass(targetClass, @#NAME, indexSpec)) { \
-            NSLog(@"*** Failed to apply annotation %@ at %s:%lu", indexSpec, __FILE__, (unsigned long)__LINE__); \
+        if (!ym_addIndexToClass(targetClass, @#NAME, indexSpecs)) { \
+            NSLog(@"*** Failed to apply index %@ at %s:%lu", indexSpecs, __FILE__, (unsigned long)__LINE__); \
         } \
     } \
     \
     @interface CLASS ()
 
-BOOL ym_addIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors);
+BOOL ym_addIndexToClass(id targetClass, NSString* indexName, NSDictionary* indexSelectors);

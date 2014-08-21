@@ -9,7 +9,7 @@
 #import "YapModelMetaprogramming.h"
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 
-BOOL ym_addIndexToClass(Class targetClass, NSString* indexName, NSArray* indexSelectors){
+BOOL ym_addIndexToClass(Class targetClass, NSString* indexName, NSDictionary* indexSelectors){
     return [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
                                                                indexName:indexName
                                                                selectors:indexSelectors];

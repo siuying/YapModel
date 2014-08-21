@@ -17,7 +17,7 @@
 @property (nonatomic, assign) NSNumber* price;
 @property (nonatomic, assign) BOOL member;
 
-@index(Car, CarAgePriceIndex, @"age", @"price");
+@index(Car, CarAgePriceIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
 
 @end
 

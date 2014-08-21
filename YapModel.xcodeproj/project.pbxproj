@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		036CC8A66D8B46F1854AE31C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C51613289C2469D802FC96C /* libPods.a */; };
+		01EC376E33B5475392485473 /* libPods-YapModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C9D26DC0359448FAE73014A /* libPods-YapModel.a */; };
 		5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F318BDDF2E00A1B48C /* Employee.m */; };
 		5475503418AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
 		5475503618AF754A001C8220 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503518AF754A001C8220 /* CoreGraphics.framework */; };
@@ -103,7 +103,9 @@
 		54F2338019A6012600CB3D73 /* YapDatabaseSecondaryIndexConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseSecondaryIndexConfigurator.m; path = Classes/YapDatabaseSecondaryIndexConfigurator.m; sourceTree = "<group>"; };
 		54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSecondaryIndexConfiguratorSpec.m; sourceTree = "<group>"; };
 		6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		7C9D26DC0359448FAE73014A /* libPods-YapModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.xcconfig"; path = "Pods/Pods-YapModelTests.xcconfig"; sourceTree = "<group>"; };
+		DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModel.xcconfig"; path = "Pods/Pods-YapModel.xcconfig"; sourceTree = "<group>"; };
 		EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModelTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,7 +117,7 @@
 				5475503618AF754A001C8220 /* CoreGraphics.framework in Frameworks */,
 				5475503818AF754A001C8220 /* UIKit.framework in Frameworks */,
 				5475503418AF754A001C8220 /* Foundation.framework in Frameworks */,
-				036CC8A66D8B46F1854AE31C /* libPods.a in Frameworks */,
+				01EC376E33B5475392485473 /* libPods-YapModel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +144,7 @@
 				5475503118AF754A001C8220 /* Products */,
 				6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */,
 				C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */,
+				DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +166,7 @@
 				5475505518AF754A001C8220 /* XCTest.framework */,
 				3C51613289C2469D802FC96C /* libPods.a */,
 				EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */,
+				7C9D26DC0359448FAE73014A /* libPods-YapModel.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -408,7 +412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-YapModel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -573,7 +577,7 @@
 		};
 		5475506618AF754A001C8220 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */;
+			baseConfigurationReference = DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -589,7 +593,7 @@
 		};
 		5475506718AF754A001C8220 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */;
+			baseConfigurationReference = DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

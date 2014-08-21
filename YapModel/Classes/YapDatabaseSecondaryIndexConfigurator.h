@@ -14,7 +14,7 @@
 
 +(BOOL) registerIndexWithClass:(Class)clazz
                      indexName:(NSString*)indexName
-                     selectors:(NSArray*)selectors;
+                     selectors:(NSDictionary*)selectors;
 
 /**
  * Configurate secondary index based on annotation @index on model

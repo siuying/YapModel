@@ -18,7 +18,7 @@ static NSMutableDictionary* _indices;
 +(void) configureWithDatabase:(YapDatabase*)database
 {
     [_indices enumerateKeysAndObjectsUsingBlock:^(NSString* className, NSDictionary* settings, BOOL *stop) {
-        [settings enumerateKeysAndObjectsUsingBlock:^(NSString* indexName, NSArray* selectors, BOOL *stop) {
+        [settings enumerateKeysAndObjectsUsingBlock:^(NSString* indexName, NSDictionary* selectors, BOOL *stop) {
             YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:NSClassFromString(className)
                                                                               properties:selectors];
             if (![database registerExtension:index withName:indexName]) {
@@ -30,7 +30,7 @@ static NSMutableDictionary* _indices;
 
 +(BOOL) registerIndexWithClass:(Class)clazz
                      indexName:(NSString*)indexName
-                     selectors:(NSArray*)selectors
+                     selectors:(NSDictionary*)selectors
 {
     NSMutableDictionary* settings = _indices[NSStringFromClass(clazz)];
     if (!settings) {

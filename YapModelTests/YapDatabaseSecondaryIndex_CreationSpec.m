@@ -67,15 +67,15 @@ describe(@"YapDatabaseSecondaryIndex_Creation", ^{
             
             it(@"should create index using a property", ^{
                 YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                  properties:@[@"age"]];
+                                                                                  properties:@{@"age": @(YapDatabaseSecondaryIndexTypeInteger)}];
                 [database registerExtension:index withName:ageIndex];
                 
                 YapDatabaseSecondaryIndex* index2 = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                   properties:@[@"name"]];
+                                                                                   properties:@{@"name": @(YapDatabaseSecondaryIndexTypeText)}];
                 [database registerExtension:index2 withName:nameIndex];
                 
                 YapDatabaseSecondaryIndex* index3 = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                   properties:@[@"salary"]];
+                                                                                   properties:@{@"salary": @(YapDatabaseSecondaryIndexTypeReal)}];
                 [database registerExtension:index3 withName:salaryIndex];
 
                 // find by age
@@ -110,7 +110,7 @@ describe(@"YapDatabaseSecondaryIndex_Creation", ^{
             
             it(@"should create index using two property", ^{
                 YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:[Person class]
-                                                                                  properties:@[@"age", @"salary"]];
+                                                                                  properties:@{@"age": @(YapDatabaseSecondaryIndexTypeInteger), @"salary": @(YapDatabaseSecondaryIndexTypeReal)}];
                 [database registerExtension:index withName:@"age-salary"];
 
                 // find by age
