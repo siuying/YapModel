@@ -17,8 +17,8 @@ Define your class with DSL:
 @property (nonatomic, assign) NSUInteger year;
 @property (nonatomic, assign) CGFloat price;
 
-// create an index named "CarAgeIndex"
-@index(Car, CarAgeIndex, @"year": @(YapDatabaseSecondaryIndexTypeInteger));
+// create an index named "CarYearIndex"
+@index(Car, CarYearIndex, @"year": @(YapDatabaseSecondaryIndexTypeInteger));
 
 // create a view named "CarByYear"
 @view(Car, CarByYear, @"group": @"year", @"sort": @"year");
