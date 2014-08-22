@@ -46,7 +46,7 @@ void ym_addViewToClass(NSString* targetClassName, NSString* viewName, NSDictiona
                                                      params:params];
 }
 
-void ym_addHasMany(NSString* targetClassName, NSString* edgeName, NSString* childKey, YDB_NodeDeleteRules nodeRules)
+void ym_addHasMany(NSString* targetClassName, NSString* childKey, NSString* edgeName, YDB_NodeDeleteRules nodeRules)
 {
     [YapDatabaseRelationshipConfigurator configureHasManyRelationshipWithClassName:targetClassName
                                                                           edgeName:edgeName
@@ -54,7 +54,7 @@ void ym_addHasMany(NSString* targetClassName, NSString* edgeName, NSString* chil
                                                                    nodeDeleteRules:nodeRules];
 }
 
-void ym_addHasOne(NSString* targetClassName, NSString* edgeName, NSString* childKey, YDB_NodeDeleteRules nodeRules)
+void ym_addHasOne(NSString* targetClassName, NSString* childKey, NSString* edgeName, YDB_NodeDeleteRules nodeRules)
 {
     [YapDatabaseRelationshipConfigurator configureHasOneRelationshipWithClassName:targetClassName
                                                                          edgeName:edgeName
@@ -62,7 +62,7 @@ void ym_addHasOne(NSString* targetClassName, NSString* edgeName, NSString* child
                                                                   nodeDeleteRules:nodeRules];
 }
 
-void ym_addBelongsTo(NSString* targetClassName, NSString* edgeName, NSString* parentKey, YDB_NodeDeleteRules nodeRules)
+void ym_addBelongsTo(NSString* targetClassName, NSString* parentKey, NSString* edgeName, YDB_NodeDeleteRules nodeRules)
 {
     [YapDatabaseRelationshipConfigurator configureBelongsToRelationshipWithClassName:targetClassName
                                                                             edgeName:edgeName
@@ -70,7 +70,7 @@ void ym_addBelongsTo(NSString* targetClassName, NSString* edgeName, NSString* pa
                                                                      nodeDeleteRules:nodeRules];
 }
 
-void ym_addHasOneFile(NSString* targetClassName, NSString* edgeName, NSString* filePathKey, YDB_NodeDeleteRules nodeRules)
+void ym_addHasOneFile(NSString* targetClassName, NSString* filePathKey, NSString* edgeName, YDB_NodeDeleteRules nodeRules)
 {
     [YapDatabaseRelationshipConfigurator configureHasOneFileRelationshipWithClassName:targetClassName
                                                                              edgeName:edgeName

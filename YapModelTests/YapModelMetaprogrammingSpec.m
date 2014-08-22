@@ -19,10 +19,14 @@
 
 @interface Driver : YapModelObject
 @property (nonatomic, strong) NSString* name;
-@property (nonatomic, strong) NSArray* carsKey;
 
-@hasMany(Driver, cars, carsKey, YDB_DeleteDestinationIfSourceDeleted);
+@hasMany(Driver, carsKey, cars, YDB_DeleteDestinationIfSourceDeleted);
+@hasOne(Driver, licenseKey, license, YDB_DeleteDestinationIfSourceDeleted);
+@belongsTo(Driver, companyKey, company, YDB_DeleteDestinationIfSourceDeleted);
+@hasOneFile(Driver, pictureFilePath, picture, YDB_DeleteDestinationIfSourceDeleted);
+
 @end
+
 @implementation Driver
 @end
 
@@ -81,6 +85,32 @@ describe(@"YapModelMetaprogramming", ^{
                                                     @"key": @"carsKey",
                                                     @"rule": @(YDB_DeleteDestinationIfSourceDeleted),
                                                     @"edge": @"cars"}];
+                [[relation[@"license"] should] equal:@{@"type": @"has_one",
+                                                       @"key": @"licenseKey",
+                                                       @"rule": @(YDB_DeleteDestinationIfSourceDeleted),
+                                                       @"edge": @"license"}];
+                [[relation[@"company"] should] equal:@{@"type": @"belongs_to",
+                                                       @"key": @"companyKey",
+                                                       @"rule": @(YDB_DeleteDestinationIfSourceDeleted),
+                                                       @"edge": @"company"}];
+                [[relation[@"picture"] should] equal:@{@"type": @"has_one_file",
+                                                       @"key": @"pictureFilePath",
+                                                       @"rule": @(YDB_DeleteDestinationIfSourceDeleted),
+                                                       @"edge": @"picture"}];
+
+            });
+            
+            it(@"should add property to class", ^{
+                Driver* driver = [Driver new];
+                driver.carsKey = @[@"c1"];
+                driver.licenseKey = @"1";
+                driver.companyKey = @"2";
+                driver.pictureFilePath = @"/tmp/1.png";
+
+                [[driver.carsKey should] equal:@[@"c1"]];
+                [[driver.licenseKey should] equal:@"1"];
+                [[driver.companyKey should] equal:@"2"];
+                [[driver.pictureFilePath should] equal:@"/tmp/1.png"];
             });
         });
     });

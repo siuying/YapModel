@@ -17,8 +17,11 @@
 
 +(NSString*) collectionName;
 
-// default implementation of yapDatabaseRelationshipEdges
-// note this class is not implemented YapDatabaseRelationshipNode
+/**
+ * Return relationship edges based on YapDatabaseRelationshipConfigurator
+ *
+ * @see YapDatabaseRelationshipConfigurator
+ */
 -(NSArray*) yapDatabaseRelationshipEdges;
 
 @end
