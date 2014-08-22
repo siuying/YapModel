@@ -74,7 +74,19 @@ Create simple index:
 @property (nonatomic, assign) NSNumber* age;
 @property (nonatomic, assign) NSNumber* price;
 
+// text index
+@indexText(Car, CarNameIndex, @"name");
+
+// integer index
+@indexInteger(Car, CarAgeIndex, @"age");
+
+// real number index
+@indexReal(Car, CarPriceIndex, @"price");
+
 // index with multiple fields
+@indexInteger(Car, CarAgeMemberIndex, @"age", @"member");
+
+// index with multiple fields and type
 @index(Car, CarAgePriceIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
 
 @end
