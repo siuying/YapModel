@@ -9,6 +9,30 @@ You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDat
 
 ## Synopsis
 
+Define your class with DSL:
+
+```objective-c
+@interface Car : YapModelObject
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, assign) NSUInteger year;
+@property (nonatomic, assign) CGFloat price;
+
+// create an index named "CarAgeIndex"
+@index(Car, CarAgeIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger));
+
+// create a view named "CarByYear"
+@view(Car, CarByYear, @"group": @"year", @"sort": @"year");
+
+@end
+```
+
+And when the app initialize, setup the database:
+
+```objective-c
+YapDatabase* database = ... // create the database
+[YapModel setupDatabase:database];
+```
+
 ### Create / Save / Delete
 
 ```objective-c
@@ -68,33 +92,46 @@ You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDat
 Create simple index:
 
 ```objective-c
-// Your Class Definition
 @interface Car : YapModelObject
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, assign) NSUInteger age;
 @property (nonatomic, assign) CGFloat price;
+@property (nonatomic, assign) NSInteger year;
 
 // text index
 @indexText(Car, CarNameIndex, @"name");
 
 // integer index
-@indexInteger(Car, CarAgeIndex, @"age");
+@indexInteger(Car, CarAgeIndex, @"year");
 
 // real number index
 @indexReal(Car, CarPriceIndex, @"price");
 
 // index with multiple fields
-@indexInteger(Car, CarAgeMemberIndex, @"age", @"member");
+@indexInteger(Car, CarAgeMemberIndex, @"year", @"price");
 
 // index with multiple fields and type
-@index(Car, CarAgePriceIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
+@index(Car, CarAgePriceIndex, @"year": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
 
 @end
-
-// Configure the Index:
-[YapDatabaseSecondaryIndexConfigurator configureWithDatabase:database];
 ```
 
+### Views
+
+Create simple view:
+
+```objective-c
+@interface Car : YapModelObject
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, assign) CGFloat price;
+@property (nonatomic, assign) NSInteger year;
+
+// define a view by grouping and sorting using name
+@view(Car, CarByName, @"group": @"name", @"sort": @"name");
+
+// or you can use multiple sorting / grouping fields
+@view(Car, CarByYear, @"group": @[@"year"], @"sort": @[@"year", @"name"]);
+
+@end
 ## NSCoding
 
 YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you

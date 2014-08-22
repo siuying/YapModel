@@ -7,7 +7,6 @@
 //
 
 #import "YapDatabaseView+Creation.h"
-#import "YapModelObject.h"
 
 #define YapDatabaseViewCreate(collection, groupBy, sortBy, version)
 

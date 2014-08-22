@@ -32,12 +32,12 @@ describe(@"YapDatabaseSecondaryIndexConfigurator", ^{
         database = nil;
     });
     
-    context(@"+configureWithDatabase:", ^{
+    context(@"+setupIndexWithDatabase:", ^{
         it(@"should configure database by registered index", ^{
-            [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:[IndexableItem class]
-                                                                indexName:@"ItemNameIndex"
-                                                                selectors:@{@"name": @(YapDatabaseSecondaryIndexTypeText)}];
-            [YapDatabaseSecondaryIndexConfigurator configureWithDatabase:database];
+            [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:@"IndexableItem"
+                                                                     indexName:@"ItemNameIndex"
+                                                                     selectors:@{@"name": @(YapDatabaseSecondaryIndexTypeText)}];
+            [YapDatabaseSecondaryIndexConfigurator setupIndicesWithDatabase:database];
             NSDictionary* registeredExtensions = [database registeredExtensions];
             NSArray* keys = [registeredExtensions allKeys];
             [[keys should] containObjects:@"ItemNameIndex", nil];

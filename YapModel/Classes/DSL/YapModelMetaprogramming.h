@@ -15,9 +15,9 @@
     \
     __attribute__((constructor)) \
     static void metamacro_concat(ym_index_apply, NAME) (void) { \
-        Class targetClass = objc_getClass(# CLASS); \
+        NSString* className = [NSString stringWithUTF8String:#CLASS]; \
         NSDictionary* indexSpecs = @{ __VA_ARGS__ }; \
-        ym_addIndexToClass(targetClass, @#NAME, indexSpecs); \
+        ym_addIndexToClass(className, @#NAME, indexSpecs); \
     } \
     \
     @interface CLASS ()
@@ -28,9 +28,9 @@
     \
     __attribute__((constructor)) \
     static void metamacro_concat(ym_text_index_apply, NAME) (void) { \
-        Class targetClass = objc_getClass(# CLASS); \
+        NSString* className = [NSString stringWithUTF8String:#CLASS]; \
         NSArray* indexes = @[ __VA_ARGS__ ]; \
-        ym_addTextIndexToClass(targetClass, @#NAME, indexes); \
+        ym_addTextIndexToClass(className, @#NAME, indexes); \
     } \
     \
     @interface CLASS ()
@@ -41,9 +41,9 @@
     \
     __attribute__((constructor)) \
     static void metamacro_concat(ym_real_index_apply, NAME) (void) { \
-        Class targetClass = objc_getClass(# CLASS); \
+        NSString* className = [NSString stringWithUTF8String:#CLASS]; \
         NSArray* indexes = @[ __VA_ARGS__ ]; \
-        ym_addRealIndexToClass(targetClass, @#NAME, indexes); \
+        ym_addRealIndexToClass(className, @#NAME, indexes); \
     } \
     \
     @interface CLASS ()
@@ -54,14 +54,28 @@
     \
     __attribute__((constructor)) \
     static void metamacro_concat(ym_int_index_apply, NAME) (void) { \
-        Class targetClass = objc_getClass(# CLASS); \
+        NSString* className = [NSString stringWithUTF8String:#CLASS]; \
         NSArray* indexes = @[ __VA_ARGS__ ]; \
-        ym_addIntegerIndexToClass(targetClass, @#NAME, indexes);\
+        ym_addIntegerIndexToClass(className, @#NAME, indexes);\
     } \
     \
     @interface CLASS ()
 
-void ym_addIndexToClass(id targetClass, NSString* indexName, NSDictionary* indexSelectors);
-void ym_addTextIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors);
-void ym_addRealIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors);
-void ym_addIntegerIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors);
+void ym_addIndexToClass(NSString* targetClassName, NSString* indexName, NSDictionary* indexSelectors);
+void ym_addTextIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors);
+void ym_addRealIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors);
+void ym_addIntegerIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors);
+
+#define view(CLASS, NAME, ...) \
+    property (nonatomic, readonly) unsigned char metamacro_concat(NAME, _ym_grp_marker); \
+    @end \
+    \
+    __attribute__((constructor)) \
+    static void metamacro_concat(ym_grp_apply, NAME) (void) { \
+        NSString* className = [NSString stringWithUTF8String:#CLASS]; \
+        NSDictionary* params = @{ __VA_ARGS__ }; \
+        ym_addViewToClass(className, @#NAME, params);\
+    } \
+    \
+    @interface CLASS ()
+void ym_addViewToClass(NSString* targetClassName, NSString* viewName, NSDictionary* params);

@@ -8,31 +8,39 @@
 
 #import "YapModelMetaprogramming.h"
 #import "YapDatabaseSecondaryIndexConfigurator.h"
+#import "YapDatabaseViewConfigurator.h"
 
-void ym_addIndexToClass(Class targetClass, NSString* indexName, NSDictionary* indexSelectors){
-    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
-                                                        indexName:indexName
-                                                        selectors:indexSelectors];
+void ym_addIndexToClass(NSString* targetClassName, NSString* indexName, NSDictionary* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:targetClassName
+                                                             indexName:indexName
+                                                             selectors:indexSelectors];
 };
 
-void ym_addTextIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors){
-    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
-                                                        indexName:indexName
-                                                             type:YapDatabaseSecondaryIndexTypeText
-                                                        selectors:indexSelectors];
+void ym_addTextIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:targetClassName
+                                                             indexName:indexName
+                                                                  type:YapDatabaseSecondaryIndexTypeText
+                                                             selectors:indexSelectors];
 };
 
-void ym_addRealIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors){
-    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
-                                                        indexName:indexName
-                                                             type:YapDatabaseSecondaryIndexTypeReal
-                                                        selectors:indexSelectors];
+void ym_addRealIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:targetClassName
+                                                             indexName:indexName
+                                                                  type:YapDatabaseSecondaryIndexTypeReal
+                                                             selectors:indexSelectors];
 };
 
-void ym_addIntegerIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors)
+void ym_addIntegerIndexToClass(NSString* targetClassName, NSString* indexName, NSArray* indexSelectors)
 {
-    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
-                                                        indexName:indexName
-                                                             type:YapDatabaseSecondaryIndexTypeInteger
-                                                        selectors:indexSelectors];
+    [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:targetClassName
+                                                             indexName:indexName
+                                                                  type:YapDatabaseSecondaryIndexTypeInteger
+                                                             selectors:indexSelectors];
 };
+
+void ym_addViewToClass(NSString* targetClassName, NSString* viewName, NSDictionary* params)
+{
+    [YapDatabaseViewConfigurator configureViewWithClassName:targetClassName
+                                                   viewName:viewName
+                                                     params:params];
+}

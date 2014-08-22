@@ -14,20 +14,20 @@
 @interface YapDatabaseSecondaryIndexConfigurator : NSObject
 
 /**
- * Configurate secondary index based on annotation \@index on model
+ * Configure secondary index based on annotation \@index on model
  * @param database The database to configure
  */
-+(void) configureWithDatabase:(YapDatabase*)database;
++(void) setupIndicesWithDatabase:(YapDatabase*)database;
 
-+(void) registerIndexWithClass:(Class)clazz
++(void) configureIndexWithClassName:(NSString*)className
                      indexName:(NSString*)indexName
                      selectors:(NSDictionary*)selectors;
 
-+(void) registerIndexWithClass:(Class)clazz
++(void) configureIndexWithClassName:(NSString*)className
                      indexName:(NSString*)indexName
                           type:(YapDatabaseSecondaryIndexType)type
                      selectors:(NSArray*)selectors;
 
-+(NSDictionary*) indicesWithClass:(Class)clazz;
++(NSDictionary*) indicesConfigurationWithClassName:(NSString*)className;
 
 @end

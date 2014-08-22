@@ -13,6 +13,9 @@
 		541CF3C519A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3BF19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m */; };
 		541CF3C619A6C75B00127B45 /* YapDatabaseView+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */; };
 		541CF3C719A6C75B00127B45 /* YapModelMetaprogramming.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */; };
+		541CF3CD19A6D15400127B45 /* YapDatabaseViewConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */; };
+		541CF3CF19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */; };
+		541CF3D119A6D79E00127B45 /* YapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3D019A6D79E00127B45 /* YapModel.m */; };
 		5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F318BDDF2E00A1B48C /* Employee.m */; };
 		5475503418AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
 		5475503618AF754A001C8220 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503518AF754A001C8220 /* CoreGraphics.framework */; };
@@ -63,6 +66,10 @@
 		541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapDatabaseView+Creation.m"; path = "Classes/DSL/YapDatabaseView+Creation.m"; sourceTree = "<group>"; };
 		541CF3C219A6C75B00127B45 /* YapModelMetaprogramming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelMetaprogramming.h; path = Classes/DSL/YapModelMetaprogramming.h; sourceTree = "<group>"; };
 		541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelMetaprogramming.m; path = Classes/DSL/YapModelMetaprogramming.m; sourceTree = "<group>"; };
+		541CF3CB19A6D15400127B45 /* YapDatabaseViewConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapDatabaseViewConfigurator.h; path = Classes/DSL/YapDatabaseViewConfigurator.h; sourceTree = "<group>"; };
+		541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseViewConfigurator.m; path = Classes/DSL/YapDatabaseViewConfigurator.m; sourceTree = "<group>"; };
+		541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseViewConfiguratorSpec.m; sourceTree = "<group>"; };
+		541CF3D019A6D79E00127B45 /* YapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModel.m; sourceTree = "<group>"; };
 		5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelSpec.m; sourceTree = "<group>"; };
 		5427C3F218BDDF2E00A1B48C /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
 		5427C3F318BDDF2E00A1B48C /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
@@ -149,6 +156,8 @@
 				541CF3BF19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m */,
 				541CF3C019A6C75B00127B45 /* YapDatabaseView+Creation.h */,
 				541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */,
+				541CF3CB19A6D15400127B45 /* YapDatabaseViewConfigurator.h */,
+				541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */,
 				541CF3C219A6C75B00127B45 /* YapModelMetaprogramming.h */,
 				541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */,
 			);
@@ -229,6 +238,7 @@
 				5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */,
 				5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */,
 				54F2336719A5A76100CB3D73 /* YapDatabaseView+CreationSpec.m */,
+				541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */,
 				54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */,
 				54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */,
 				541CF3B719A6BDB600127B45 /* YapModelMetaprogrammingSpec.m */,
@@ -250,6 +260,7 @@
 			children = (
 				541CF3BB19A6C71F00127B45 /* DSL */,
 				5475508618AFA4E6001C8220 /* YapModel.h */,
+				541CF3D019A6D79E00127B45 /* YapModel.m */,
 				5475507218AF7B7B001C8220 /* YapModelObject.h */,
 				5475507318AF7B7B001C8220 /* YapModelObject.m */,
 				5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */,
@@ -440,12 +451,14 @@
 				5475504418AF754A001C8220 /* IGAppDelegate.m in Sources */,
 				541CF3C719A6C75B00127B45 /* YapModelMetaprogramming.m in Sources */,
 				541CF3C519A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m in Sources */,
+				541CF3D119A6D79E00127B45 /* YapModel.m in Sources */,
 				5475504018AF754A001C8220 /* main.m in Sources */,
 				5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */,
 				5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */,
 				541CF3C419A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m in Sources */,
 				5475504D18AF754A001C8220 /* IGViewController.m in Sources */,
 				541CF3C619A6C75B00127B45 /* YapDatabaseView+Creation.m in Sources */,
+				541CF3CD19A6D15400127B45 /* YapDatabaseViewConfigurator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +474,7 @@
 				54F2338319A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m in Sources */,
 				54F2337919A5EC0900CB3D73 /* YapModelObjectCRUDSpec.m in Sources */,
 				54F2337719A5EBD100CB3D73 /* YapDatabaseView+CreationSpec.m in Sources */,
+				541CF3CF19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m in Sources */,
 				5475507F18AF8878001C8220 /* Company.m in Sources */,
 				54F2337819A5EC0700CB3D73 /* YapModelSpec.m in Sources */,
 				541CF3B819A6BDB600127B45 /* YapModelMetaprogrammingSpec.m in Sources */,

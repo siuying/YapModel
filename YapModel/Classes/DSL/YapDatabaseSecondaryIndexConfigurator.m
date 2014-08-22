@@ -11,20 +11,20 @@
 #import "YapDatabaseSecondaryIndex+Creation.h"
 #import "YapDatabase.h"
 
-static NSMutableDictionary* _indices;
+static NSMutableDictionary* _indicesConfiguration;
 
 @implementation YapDatabaseSecondaryIndexConfigurator
 
 +(void) initialize
 {
-    _indices = [NSMutableDictionary dictionary];
+    _indicesConfiguration = [NSMutableDictionary dictionary];
 }
 
-+(void) configureWithDatabase:(YapDatabase*)database
++(void) setupIndicesWithDatabase:(YapDatabase*)database
 {
-    NSAssert(_indices, @"_indices should not be nil");
+    NSAssert(_indicesConfiguration, @"_indices should not be nil");
 
-    [_indices enumerateKeysAndObjectsUsingBlock:^(NSString* className, NSDictionary* settings, BOOL *stop) {
+    [_indicesConfiguration enumerateKeysAndObjectsUsingBlock:^(NSString* className, NSDictionary* settings, BOOL *stop) {
         [settings enumerateKeysAndObjectsUsingBlock:^(NSString* indexName, NSDictionary* selectors, BOOL *stop) {
             YapDatabaseSecondaryIndex* index = [YapDatabaseSecondaryIndex indexWithClass:NSClassFromString(className)
                                                                               properties:selectors];
@@ -35,20 +35,23 @@ static NSMutableDictionary* _indices;
     }];
 }
 
-+(void) registerIndexWithClass:(Class)clazz
++(void) configureIndexWithClassName:(NSString*)className
                      indexName:(NSString*)indexName
                      selectors:(NSDictionary*)selectors
 {
-    NSMutableDictionary* settings = [self _indicesWithClass:clazz];
+    NSAssert(className, @"className cannot be nil");
+    NSAssert(indexName, @"indexName cannot be nil");
+
+    NSMutableDictionary* settings = [self _indicesConfigurationWithClassName:className];
     settings[indexName] = selectors;
 }
 
-+(void) registerIndexWithClass:(Class)clazz
++(void) configureIndexWithClassName:(NSString*)className
                      indexName:(NSString*)indexName
                           type:(YapDatabaseSecondaryIndexType)type
                      selectors:(NSArray*)selectors
 {
-    NSMutableDictionary* settings = [self _indicesWithClass:clazz];
+    NSMutableDictionary* settings = [self _indicesConfigurationWithClassName:className];
     NSMutableDictionary* selectorsDict = [NSMutableDictionary dictionary];
     [selectors enumerateObjectsUsingBlock:^(NSString* name, NSUInteger idx, BOOL *stop) {
         [selectorsDict setObject:@(type) forKey:name];
@@ -56,20 +59,22 @@ static NSMutableDictionary* _indices;
     settings[indexName] = selectorsDict;
 }
 
-+(NSDictionary*) indicesWithClass:(Class)clazz
++(NSDictionary*) indicesConfigurationWithClassName:(NSString*)className
 {
-    return [self _indicesWithClass:clazz];
+    return [self _indicesConfigurationWithClassName:className];
 }
 
 #pragma mark - Private
 
-+(NSMutableDictionary*) _indicesWithClass:(Class)clazz
++(NSMutableDictionary*) _indicesConfigurationWithClassName:(NSString*)className
 {
-    NSAssert(_indices, @"_indices should not be nil");
-    NSMutableDictionary* settings = _indices[NSStringFromClass(clazz)];
+    NSAssert(_indicesConfiguration, @"_indices should not be nil");
+    NSAssert(className, @"className cannot be nil");
+
+    NSMutableDictionary* settings = _indicesConfiguration[className];
     if (!settings) {
         settings = [NSMutableDictionary dictionary];
-        _indices[NSStringFromClass(clazz)] = settings;
+        _indicesConfiguration[className] = settings;
     }
     return settings;
 }

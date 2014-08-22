@@ -10,13 +10,14 @@
 #import "YapModelMetaprogramming.h"
 
 #import "YapDatabaseSecondaryIndexConfigurator.h"
+#import "YapDatabaseViewConfigurator.h"
 #import "YapModelObject.h"
 #import "TestHelper.h"
 
 @interface Car : YapModelObject
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, assign) NSNumber* age;
-@property (nonatomic, assign) NSNumber* price;
+@property (nonatomic, assign) NSUInteger age;
+@property (nonatomic, assign) CGFloat price;
 @property (nonatomic, assign) BOOL member;
 
 // index meta programming
@@ -27,7 +28,7 @@
 @indexInteger(Car, CarAgeMemberIndex, @"age", @"member");
 
 // view meta programming
-//@view(Car, CarView, @"group" => @[], @"sort" => @[]);
+@view(Car, CarView, @"group": @[@"age"], @"sort": @[@"price"]);
 
 @end
 
@@ -37,15 +38,26 @@
 SPEC_BEGIN(YapModelMetaprogrammingSpec)
 
 describe(@"YapModelMetaprogramming", ^{
-    describe(@"Index", ^{
-        context(@"+indicesWithClass:", ^{
+    describe(@"YapDatabaseSecondaryIndexConfigurator", ^{
+        context(@"+indicesConfigurationWithClass:", ^{
             it(@"should return settings from metaprogramming", ^{
-                NSDictionary* indices = [YapDatabaseSecondaryIndexConfigurator indicesWithClass:[Car class]];
+                NSDictionary* indices = [YapDatabaseSecondaryIndexConfigurator indicesConfigurationWithClassName:NSStringFromClass([Car class])];
                 [[(indices[@"CarAgePriceIndex"]) should] equal:@{@"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal)}];
                 [[(indices[@"CarNameIndex"]) should] equal:@{@"name": @(YapDatabaseSecondaryIndexTypeText)}];
                 [[(indices[@"CarAgeIndex"]) should] equal:@{@"age": @(YapDatabaseSecondaryIndexTypeInteger)}];
                 [[(indices[@"CarPriceIndex"]) should] equal:@{@"price": @(YapDatabaseSecondaryIndexTypeReal)}];
                 [[(indices[@"CarAgeMemberIndex"]) should] equal:@{@"age": @(YapDatabaseSecondaryIndexTypeInteger), @"member": @(YapDatabaseSecondaryIndexTypeInteger)}];
+            });
+        });
+    });
+    
+    describe(@"YapDatabaseViewConfigurator", ^{
+        context(@"+viewsConfigurationWithClass:", ^{
+            it(@"should return config from metaprogramming", ^{
+                NSDictionary* viewConfig = [YapDatabaseViewConfigurator viewsConfigurationWithClassName:NSStringFromClass([Car class])];
+                NSDictionary* carViewConfig = viewConfig[@"CarView"];
+                [[carViewConfig[@"group"] should] equal:@[@"age"]];
+                [[carViewConfig[@"sort"] should] equal:@[@"price"]];
             });
         });
     });
