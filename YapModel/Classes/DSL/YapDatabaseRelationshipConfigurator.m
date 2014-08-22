@@ -14,15 +14,22 @@
 
 static NSMutableDictionary* _configuration;
 
-NSArray* _yapDatabaseRelationshipEdgesWithConfiguration(id self, SEL cmd) {
-    return [YapDatabaseRelationshipConfigurator edgesWithInstance:self];
-}
-
 @implementation YapDatabaseRelationshipConfigurator
 
 +(void) initialize
 {
     _configuration = [NSMutableDictionary dictionary];
+}
+
++(NSDictionary*) relationshipConfigurationWithClassName:(NSString*)className
+{
+    return [self _configurationWithClassName:className];
+}
+
++(BOOL) hasRelationshipConfigurationWithClassName:(NSString*)className
+{
+    NSAssert(_configuration, @"_configuration should not be nil");
+    return _configuration[className] != nil;
 }
 
 +(void) setupViewsWithDatabase:(YapDatabase*)database
@@ -35,53 +42,54 @@ NSArray* _yapDatabaseRelationshipEdgesWithConfiguration(id self, SEL cmd) {
     [_configuration enumerateKeysAndObjectsUsingBlock:^(NSString* className, NSDictionary* settings, BOOL *stop) {
         Class class = NSClassFromString(className);
         NSAssert(class, @"class should not be nil");
-        
-        // implement YapDatabaseRelationshipNode protocol and replace default implementation with _yapDatabaseRelationshipEdgesWithConfiguration
         class_addProtocol(class, @protocol(YapDatabaseRelationshipNode));
-        class_replaceMethod(class, @selector(yapDatabaseRelationshipEdges), (IMP)_yapDatabaseRelationshipEdgesWithConfiguration, "@@:");
     }];
 }
 
 +(void) configureHasManyRelationshipWithClassName:(NSString*)className
                                          edgeName:(NSString*)edgeName
                                          childKey:(NSString*)childKey
-                                  nodeDeleteRules:(NSNumber*)nodeDeleteRules
+                                  nodeDeleteRules:(YDB_NodeDeleteRules)nodeDeleteRules
 {
     NSMutableDictionary* config = [self _configurationWithClassName:className];
-    config[childKey] = @{@"type": @"has_many", @"key": childKey, @"rule": nodeDeleteRules, @"edge": edgeName ?: childKey};
+    config[edgeName] = @{@"type": @"has_many", @"key": childKey, @"rule": @(nodeDeleteRules), @"edge": edgeName ?: childKey};
 }
 
 +(void) configureHasOneRelationshipWithClassName:(NSString*)className
                                         edgeName:(NSString*)edgeName
                                         childKey:(NSString*)childKey
-                                 nodeDeleteRules:(NSNumber*)nodeDeleteRules
+                                 nodeDeleteRules:(YDB_NodeDeleteRules)nodeDeleteRules
 {
     NSMutableDictionary* config = [self _configurationWithClassName:className];
-    config[childKey] = @{@"type": @"has_one", @"key": childKey, @"rule": nodeDeleteRules, @"edge": edgeName ?: childKey};
+    config[edgeName] = @{@"type": @"has_one", @"key": childKey, @"rule": @(nodeDeleteRules), @"edge": edgeName ?: childKey};
 }
 
 +(void) configureBelongsToRelationshipWithClassName:(NSString*)className
                                            edgeName:(NSString*)edgeName
                                           parentKey:(NSString*)parentKey
-                                    nodeDeleteRules:(NSNumber*)nodeDeleteRules
+                                    nodeDeleteRules:(YDB_NodeDeleteRules)nodeDeleteRules
 {
     NSMutableDictionary* config = [self _configurationWithClassName:className];
-    config[parentKey] = @{@"type": @"belongs_to", @"key": parentKey, @"rule": nodeDeleteRules, @"edge": edgeName ?: parentKey};
+    config[edgeName] = @{@"type": @"belongs_to", @"key": parentKey, @"rule": @(nodeDeleteRules), @"edge": edgeName ?: parentKey};
 }
 
 
 +(void) configureHasOneFileRelationshipWithClassName:(NSString*)className
                                             edgeName:(NSString*)edgeName
                                          filePathKey:(NSString*)filePathKey
-                                     nodeDeleteRules:(NSNumber*)nodeDeleteRules
+                                     nodeDeleteRules:(YDB_NodeDeleteRules)nodeDeleteRules
 {
     NSMutableDictionary* config = [self _configurationWithClassName:className];
-    config[filePathKey] = @{@"type": @"has_one_file", @"key": filePathKey, @"rule": nodeDeleteRules, @"edge": edgeName ?: filePathKey};
+    config[edgeName] = @{@"type": @"has_one_file", @"key": filePathKey, @"rule": @(nodeDeleteRules), @"edge": edgeName ?: filePathKey};
 }
 
 +(NSArray*) edgesWithInstance:(id)instance
 {
     NSString* className = NSStringFromClass([instance class]);
+    if (![self hasRelationshipConfigurationWithClassName:className]) {
+        return nil;
+    }
+
     NSDictionary* config = [self _configurationWithClassName:className];
     NSMutableArray* edges = [NSMutableArray array];
     [config enumerateKeysAndObjectsUsingBlock:^(NSString* k, NSDictionary* setting, BOOL *stop) {
@@ -155,6 +163,11 @@ NSArray* _yapDatabaseRelationshipEdgesWithConfiguration(id self, SEL cmd) {
         }
 
     }];
+
+    if ([config count] == 0) {
+        return nil;
+    }
+
     return edges;
 }
 

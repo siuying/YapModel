@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <libextobjc/extobjc.h>
+#import "YapDatabaseRelationshipEdge.h"
 
 #define index(CLASS, NAME, ...) \
     property (nonatomic, readonly) unsigned char metamacro_concat(NAME, _ym_index_marker); \
@@ -79,3 +80,57 @@ void ym_addIntegerIndexToClass(NSString* targetClassName, NSString* indexName, N
     \
     @interface CLASS ()
 void ym_addViewToClass(NSString* targetClassName, NSString* viewName, NSDictionary* params);
+
+#define hasMany(CLASS, EDGE, KEY, ID) \
+    property (nonatomic, readonly) unsigned char metamacro_concat(EDGE, _ym_has_many_marker); \
+    @end \
+    \
+    __attribute__((constructor)) \
+    static void metamacro_concat(ym_has_many_apply, EDGE) (void) { \
+        ym_addHasMany(@#CLASS, @#EDGE, @#KEY, ID);\
+    } \
+    \
+    @interface CLASS ()
+
+#define hasOne(CLASS, EDGE, KEY, ID) \
+    property (nonatomic, readonly) unsigned char metamacro_concat(EDGE, _ym_has_one_marker); \
+    @end \
+    \
+    __attribute__((constructor)) \
+    static void metamacro_concat(ym_has_one_apply, EDGE) (void) { \
+        ym_addHasOne(@#CLASS, @#EDGE, @#KEY, ID);\
+    } \
+    \
+    @interface CLASS ()
+
+#define belongsTo(CLASS, EDGE, KEY, ID) \
+    property (nonatomic, readonly) unsigned char metamacro_concat(EDGE, _ym_belongs_to__marker); \
+    @end \
+    \
+    __attribute__((constructor)) \
+    static void metamacro_concat(ym_belongs_to_apply, EDGE) (void) { \
+        ym_addBelongsTo(@#CLASS, @#EDGE, @#KEY, ID);\
+    } \
+    \
+    @interface CLASS ()
+
+#define hasOneFile(CLASS, EDGE, KEY, ID) \
+    property (nonatomic, readonly) unsigned char metamacro_concat(EDGE, _ym_has_one_file_marker); \
+    @end \
+    \
+    __attribute__((constructor)) \
+    static void metamacro_concat(ym_has_one_file_apply, EDGE) (void) { \
+        ym_addHasOneFile(@#CLASS, @#EDGE, @#KEY, ID);\
+    } \
+    \
+    @interface CLASS ()
+
+
+void ym_addHasMany(NSString* targetClassName, NSString* edgeName, NSString* childKey, YDB_NodeDeleteRules nodeRules);
+
+void ym_addHasOne(NSString* targetClassName, NSString* edgeName, NSString* childKey, YDB_NodeDeleteRules nodeRules);
+
+void ym_addBelongsTo(NSString* targetClassName, NSString* edgeName, NSString* parentKey, YDB_NodeDeleteRules nodeRules);
+
+void ym_addHasOneFile(NSString* targetClassName, NSString* edgeName, NSString* filePathKey, YDB_NodeDeleteRules nodeRules);
+

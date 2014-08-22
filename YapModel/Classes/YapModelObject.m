@@ -9,6 +9,7 @@
 #import "YapModelObject.h"
 #import "YapDatabase.h"
 #import "AutoCoding.h"
+#import "YapDatabaseRelationshipConfigurator.h"
 
 @implementation YapModelObject
 
@@ -25,7 +26,11 @@
 }
 
 -(NSArray*) yapDatabaseRelationshipEdges {
-    return nil;
+    if (![YapDatabaseRelationshipConfigurator hasRelationshipConfigurationWithClassName:NSStringFromClass([self class])]) {
+        return nil;
+    }
+
+    return [YapDatabaseRelationshipConfigurator edgesWithInstance:self];
 }
 
 @end

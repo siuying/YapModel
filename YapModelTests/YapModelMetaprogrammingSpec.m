@@ -11,8 +11,20 @@
 
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapDatabaseViewConfigurator.h"
+#import "YapDatabaseRelationshipConfigurator.h"
+
 #import "YapModelObject.h"
 #import "TestHelper.h"
+#import "YapDatabaseRelationshipEdge.h"
+
+@interface Driver : YapModelObject
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSArray* carsKey;
+
+@hasMany(Driver, cars, carsKey, YDB_DeleteDestinationIfSourceDeleted);
+@end
+@implementation Driver
+@end
 
 @interface Car : YapModelObject
 @property (nonatomic, copy) NSString* name;
@@ -29,7 +41,6 @@
 
 // view meta programming
 @view(Car, CarView, @"group": @[@"age"], @"sort": @[@"price"]);
-
 @end
 
 @implementation Car
@@ -61,7 +72,18 @@ describe(@"YapModelMetaprogramming", ^{
             });
         });
     });
-
+    
+    describe(@"YapDatabaseRelationshipConfigurator", ^{
+        context(@"+viewsConfigurationWithClass:", ^{
+            it(@"should return config from metaprogramming", ^{
+                NSDictionary* relation = [YapDatabaseRelationshipConfigurator relationshipConfigurationWithClassName:NSStringFromClass([Driver class])];
+                [[relation[@"cars"] should] equal:@{@"type": @"has_many",
+                                                    @"key": @"carsKey",
+                                                    @"rule": @(YDB_DeleteDestinationIfSourceDeleted),
+                                                    @"edge": @"cars"}];
+            });
+        });
+    });
 });
 
 SPEC_END

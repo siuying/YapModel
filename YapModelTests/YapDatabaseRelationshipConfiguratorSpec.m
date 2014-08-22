@@ -59,7 +59,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             [YapDatabaseRelationshipConfigurator configureHasManyRelationshipWithClassName:@"TaskList"
                                                                               edgeName:@"task"
                                                                               childKey:@"taskKeys"
-                                                                       nodeDeleteRules:@(YDB_DeleteSourceIfAllDestinationsDeleted)];
+                                                                       nodeDeleteRules:(YDB_DeleteSourceIfAllDestinationsDeleted)];
             [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
 
             TaskList* taskList = [TaskList new];
@@ -94,7 +94,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             [YapDatabaseRelationshipConfigurator configureHasOneRelationshipWithClassName:@"TaskList"
                                                                              edgeName:@"taskManager"
                                                                              childKey:@"taskManagerKey"
-                                                                      nodeDeleteRules:@(YDB_DeleteSourceIfAllDestinationsDeleted)];
+                                                                      nodeDeleteRules:(YDB_DeleteSourceIfAllDestinationsDeleted)];
             [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             TestTaskManager* manager = [TestTaskManager new];
@@ -117,7 +117,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             [YapDatabaseRelationshipConfigurator configureBelongsToRelationshipWithClassName:@"Task"
                                                                                 edgeName:@"list"
                                                                                parentKey:@"listKey"
-                                                                         nodeDeleteRules:@(YDB_DeleteDestinationIfSourceDeleted)];
+                                                                         nodeDeleteRules:(YDB_DeleteDestinationIfSourceDeleted)];
             [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             TaskList* taskList = [TaskList new];
@@ -148,7 +148,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             [YapDatabaseRelationshipConfigurator configureHasOneFileRelationshipWithClassName:@"Task"
                                                                                  edgeName:@"imageFile"
                                                                               filePathKey:@"imageFilePath"
-                                                                          nodeDeleteRules:@(YDB_DeleteDestinationIfAllSourcesDeleted)];
+                                                                          nodeDeleteRules:YDB_DeleteDestinationIfAllSourcesDeleted];
             [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             Task* item1 = [Task new];
