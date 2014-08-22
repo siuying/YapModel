@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
-  s.version      = "0.6.0"
+  s.version      = "0.7.0"
   s.summary      = "YapModel is an lightweight ActiveRecord implementation on top of YapDatabase."
 
   s.description  = <<-DESC
