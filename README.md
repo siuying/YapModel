@@ -1,11 +1,11 @@
 # YapModel
 
-YapModel is an lightweight ActiveRecord implementation on top of [YapDatabase](https://github.com/yaptv/YapDatabase).
+YapModel is a DSL for working with [YapDatabase](https://github.com/yaptv/YapDatabase).
 The syntax is borrowed from Ruby on Rails and inspired by [ObjectiveRecord](https://github.com/mneorr/ObjectiveRecord).
 
 ## Prerequisite
 
-You'll need to understand [how YapDatabase work](https://github.com/yaptv/YapDatabase/wiki) before using this library.
+You'll need to understand [how YapDatabase works](https://github.com/yaptv/YapDatabase/wiki) before using this library.
 
 ## Synopsis
 

@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
   s.version      = "0.7.0"
-  s.summary      = "YapModel is an lightweight ActiveRecord implementation on top of YapDatabase."
+  s.summary      = "YapModel is a DSL for working with YapDatabase."
 
   s.description  = <<-DESC
-                   YapModel is an lightweight ActiveRecord implementation on top of YapDatabase. The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
+                   YapModel is a DSL for working with YapDatabase.
+                   The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
                    DESC
 
   s.homepage     = "https://github.com/siuying/YapModel"
