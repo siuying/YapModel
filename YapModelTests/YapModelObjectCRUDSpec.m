@@ -13,7 +13,6 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
-#import "YapDatabaseManager.h"
 
 #import "Person.h"
 #import "Company.h"

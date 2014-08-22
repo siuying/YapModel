@@ -10,7 +10,6 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
-#import "YapDatabaseManager.h"
 
 extern YapDatabase*(^CreateDatabase)(void);
 extern void(^CleanupDatabase)(YapDatabase*);

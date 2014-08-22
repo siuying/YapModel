@@ -13,14 +13,24 @@
 
 @implementation YapDatabaseView (Creation)
 
-+(instancetype) viewWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys version:(int)version
++(instancetype) viewWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys versionTag:(NSString*)versionTag
 {
-    return [[self alloc] initWithCollection:collection groupByKeys:groupByKeys sortByKeys:sortByKeys version:version];
+    return [[self alloc] initWithCollection:collection groupByKeys:groupByKeys sortByKeys:sortByKeys versionTag:versionTag];
+}
+
++(instancetype) viewWithCollection:(NSString*)collection
+                       groupByKeys:(NSArray*)groupByKeys
+                        sortByKeys:(NSArray*)sortByKeys
+{
+    NSString* groupByTag = groupByKeys ? [groupByKeys componentsJoinedByString:@"-"] : @"all";
+    NSString* sortByTag = sortByKeys ? [sortByKeys componentsJoinedByString:@"-"] : @"none";
+    NSString* versionTag = [[groupByTag stringByAppendingString:@"-"] stringByAppendingString:sortByTag];
+    return [[self alloc] initWithCollection:collection groupByKeys:groupByKeys sortByKeys:sortByKeys versionTag:versionTag];
 }
 
 #pragma mark - Private
 
--(instancetype) initWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys version:(int)version
+-(instancetype) initWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys versionTag:(NSString*)versionTag
 {
     
     YapDatabaseViewBlockType groupingBlockType;
@@ -79,7 +89,7 @@
                                         groupingBlockType:groupingBlockType
                                              sortingBlock:sortingBlock
                                          sortingBlockType:sortingBlockType
-                                                  version:version
+                                               versionTag:versionTag
                                                   options:options];
 }
 

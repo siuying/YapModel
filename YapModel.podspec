@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.source_files  = 'YapModel/Classes/**/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'YapDatabase', '>= 2.3'
+  s.dependency 'YapDatabase', '>= 2.4'
   s.dependency 'AutoCoding', '>= 2.2'
 end
