@@ -305,6 +305,7 @@ describe(@"YapModelObject+CRUD", ^{
                     [john update:@{@"age": @21} withTransaction:transaction];
                 }];
                 [[theValue(john.age) should] equal:theValue(21)];
+                [[john.name should] equal:@"John"];
             });
         });
         
