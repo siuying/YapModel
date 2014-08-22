@@ -68,7 +68,7 @@ YapDatabase* database = ... // create the database
       return person.age < 30;
   } withTransaction:transaction];
 
-  // Find using Sgecondary Index
+  // Find using Secondary Index
   Person *johnDoe = [Person findWithIndex:@"idx"
                                     query:[YapDatabaseQuery queryWithFormat:@"WHERE name == ? AND surname == ?", @"John", @"Doe"]
                           withTransaction:transaction];
