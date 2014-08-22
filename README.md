@@ -132,10 +132,24 @@ Create simple view:
 @view(Car, CarByYear, @"group": @[@"year"], @"sort": @[@"year", @"name"]);
 
 @end
+```
+
 ## NSCoding
 
 YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you
 should check [AutoCoding](https://github.com/nicklockwood/AutoCoding) to understand how it work, and override the NSCoding/NSCopying methods if needed.
+
+## TODO
+
+- Relationship DSL
+
+```objective-c
+// add yapDatabaseRelationshipEdges method to the class
+@hasMany(Company, Employee, @(YDB_DeleteDestinationIfSourceDeleted))
+@belongsTo(Employee, Company, @(YDB_DeleteSourceIfDestinationDeleted))
+@hasOne(Employee, Manager, @(YDB_DeleteDestinationIfSourceDeleted))
+@hasOneFile(Player, avatar, avatarFilePath, @(YDB_DeleteDestinationIfAllSourcesDeleted))
+```
 
 ## Breaking Changes
 
