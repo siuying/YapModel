@@ -19,9 +19,9 @@
 #import "Company.h"
 #import "TestHelper.h"
 
-SPEC_BEGIN(YapDatabaseViewShorthandSpec)
+SPEC_BEGIN(YapDatabaseViewCreationSpec)
 
-describe(@"YapDatabaseView+Shorthand", ^{
+describe(@"YapDatabaseView+Creation", ^{
     __block YapDatabase* database;
 
     void(^CreateTestRecords)(YapDatabaseConnection*) = ^(YapDatabaseConnection* connection){
@@ -55,9 +55,13 @@ describe(@"YapDatabaseView+Shorthand", ^{
 
         it(@"should create a view with the specific model class", ^{
             NSString* viewName = @"viewByPerson";
-            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName] groupBy:@selector(age) sortBy:@selector(age) version:1];
-            [database registerExtension:view withName:viewName];
-            
+            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName]
+                                                            groupByKeys:@[@"age"]
+                                                             sortByKeys:@[@"age"]
+                                                                version:1];
+            BOOL registered = [database registerExtension:view withName:viewName];
+            [[theValue(registered) should] beTrue];
+
             CreateTestRecords(connection);
             
             __block Person* person;
@@ -69,28 +73,6 @@ describe(@"YapDatabaseView+Shorthand", ^{
             [[theValue(person.age) should] equal:theValue(30)];
             [[person.name should] equal:@"Person0"];
             
-            [database unregisterExtension:viewName];
-        });
-        
-        it(@"should create a view with the specific model class, using a sort descriptor", ^{
-            NSString* viewName = @"viewByPerson2";
-            NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"age" ascending:NO];
-            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName] groupBy:nil sortByDescriptor:sortDescriptor version:1];
-            [database registerExtension:view withName:viewName];
-            
-            CreateTestRecords(connection);
-            
-            __block NSArray* groups = nil;
-            __block Person* person = nil;
-            [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                groups = [[transaction ext:viewName] allGroups];
-                person = [[transaction ext:viewName] firstObjectInGroup:@"all"];
-            }];
-            
-            [[person should] beNonNil];
-            [[groups should] equal:@[@"all"]];
-            [[person.name should] equal:@"Person9"];
-
             [database unregisterExtension:viewName];
         });
     });

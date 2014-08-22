@@ -18,3 +18,7 @@ extern void(^SetupDatabaseIndex)(YapDatabase*);
 
 @interface TestHelper : NSObject
 @end
+
+@interface YapDatabaseExtension(Private)
+- (BOOL)supportsDatabase:(YapDatabase *)database withRegisteredExtensions:(NSDictionary *)registeredExtensions;
+@end

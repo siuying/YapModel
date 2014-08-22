@@ -19,12 +19,15 @@
 @property (nonatomic, assign) NSNumber* price;
 @property (nonatomic, assign) BOOL member;
 
-// index metaprogramming
+// index meta programming
 @index(Car, CarAgePriceIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
 @indexText(Car, CarNameIndex, @"name");
 @indexInteger(Car, CarAgeIndex, @"age");
 @indexReal(Car, CarPriceIndex, @"price");
 @indexInteger(Car, CarAgeMemberIndex, @"age", @"member");
+
+// view meta programming
+//@view(Car, CarView, @"group" => @[], @"sort" => @[]);
 
 @end
 
