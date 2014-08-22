@@ -9,8 +9,30 @@
 #import "YapModelMetaprogramming.h"
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 
-BOOL ym_addIndexToClass(Class targetClass, NSString* indexName, NSDictionary* indexSelectors){
-    return [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
-                                                               indexName:indexName
-                                                               selectors:indexSelectors];
+void ym_addIndexToClass(Class targetClass, NSString* indexName, NSDictionary* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
+                                                        indexName:indexName
+                                                        selectors:indexSelectors];
+};
+
+void ym_addTextIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
+                                                        indexName:indexName
+                                                             type:YapDatabaseSecondaryIndexTypeText
+                                                        selectors:indexSelectors];
+};
+
+void ym_addRealIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors){
+    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
+                                                        indexName:indexName
+                                                             type:YapDatabaseSecondaryIndexTypeReal
+                                                        selectors:indexSelectors];
+};
+
+void ym_addIntegerIndexToClass(id targetClass, NSString* indexName, NSArray* indexSelectors)
+{
+    [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:targetClass
+                                                        indexName:indexName
+                                                             type:YapDatabaseSecondaryIndexTypeInteger
+                                                        selectors:indexSelectors];
 };

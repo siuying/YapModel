@@ -11,17 +11,11 @@
 #import "YapModelObject.h"
 #import "TestHelper.h"
 
-@interface Car : YapModelObject
+@interface IndexableItem : YapModelObject
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, assign) NSNumber* age;
-@property (nonatomic, assign) NSNumber* price;
-@property (nonatomic, assign) BOOL member;
-
-@index(Car, CarAgePriceIndex, @"age": @(YapDatabaseSecondaryIndexTypeInteger), @"price": @(YapDatabaseSecondaryIndexTypeReal));
-
 @end
 
-@implementation Car
+@implementation IndexableItem
 @end
 
 SPEC_BEGIN(YapDatabaseSecondaryIndexConfiguratorSpec)
@@ -39,12 +33,15 @@ describe(@"YapDatabaseSecondaryIndexConfigurator", ^{
     });
     
     context(@"+configureWithDatabase:", ^{
-        it(@"should configure database by annotation", ^{
+        it(@"should configure database by registered index", ^{
+            [YapDatabaseSecondaryIndexConfigurator registerIndexWithClass:[IndexableItem class]
+                                                                indexName:@"ItemNameIndex"
+                                                                selectors:@{@"name": @(YapDatabaseSecondaryIndexTypeText)}];
             [YapDatabaseSecondaryIndexConfigurator configureWithDatabase:database];
             NSDictionary* registeredExtensions = [database registeredExtensions];
-            NSString* key = [[registeredExtensions allKeys] firstObject];
-            [[key should] equal:@"CarAgePriceIndex"];
-            
+            NSArray* keys = [registeredExtensions allKeys];
+            [[keys should] containObjects:@"ItemNameIndex", nil];
+
             YapDatabaseSecondaryIndex* index = [[registeredExtensions allValues] firstObject];
             [[index should] beKindOfClass:[YapDatabaseSecondaryIndex class]];
         });

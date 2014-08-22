@@ -7,18 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YapDatabaseSecondaryIndex.h"
 
 @class YapDatabase;
 
 @interface YapDatabaseSecondaryIndexConfigurator : NSObject
 
-+(BOOL) registerIndexWithClass:(Class)clazz
+/**
+ * Configurate secondary index based on annotation \@index on model
+ * @param database The database to configure
+ */
++(void) configureWithDatabase:(YapDatabase*)database;
+
++(void) registerIndexWithClass:(Class)clazz
                      indexName:(NSString*)indexName
                      selectors:(NSDictionary*)selectors;
 
-/**
- * Configurate secondary index based on annotation @index on model
- */
-+(void) configureWithDatabase:(YapDatabase*)database;
++(void) registerIndexWithClass:(Class)clazz
+                     indexName:(NSString*)indexName
+                          type:(YapDatabaseSecondaryIndexType)type
+                     selectors:(NSArray*)selectors;
+
++(NSDictionary*) indicesWithClass:(Class)clazz;
 
 @end
