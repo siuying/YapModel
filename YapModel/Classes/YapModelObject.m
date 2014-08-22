@@ -24,4 +24,8 @@
     return NSStringFromClass([self class]);
 }
 
+-(NSArray*) yapDatabaseRelationshipEdges {
+    return nil;
+}
+
 @end

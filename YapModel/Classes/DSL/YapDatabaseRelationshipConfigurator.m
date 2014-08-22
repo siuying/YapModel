@@ -8,14 +8,38 @@
 
 #import "YapDatabaseRelationshipConfigurator.h"
 #import "YapDatabaseRelationshipEdge.h"
+#import "YapDatabaseRelationship.h"
+#import "YapDatabase.h"
+#import <objc/runtime.h>
 
 static NSMutableDictionary* _configuration;
+
+NSArray* _yapDatabaseRelationshipEdgesWithConfiguration(id self, SEL cmd) {
+    return [YapDatabaseRelationshipConfigurator edgesWithInstance:self];
+}
 
 @implementation YapDatabaseRelationshipConfigurator
 
 +(void) initialize
 {
     _configuration = [NSMutableDictionary dictionary];
+}
+
++(void) setupViewsWithDatabase:(YapDatabase*)database
+{
+    NSAssert(_configuration, @"_configuration should not be nil");
+    if ([[[database registeredExtensions] allKeys] containsObject:@"relationship"]) {
+        [database registerExtension:[[YapDatabaseRelationship alloc] init] withName:@"relationship"];
+    }
+    
+    [_configuration enumerateKeysAndObjectsUsingBlock:^(NSString* className, NSDictionary* settings, BOOL *stop) {
+        Class class = NSClassFromString(className);
+        NSAssert(class, @"class should not be nil");
+        
+        // implement YapDatabaseRelationshipNode protocol and replace default implementation with _yapDatabaseRelationshipEdgesWithConfiguration
+        class_addProtocol(class, @protocol(YapDatabaseRelationshipNode));
+        class_replaceMethod(class, @selector(yapDatabaseRelationshipEdges), (IMP)_yapDatabaseRelationshipEdgesWithConfiguration, "@@:");
+    }];
 }
 
 +(void) configureHasManyRelationshipWithClassName:(NSString*)className

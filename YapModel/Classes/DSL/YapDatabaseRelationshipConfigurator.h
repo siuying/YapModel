@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "YapDatabaseRelationshipEdge.h"
 
+@class YapDatabase;
+
 @interface YapDatabaseRelationshipConfigurator : NSObject
+
++(void) setupViewsWithDatabase:(YapDatabase*)database;
 
 #pragma mark - Config
 

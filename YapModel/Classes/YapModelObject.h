@@ -17,6 +17,10 @@
 
 +(NSString*) collectionName;
 
+// default implementation of yapDatabaseRelationshipEdges
+// note this class is not implemented YapDatabaseRelationshipNode
+-(NSArray*) yapDatabaseRelationshipEdges;
+
 @end
 
 #import "YapModelObject+CRUD.h"

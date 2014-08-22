@@ -12,6 +12,7 @@
 #import "YapModelObject.h"
 #import "TestHelper.h"
 #import "YapDatabaseRelationshipEdge.h"
+#import "YapDatabaseRelationshipNode.h"
 
 @interface TestTaskManager : YapModelObject
 @property (nonatomic, copy) NSString* name;
@@ -59,6 +60,8 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
                                                                               edgeName:@"task"
                                                                               childKey:@"taskKeys"
                                                                        nodeDeleteRules:@(YDB_DeleteSourceIfAllDestinationsDeleted)];
+            [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
+
             TaskList* taskList = [TaskList new];
             taskList.name = @"My List";
             
@@ -70,7 +73,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             
             taskList.taskKeys = @[item1.key, item2.key];
             
-            NSArray* edges = [YapDatabaseRelationshipConfigurator edgesWithInstance:taskList];
+            NSArray* edges = [taskList yapDatabaseRelationshipEdges];
             [[edges should] haveCountOf:2];
             
             YapDatabaseRelationshipEdge* edge = [edges firstObject];
@@ -92,13 +95,14 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
                                                                              edgeName:@"taskManager"
                                                                              childKey:@"taskManagerKey"
                                                                       nodeDeleteRules:@(YDB_DeleteSourceIfAllDestinationsDeleted)];
+            [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             TestTaskManager* manager = [TestTaskManager new];
             TaskList* taskList = [TaskList new];
             taskList.name = @"My List";
             taskList.taskManagerKey = manager.key;
             
-            NSArray* edges = [YapDatabaseRelationshipConfigurator edgesWithInstance:taskList];
+            NSArray* edges = [taskList yapDatabaseRelationshipEdges];
             [[edges should] haveCountOf:1];
             
             YapDatabaseRelationshipEdge* edge = [edges firstObject];
@@ -114,6 +118,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
                                                                                 edgeName:@"list"
                                                                                parentKey:@"listKey"
                                                                          nodeDeleteRules:@(YDB_DeleteDestinationIfSourceDeleted)];
+            [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             TaskList* taskList = [TaskList new];
             taskList.name = @"My List";
@@ -128,7 +133,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
 
             taskList.taskKeys = @[item1.key, item2.key];
             
-            NSArray* edges = [YapDatabaseRelationshipConfigurator edgesWithInstance:item1];
+            NSArray* edges = [item1 yapDatabaseRelationshipEdges];
             [[edges should] haveCountOf:1];
             
             YapDatabaseRelationshipEdge* edge = [edges firstObject];
@@ -144,13 +149,13 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
                                                                                  edgeName:@"imageFile"
                                                                               filePathKey:@"imageFilePath"
                                                                           nodeDeleteRules:@(YDB_DeleteDestinationIfAllSourcesDeleted)];
-            
+            [YapDatabaseRelationshipConfigurator setupViewsWithDatabase:database];
             
             Task* item1 = [Task new];
             item1.text = @"Hello";
             item1.imageFilePath = @"~/a.jpg";
             
-            NSArray* edges = [YapDatabaseRelationshipConfigurator edgesWithInstance:item1];
+            NSArray* edges = [item1 yapDatabaseRelationshipEdges];
             [[edges should] haveCountOf:1];
             
             YapDatabaseRelationshipEdge* edge = [edges firstObject];
