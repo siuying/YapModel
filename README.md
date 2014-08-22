@@ -71,8 +71,8 @@ Create simple index:
 // Your Class Definition
 @interface Car : YapModelObject
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, assign) NSNumber* age;
-@property (nonatomic, assign) NSNumber* price;
+@property (nonatomic, assign) NSUInteger age;
+@property (nonatomic, assign) CGFloat price;
 
 // text index
 @indexText(Car, CarNameIndex, @"name");
