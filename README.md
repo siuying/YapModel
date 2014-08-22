@@ -23,6 +23,9 @@ Define your class with DSL:
 // create a view named "CarByYear"
 @view(Car, CarByYear, @"group": @"year", @"sort": @"year");
 
+// create relationships
+@hasMany(Driver, carsKey, cars, YDB_DeleteDestinationIfSourceDeleted);
+
 @end
 ```
 
@@ -134,26 +137,37 @@ Create simple view:
 @end
 ```
 
+### Relationship
+
+Configure relationship:
+
+```objective-c
+@interface Driver : YapModelObject
+@property (nonatomic, strong) NSString* name;
+
+// Has many.
+// Add a NSArray* property "cars", and setup yapDatabaseRelationshipEdges to return proper edges
+@hasMany(Driver, carsKey, cars, YDB_DeleteDestinationIfSourceDeleted);
+
+// Has one.
+// add a NSString* property "companyKey", and setup yapDatabaseRelationshipEdges to return proper edges
+@hasOne(Driver, licenseKey, license, YDB_DeleteDestinationIfSourceDeleted);
+
+// Belongs to
+// add a NSString* property "companyKey", and setup yapDatabaseRelationshipEdges to return proper edges
+@belongsTo(Driver, companyKey, company, YDB_DeleteDestinationIfSourceDeleted);
+
+// Has one file
+// add a NSString* property "pictureFilePath", and setup yapDatabaseRelationshipEdges to return proper edges
+@hasOneFile(Driver, pictureFilePath, picture, YDB_DeleteDestinationIfSourceDeleted);
+
+@end
+```
+
 ## NSCoding
 
 YapModel include [AutoCoding](https://github.com/nicklockwood/AutoCoding) for automatic NSCoding. This should just work but you
 should check [AutoCoding](https://github.com/nicklockwood/AutoCoding) to understand how it work, and override the NSCoding/NSCopying methods if needed.
-
-## TODO
-
-- Relationship DSL
-
-```objective-c
-// add yapDatabaseRelationshipEdges method to the class
-@hasMany(Company, Employee, @(YDB_DeleteDestinationIfSourceDeleted))
-@belongsTo(Employee, Company, @(YDB_DeleteSourceIfDestinationDeleted))
-@hasOne(Employee, Manager, @(YDB_DeleteDestinationIfSourceDeleted))
-@hasOneFile(Player, avatar, avatarFilePath, @(YDB_DeleteDestinationIfAllSourcesDeleted))
-```
-
-## Breaking Changes
-
-- 0.4.0 - Removed YapModelManager and methods using managed transactions.
 
 ## License
 
