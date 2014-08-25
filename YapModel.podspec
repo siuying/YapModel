@@ -1,10 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
-  s.version      = "0.4.0"
-  s.summary      = "YapModel is an lightweight ActiveRecord implementation on top of YapDatabase."
+  s.version      = "0.7.0"
+  s.summary      = "YapModel is a DSL for working with YapDatabase."
 
   s.description  = <<-DESC
-                   YapModel is an lightweight ActiveRecord implementation on top of YapDatabase. The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
+                   YapModel is a DSL for working with YapDatabase.
+                   The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
                    DESC
 
   s.homepage     = "https://github.com/siuying/YapModel"
@@ -22,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files  = 'YapModel/Classes/**/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'YapDatabase', '>= 2.3'
-  s.dependency 'AutoCoding', '~> 2.1'
+  s.dependency 'YapDatabase', '>= 2.4'
+  s.dependency 'AutoCoding', '~> 2.2'
   s.dependency 'libextobjc'
 end

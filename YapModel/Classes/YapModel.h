@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#ifndef YapModel_YapModel_h
-#define YapModel_YapModel_h
-
 #import "YapModelObject.h"
-#import "YapModelObject+CRUD.h"
 #import "YapDatabaseView+Creation.h"
 #import "YapDatabaseSecondaryIndex+Creation.h"
 
-#endif
+@class YapDatabase;
+
+@interface YapModel : NSObject
++(void) setupDatabse:(YapDatabase*)database;
+@end

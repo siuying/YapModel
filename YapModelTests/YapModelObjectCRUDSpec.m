@@ -13,7 +13,6 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
-#import "YapDatabaseManager.h"
 
 #import "Person.h"
 #import "Company.h"
@@ -113,7 +112,7 @@ describe(@"YapModelObject+CRUD", ^{
                     NSArray* people = [Person findWithIndex:@"index"
                                                       query:[YapDatabaseQuery queryWithFormat:@"WHERE age < ?", @(16)]
                                                 transaction:transaction];
-                    [[theValue([people count]) should] equal:theValue(4)];
+                    [[people should] haveCountOf:4];
                     
                     [people enumerateObjectsUsingBlock:^(Person* person, NSUInteger idx, BOOL *stop) {
                         [[theValue(person.age) should] beLessThan:theValue(16)];
@@ -306,6 +305,7 @@ describe(@"YapModelObject+CRUD", ^{
                     [john update:@{@"age": @21} withTransaction:transaction];
                 }];
                 [[theValue(john.age) should] equal:theValue(21)];
+                [[john.name should] equal:@"John"];
             });
         });
         

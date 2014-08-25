@@ -10,11 +10,14 @@
 #import "YapDatabase.h"
 #import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseExtension.h"
-#import "YapDatabaseManager.h"
 
 extern YapDatabase*(^CreateDatabase)(void);
 extern void(^CleanupDatabase)(YapDatabase*);
 extern void(^SetupDatabaseIndex)(YapDatabase*);
 
 @interface TestHelper : NSObject
+@end
+
+@interface YapDatabaseExtension(Private)
+- (BOOL)supportsDatabase:(YapDatabase *)database withRegisteredExtensions:(NSDictionary *)registeredExtensions;
 @end

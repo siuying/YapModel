@@ -11,10 +11,6 @@
 #import "Person.h"
 #import "Company.h"
 
-@interface YapDatabaseExtension(Private)
-- (BOOL)supportsDatabase:(YapDatabase *)database withRegisteredExtensions:(NSDictionary *)registeredExtensions;
-@end
-
 void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
     YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
     [setup addColumn:@"age" withType:YapDatabaseSecondaryIndexTypeInteger];
@@ -29,7 +25,7 @@ void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
     YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
     
     // for some reason the method return NO in test
-    [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:@YES];
+    [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:theValue(YES)];
     BOOL registered = [database registerExtension:index withName:@"index"];
     if (!registered) {
         NSLog(@"failed register extension: %@", index);

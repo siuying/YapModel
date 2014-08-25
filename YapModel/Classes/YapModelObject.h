@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AutoCoding.h"
 #import "YapModelMetaprogramming.h"
 #import "YapDatabase.h"
-#import "AutoCoding.h"
 
 @interface YapModelObject : NSObject
 
@@ -19,8 +18,12 @@
 +(NSString*) collectionName;
 
 /**
- * Override 
+ * Return relationship edges based on YapDatabaseRelationshipConfigurator
+ *
+ * @see YapDatabaseRelationshipConfigurator
  */
-+(NSDictionary*) codableProperties;
+-(NSArray*) yapDatabaseRelationshipEdges;
 
 @end
+
+#import "YapModelObject+CRUD.h"

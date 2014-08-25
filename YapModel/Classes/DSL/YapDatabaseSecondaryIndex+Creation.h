@@ -10,7 +10,11 @@
 
 @interface YapDatabaseSecondaryIndex (Creation)
 
+/**
+ * @param clazz the class this index should target
+ * @param [NSDictionary<NSString, NSNumber>] properties A dictionary with property as key and YapDatabaseSecondaryIndexBlockType (in NSNumber) as the value.
+ */
 +(YapDatabaseSecondaryIndex*) indexWithClass:(Class)clazz
-                                  properties:(NSArray*)properties;
+                                  properties:(NSDictionary*)properties;
 
 @end
