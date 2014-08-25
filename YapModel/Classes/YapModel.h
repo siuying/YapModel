@@ -15,3 +15,6 @@
 @interface YapModel : NSObject
 +(void) setupDatabse:(YapDatabase*)database;
 @end
+
+#import "YapModelObject+CRUD.h"
+#import "YapModelMetaprogramming.h"
