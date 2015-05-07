@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import "YapModelObject.h"
+#import "YapModel.h"
 #import "Person.h"
 
 @interface Employee : Person

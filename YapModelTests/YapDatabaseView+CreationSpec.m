@@ -7,12 +7,14 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import "YapDatabaseView+Creation.h"
 
-#import "YapModel.h"
-#import "YapDatabase.h"
-#import "YapDatabaseSecondaryIndex.h"
-#import "YapDatabaseExtension.h"
+
+
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseView.h>
+#import <YapModel/YapModel.h>
+//#import "YapDatabaseSecondaryIndex.h"
+//#import "YapDatabaseExtension.h"
 
 #import "Person.h"
 #import "Company.h"

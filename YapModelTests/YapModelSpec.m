@@ -7,6 +7,7 @@
 //
 
 #import <Kiwi/Kiwi.h>
+#import <AutoCoding/AutoCoding.h>
 #import "YapModel.h"
 #import "YapModelObject.h"
 #import "Person.h"

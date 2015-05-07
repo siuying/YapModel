@@ -45,6 +45,10 @@ PODS:
     - YapDatabase/standard (= 2.6.2)
   - YapDatabase/standard (2.6.2):
     - CocoaLumberjack (~> 1)
+  - YapModel (0.8.0):
+    - AutoCoding (~> 2.2)
+    - libextobjc
+    - YapDatabase (>= 2.6)
 
 DEPENDENCIES:
   - AutoCoding (>= 2.2)
@@ -52,6 +56,11 @@ DEPENDENCIES:
   - Kiwi
   - libextobjc
   - YapDatabase (>= 2.4)
+  - YapModel (from `./`)
+
+EXTERNAL SOURCES:
+  YapModel:
+    :path: ./
 
 SPEC CHECKSUMS:
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
@@ -59,5 +68,6 @@ SPEC CHECKSUMS:
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
   YapDatabase: 2898ddb5dfbef699539a2a673bf900831f4eca8b
+  YapModel: 6244e15072a8a4dc8728adf3b2bbe7a30e26bd58
 
 COCOAPODS: 0.37.1

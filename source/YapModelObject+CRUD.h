@@ -9,6 +9,11 @@
 #import "YapModelObject.h"
 #import "YapDatabaseQuery.h"
 
+@class YapDatabaseReadTransaction;
+@class YapDatabaseReadWriteTransaction;
+@class YapDatabaseQuery;
+
+
 @interface YapModelObject (CRUD)
 
 /**

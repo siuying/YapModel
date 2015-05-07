@@ -8,7 +8,7 @@
 
 #import <Kiwi/Kiwi.h>
 #import "YapDatabaseViewConfigurator.h"
-#import "YapDatabaseView.h"
+#import <YapDatabase/YapDatabaseView.h>
 #import "YapModelObject.h"
 #import "TestHelper.h"
 

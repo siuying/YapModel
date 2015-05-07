@@ -10,9 +10,9 @@
 #import <math.h>
 
 #import "YapModel.h"
-#import "YapDatabase.h"
-#import "YapDatabaseSecondaryIndex.h"
-#import "YapDatabaseExtension.h"
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
+#import <YapDatabase/YapDatabaseExtension.h>
 
 #import "Person.h"
 #import "Company.h"

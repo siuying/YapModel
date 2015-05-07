@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <libextobjc/extobjc.h>
-#import "YapDatabaseRelationshipEdge.h"
+#import <YapDatabase/YapDatabaseRelationshipEdge.h>
 
 #define index(CLASS, NAME, ...) \
     property (nonatomic, readonly) unsigned char metamacro_concat(NAME, _ym_index_marker); \

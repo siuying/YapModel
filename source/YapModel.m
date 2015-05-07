@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import <YapDatabase/YapDatabase.h>
 #import "YapModel.h"
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapDatabaseViewConfigurator.h"
