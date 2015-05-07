@@ -82,7 +82,7 @@
     }
 
     options = [[YapDatabaseViewOptions alloc] init];
-    options.allowedCollections = [NSSet setWithArray:@[collection]];
+    options.allowedCollections = [[YapWhitelistBlacklist alloc] initWithWhitelist:[NSSet setWithArray:@[collection]]];
     
     return [[YapDatabaseView alloc] initWithGroupingBlock:groupingBlock
                                         groupingBlockType:groupingBlockType

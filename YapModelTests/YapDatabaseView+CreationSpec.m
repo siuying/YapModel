@@ -75,7 +75,7 @@ describe(@"YapDatabaseView+Creation", ^{
             [[theValue(person.age) should] equal:theValue(30)];
             [[person.name should] equal:@"Person0"];
             
-            [database unregisterExtension:viewName];
+            [database unregisterExtensionWithName:viewName];
         });
         
         it(@"should create a view with multiple sort by keys", ^{
@@ -101,7 +101,7 @@ describe(@"YapDatabaseView+Creation", ^{
             [[theValue(person.salary) should] equal:theValue(2000)];
             [[person.name should] equal:@"Person2"];
             
-            [database unregisterExtension:viewName];
+            [database unregisterExtensionWithName:viewName];
         });
     });
     
@@ -134,7 +134,7 @@ describe(@"YapDatabaseView+Creation", ^{
             [[theValue(person.age) should] equal:theValue(30)];
             [[person.name should] equal:@"Person0"];
             
-            [database unregisterExtension:viewName];
+            [database unregisterExtensionWithName:viewName];
         });
         
         it(@"should create a view with multiple sort by keys", ^{
@@ -159,7 +159,7 @@ describe(@"YapDatabaseView+Creation", ^{
             [[theValue(person.salary) should] equal:theValue(2000)];
             [[person.name should] equal:@"Person2"];
             
-            [database unregisterExtension:viewName];
+            [database unregisterExtensionWithName:viewName];
         });
         
         it(@"should use a default versionTag when no keys supplied", ^{
