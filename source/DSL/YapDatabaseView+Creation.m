@@ -42,7 +42,7 @@
                 id group = [object valueForKey:groupBySelector];
                 if ([group isMemberOfClass:[NSString class]]) {
                     [groupByValues addObject:group];
-                } else {
+                } else if(group!=nil){
                     [groupByValues addObject:[group description]];
                 }
             }];
