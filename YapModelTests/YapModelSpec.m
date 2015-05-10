@@ -20,6 +20,7 @@
 
 @index(TestModel, TestModelIndex, @"name": @(YapDatabaseSecondaryIndexTypeText));
 @view(TestModel, TestModelView, @"group": @"name", @"sort": @"age");
+@view(TestModel, TestModelReverseSortView, @"group": @"name", @"sort": @"age");
 @end
 
 SPEC_BEGIN(YapModelSpec)
@@ -59,7 +60,7 @@ describe(@"YapModel", ^{
             [YapModel setupDatabse:database];
             
             NSArray* extensions = [[database registeredExtensions] allKeys];
-            [[extensions should] containObjects:@"TestModelIndex", @"TestModelView", nil];
+            [[extensions should] containObjects:@"TestModelIndex", @"TestModelView", @"TestModelReverseSortView", nil];
         });
     });
 });

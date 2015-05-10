@@ -45,6 +45,7 @@
 
 // view meta programming
 @view(Car, CarView, @"group": @[@"age"], @"sort": @[@"price"]);
+@view(Car, CarViewReverseSort, @"group": @[@"age"], @"sort": @[@"-price"]);
 @end
 
 @implementation Car
@@ -76,6 +77,18 @@ describe(@"YapModelMetaprogramming", ^{
             });
         });
     });
+    
+    describe(@"YapDatabaseViewConfigurator", ^{
+        context(@"+viewsConfigurationWithClass:", ^{
+            it(@"should return config from metaprogramming", ^{
+                NSDictionary* viewConfig = [YapDatabaseViewConfigurator viewsConfigurationWithClassName:NSStringFromClass([Car class])];
+                NSDictionary* carViewConfig = viewConfig[@"CarViewReverseSort"];
+                [[carViewConfig[@"group"] should] equal:@[@"age"]];
+                [[carViewConfig[@"sort"] should] equal:@[@"-price"]];
+            });
+        });
+    });
+    
     
     describe(@"YapDatabaseRelationshipConfigurator", ^{
         context(@"+viewsConfigurationWithClass:", ^{

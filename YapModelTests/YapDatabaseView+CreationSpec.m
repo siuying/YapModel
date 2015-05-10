@@ -119,7 +119,7 @@ describe(@"YapDatabaseView+Creation", ^{
             YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName]
                                                             groupByKeys:@[@"age"]
                                                              sortByKeys:@[@"age"]];
-            [[view.versionTag should] equal:@"age-age"];
+            [[view.versionTag should] equal:@"age!age"];
 
             BOOL registered = [database registerExtension:view withName:viewName];
             [[theValue(registered) should] beTrue];
@@ -139,12 +139,37 @@ describe(@"YapDatabaseView+Creation", ^{
             [database unregisterExtensionWithName:viewName];
         });
         
+        it(@"should create a view with reverse sort order", ^{
+            NSString* viewName = @"viewByPersonReverse";
+            YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName]
+                                                            groupByKeys:@[]
+                                                             sortByKeys:@[@"-age"]];
+            [[view.versionTag should] equal:@"!-age"];
+            
+            BOOL registered = [database registerExtension:view withName:viewName];
+            [[theValue(registered) should] beTrue];
+            
+            CreateTestRecords(connection);
+            
+            __block Person* person;
+            [connection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                person = [[transaction ext:viewName] objectAtIndex:0 inGroup:@"all"];
+            }];
+            
+            [[person should] beNonNil];
+            [[theValue(person.age) should] equal:theValue(39)];
+            [[person.name should] equal:@"Person9"];
+            
+            [database unregisterExtensionWithName:viewName];
+        });
+        
+        
         it(@"should create a view with multiple sort by keys", ^{
             NSString* viewName = @"viewByPerson2";
             YapDatabaseView* view = [YapDatabaseView viewWithCollection:[Person collectionName]
                                                             groupByKeys:@[@"salary"]
                                                              sortByKeys:@[@"salary", @"name"]];
-            [[view.versionTag should] equal:@"salary-salary-name"];
+            [[view.versionTag should] equal:@"salary!salary!name"];
 
             BOOL registered = [database registerExtension:view withName:viewName];
             [[theValue(registered) should] beTrue];

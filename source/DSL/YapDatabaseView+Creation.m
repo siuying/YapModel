@@ -9,6 +9,8 @@
 #import "YapDatabaseView+Creation.h"
 
 #define YapDatabaseViewCreate(collection, groupBy, sortBy, version)
+static NSString * const kParamsSplitter = @"!";
+static NSString * const kReverseSortOrderPrefix = @"-";
 
 @implementation YapDatabaseView (Creation)
 
@@ -21,19 +23,32 @@
                        groupByKeys:(NSArray*)groupByKeys
                         sortByKeys:(NSArray*)sortByKeys
 {
-    NSString* groupByTag = groupByKeys ? [groupByKeys componentsJoinedByString:@"-"] : @"all";
-    NSString* sortByTag = sortByKeys ? [sortByKeys componentsJoinedByString:@"-"] : @"none";
-    NSString* versionTag = [[groupByTag stringByAppendingString:@"-"] stringByAppendingString:sortByTag];
+    NSString* groupByTag = groupByKeys ? [groupByKeys componentsJoinedByString:kParamsSplitter] : @"all";
+    NSString* sortByTag = sortByKeys ? [sortByKeys componentsJoinedByString:kParamsSplitter] : @"none";
+    NSString* versionTag = [[groupByTag stringByAppendingString:kParamsSplitter] stringByAppendingString:sortByTag];
     return [[self alloc] initWithCollection:collection groupByKeys:groupByKeys sortByKeys:sortByKeys versionTag:versionTag];
 }
 
 #pragma mark - Private
 
--(instancetype) initWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys versionTag:(NSString*)versionTag
+-(instancetype) initWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)originalSortByKeys versionTag:(NSString*)versionTag
 {
     YapDatabaseViewOptions* options;    
     YapDatabaseViewGrouping * grouping;
     YapDatabaseViewSorting * sorting;
+    
+    NSMutableIndexSet * reverseSortKeys = [NSMutableIndexSet new];
+    NSMutableArray * sortByKeys = [NSMutableArray array];
+    [originalSortByKeys enumerateObjectsUsingBlock:^(NSString* key, NSUInteger idx, BOOL *stop) {
+        NSString * actualKey = key;
+        if([actualKey hasPrefix:kReverseSortOrderPrefix])
+        {
+            [reverseSortKeys addIndex:idx];
+            actualKey = [actualKey substringFromIndex:1];
+        }
+        [sortByKeys addObject:actualKey];
+    }];
+    
     
     if (groupByKeys && groupByKeys.count > 0) {
         grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(NSString *collection, NSString *key, id object) {
@@ -46,7 +61,7 @@
                     [groupByValues addObject:[group description]];
                 }
             }];
-            return [groupByValues componentsJoinedByString:@"-"];
+            return [groupByValues componentsJoinedByString:kParamsSplitter];
         }];
     } else {
         grouping = [YapDatabaseViewGrouping withKeyBlock:^NSString *(NSString *collection, NSString *key) {
@@ -57,9 +72,13 @@
     if (sortByKeys && sortByKeys.count > 0) {
         sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
             __block NSComparisonResult result = NSOrderedSame;
+            
             [sortByKeys enumerateObjectsUsingBlock:^(NSString* sortBySelector, NSUInteger idx, BOOL *stop) {
                 NSComparisonResult _result = [[object1 valueForKey:sortBySelector] compare:[object2 valueForKey:sortBySelector]];
+                
                 if (_result != NSOrderedSame) {
+                    //flip result if order is reversed
+                    if([reverseSortKeys containsIndex:idx]) _result = (_result== NSOrderedAscending) ? NSOrderedDescending : NSOrderedAscending;
                     result = _result;
                     *stop = YES;
                 }
