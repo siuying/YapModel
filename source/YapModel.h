@@ -9,6 +9,8 @@
 #import "YapModelObject.h"
 #import "YapDatabaseView+Creation.h"
 #import "YapDatabaseSecondaryIndex+Creation.h"
+#import "YapModelObject+CRUD.h"
+#import "YapModelMetaprogramming.h"
 
 @class YapDatabase;
 
@@ -16,5 +18,3 @@
 +(void) setupDatabse:(YapDatabase*)database;
 @end
 
-#import "YapModelObject+CRUD.h"
-#import "YapModelMetaprogramming.h"

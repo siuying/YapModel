@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
+#import <YapDatabase/YapDatabase.h>
 #import "YapModelObject.h"
-#import "YapDatabase.h"
-#import "AutoCoding.h"
+#import <AutoCoding/AutoCoding.h>
 #import "YapDatabaseRelationshipConfigurator.h"
 
 @implementation YapModelObject

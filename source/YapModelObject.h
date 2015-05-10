@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AutoCoding.h"
 #import "YapModelMetaprogramming.h"
-#import "YapDatabase.h"
+
+
 
 @interface YapModelObject : NSObject
 

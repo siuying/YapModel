@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YapDatabaseRelationshipEdge.h"
+#import <YapDatabase/YapDatabaseRelationshipEdge.h>
 
 @class YapDatabase;
 

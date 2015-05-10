@@ -10,9 +10,9 @@
 #import <math.h>
 
 #import "YapModel.h"
-#import "YapDatabase.h"
-#import "YapDatabaseSecondaryIndex.h"
-#import "YapDatabaseExtension.h"
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
+#import <YapDatabase/YapDatabaseExtension.h>
 
 #import "Person.h"
 #import "Company.h"
@@ -104,7 +104,7 @@ describe(@"YapModelObject+CRUD", ^{
             });
             
             afterEach(^{
-                [database unregisterExtension:@"index"];
+                [database unregisterExtensionWithName:@"index"];
             });
             
             it(@"should find people with age < 16",  ^{
@@ -128,7 +128,7 @@ describe(@"YapModelObject+CRUD", ^{
             });
             
             afterEach(^{
-                [database unregisterExtension:@"index"];
+                [database unregisterExtensionWithName:@"index"];
             });
             
             it(@"should find first person with age < 16",  ^{

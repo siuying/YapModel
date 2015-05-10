@@ -11,8 +11,10 @@
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapModelObject.h"
 #import "TestHelper.h"
-#import "YapDatabaseRelationshipEdge.h"
-#import "YapDatabaseRelationshipNode.h"
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseRelationshipEdge.h>
+#import <YapDatabase/YapDatabaseRelationshipNode.h>
+
 
 @interface TestTaskManager : YapModelObject
 @property (nonatomic, copy) NSString* name;

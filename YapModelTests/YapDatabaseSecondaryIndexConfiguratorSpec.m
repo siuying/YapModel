@@ -7,6 +7,7 @@
 //
 
 #import <Kiwi/Kiwi.h>
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapModelObject.h"
 #import "TestHelper.h"

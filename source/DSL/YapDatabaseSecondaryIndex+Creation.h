@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import "YapDatabaseSecondaryIndex.h"
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
 
 @interface YapDatabaseSecondaryIndex (Creation)
 

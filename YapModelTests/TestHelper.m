@@ -14,15 +14,18 @@
 void(^SetupDatabaseIndex)(YapDatabase*) = ^(YapDatabase* database){
     YapDatabaseSecondaryIndexSetup *setup = [ [YapDatabaseSecondaryIndexSetup alloc] init];
     [setup addColumn:@"age" withType:YapDatabaseSecondaryIndexTypeInteger];
-    
-    YapDatabaseSecondaryIndexBlockType blockType = YapDatabaseSecondaryIndexBlockTypeWithObject;
-    YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
+
+    YapDatabaseSecondaryIndexWithObjectBlock handlerBlock = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
         if ([object isKindOfClass:[Person class]]) {
             Person *person = (Person *)object;
             [dict setObject:@(person.age) forKey:@"age"];
         }
     };
-    YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
+
+    
+    YapDatabaseSecondaryIndexHandler * handler = [YapDatabaseSecondaryIndexHandler withObjectBlock:handlerBlock];
+    
+    YapDatabaseSecondaryIndex* index = [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup handler:handler];
     
     // for some reason the method return NO in test
     [index stub:@selector(supportsDatabase:withRegisteredExtensions:) andReturn:theValue(YES)];

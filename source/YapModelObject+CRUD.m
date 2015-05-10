@@ -7,7 +7,8 @@
 //
 
 #import "YapModelObject+CRUD.h"
-#import "YapDatabaseSecondaryIndexTransaction.h"
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseSecondaryIndexTransaction.h>
 
 @implementation YapModelObject (CRUD)
 

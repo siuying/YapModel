@@ -131,8 +131,14 @@ Create simple view:
 // define a view by grouping and sorting using name
 @view(Car, CarByName, @"group": @"name", @"sort": @"name");
 
+// define a view by grouping and sorting using name (reverse sort)
+@view(Car, CarByName, @"group": @"name", @"sort": @"-name");
+
 // or you can use multiple sorting / grouping fields
 @view(Car, CarByYear, @"group": @[@"year"], @"sort": @[@"year", @"name"]);
+
+// sort by year in descending order, then by name
+@view(Car, CarByYear, @"group": @[@"year"], @"sort": @[@"-year", @"name"]);
 
 @end
 ```

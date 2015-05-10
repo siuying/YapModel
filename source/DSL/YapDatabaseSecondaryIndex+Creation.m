@@ -19,9 +19,8 @@
         YapDatabaseSecondaryIndexType type = (YapDatabaseSecondaryIndexType) typeValue.integerValue;
         [setup addColumn:property withType:type];
     }];
-   
-    YapDatabaseSecondaryIndexBlockType blockType = YapDatabaseSecondaryIndexBlockTypeWithObject;
-    YapDatabaseSecondaryIndexWithObjectBlock block = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object){
+    
+    YapDatabaseSecondaryIndexWithObjectBlock handlerBlock = ^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object) {
         if ([object isMemberOfClass:clazz]) {
             [properties enumerateKeysAndObjectsUsingBlock:^(NSString* property, NSNumber* typeValue, BOOL *stop) {
                 id indexedValue = [object valueForKey:property];
@@ -36,7 +35,9 @@
             return;
         }
     };
-    return [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup block:block blockType:blockType];
+    YapDatabaseSecondaryIndexHandler * handler = [YapDatabaseSecondaryIndexHandler withObjectBlock:handlerBlock];
+    
+    return [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup handler:handler];
 }
 
 @end

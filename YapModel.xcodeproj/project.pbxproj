@@ -7,16 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01EC376E33B5475392485473 /* libPods-YapModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C9D26DC0359448FAE73014A /* libPods-YapModel.a */; };
-		541A5BF919A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541A5BF819A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.m */; };
 		541CF3B819A6BDB600127B45 /* YapModelMetaprogrammingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3B719A6BDB600127B45 /* YapModelMetaprogrammingSpec.m */; };
-		541CF3C419A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3BD19A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m */; };
-		541CF3C519A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3BF19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m */; };
-		541CF3C619A6C75B00127B45 /* YapDatabaseView+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */; };
-		541CF3C719A6C75B00127B45 /* YapModelMetaprogramming.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */; };
-		541CF3CD19A6D15400127B45 /* YapDatabaseViewConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */; };
 		541CF3CF19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */; };
-		541CF3D119A6D79E00127B45 /* YapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3D019A6D79E00127B45 /* YapModel.m */; };
 		5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F318BDDF2E00A1B48C /* Employee.m */; };
 		542FD7F419A756D800C70A62 /* YapDatabaseRelationshipConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 542FD7F319A756D800C70A62 /* YapDatabaseRelationshipConfiguratorSpec.m */; };
 		5475503418AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
@@ -33,18 +25,15 @@
 		5475505718AF754A001C8220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503318AF754A001C8220 /* Foundation.framework */; };
 		5475505818AF754A001C8220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5475503718AF754A001C8220 /* UIKit.framework */; };
 		5475506018AF754A001C8220 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5475505E18AF754A001C8220 /* InfoPlist.strings */; };
-		5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507318AF7B7B001C8220 /* YapModelObject.m */; };
 		5475507B18AF85C9001C8220 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507A18AF85C9001C8220 /* Person.m */; };
 		5475507F18AF8878001C8220 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507E18AF8878001C8220 /* Company.m */; };
-		5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */; };
 		54F2336B19A5A78F00CB3D73 /* TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2336A19A5A78F00CB3D73 /* TestHelper.m */; };
 		54F2337719A5EBD100CB3D73 /* YapDatabaseView+CreationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2336719A5A76100CB3D73 /* YapDatabaseView+CreationSpec.m */; };
 		54F2337819A5EC0700CB3D73 /* YapModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */; };
 		54F2337919A5EC0900CB3D73 /* YapModelObjectCRUDSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */; };
 		54F2337A19A5EC5100CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */; };
 		54F2338319A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */; };
-		54F2338419A60C3C00CB3D73 /* YapModelObject+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */; };
-		E86946581BE2489790C5810E /* libPods-YapModelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */; };
+		BEBEDE2D7580EADD3E1D5F32 /* Pods_YapModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,22 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C51613289C2469D802FC96C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		541A5BF719A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapDatabaseRelationshipConfigurator.h; path = Classes/DSL/YapDatabaseRelationshipConfigurator.h; sourceTree = "<group>"; };
-		541A5BF819A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseRelationshipConfigurator.m; path = Classes/DSL/YapDatabaseRelationshipConfigurator.m; sourceTree = "<group>"; };
+		32029D4C3AA2EB3EC4271CE1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		541CF3B719A6BDB600127B45 /* YapModelMetaprogrammingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelMetaprogrammingSpec.m; sourceTree = "<group>"; };
-		541CF3BC19A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapDatabaseSecondaryIndex+Creation.h"; path = "Classes/DSL/YapDatabaseSecondaryIndex+Creation.h"; sourceTree = "<group>"; };
-		541CF3BD19A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapDatabaseSecondaryIndex+Creation.m"; path = "Classes/DSL/YapDatabaseSecondaryIndex+Creation.m"; sourceTree = "<group>"; };
-		541CF3BE19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapDatabaseSecondaryIndexConfigurator.h; path = Classes/DSL/YapDatabaseSecondaryIndexConfigurator.h; sourceTree = "<group>"; };
-		541CF3BF19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseSecondaryIndexConfigurator.m; path = Classes/DSL/YapDatabaseSecondaryIndexConfigurator.m; sourceTree = "<group>"; };
-		541CF3C019A6C75B00127B45 /* YapDatabaseView+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapDatabaseView+Creation.h"; path = "Classes/DSL/YapDatabaseView+Creation.h"; sourceTree = "<group>"; };
-		541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapDatabaseView+Creation.m"; path = "Classes/DSL/YapDatabaseView+Creation.m"; sourceTree = "<group>"; };
-		541CF3C219A6C75B00127B45 /* YapModelMetaprogramming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelMetaprogramming.h; path = Classes/DSL/YapModelMetaprogramming.h; sourceTree = "<group>"; };
-		541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelMetaprogramming.m; path = Classes/DSL/YapModelMetaprogramming.m; sourceTree = "<group>"; };
-		541CF3CB19A6D15400127B45 /* YapDatabaseViewConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapDatabaseViewConfigurator.h; path = Classes/DSL/YapDatabaseViewConfigurator.h; sourceTree = "<group>"; };
-		541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseViewConfigurator.m; path = Classes/DSL/YapDatabaseViewConfigurator.m; sourceTree = "<group>"; };
 		541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseViewConfiguratorSpec.m; sourceTree = "<group>"; };
-		541CF3D019A6D79E00127B45 /* YapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModel.m; sourceTree = "<group>"; };
 		5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelSpec.m; sourceTree = "<group>"; };
 		5427C3F218BDDF2E00A1B48C /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
 		5427C3F318BDDF2E00A1B48C /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
@@ -97,26 +73,20 @@
 		5475505518AF754A001C8220 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5475505D18AF754A001C8220 /* YapModelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YapModelTests-Info.plist"; sourceTree = "<group>"; };
 		5475505F18AF754A001C8220 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5475507218AF7B7B001C8220 /* YapModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YapModelObject.h; path = Classes/YapModelObject.h; sourceTree = "<group>"; };
-		5475507318AF7B7B001C8220 /* YapModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YapModelObject.m; path = Classes/YapModelObject.m; sourceTree = "<group>"; };
 		5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelObjectCRUDSpec.m; sourceTree = "<group>"; };
 		5475507918AF85C9001C8220 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		5475507A18AF85C9001C8220 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		5475507D18AF8878001C8220 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		5475507E18AF8878001C8220 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
-		5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YapModelObject+CRUD.h"; path = "Classes/YapModelObject+CRUD.h"; sourceTree = "<group>"; };
-		5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "YapModelObject+CRUD.m"; path = "Classes/YapModelObject+CRUD.m"; sourceTree = "<group>"; };
-		5475508618AFA4E6001C8220 /* YapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YapModel.h; path = Classes/YapModel.h; sourceTree = "<group>"; };
 		54F2336719A5A76100CB3D73 /* YapDatabaseView+CreationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YapDatabaseView+CreationSpec.m"; sourceTree = "<group>"; };
 		54F2336919A5A78F00CB3D73 /* TestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelper.h; sourceTree = "<group>"; };
 		54F2336A19A5A78F00CB3D73 /* TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelper.m; sourceTree = "<group>"; };
 		54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSecondaryIndex_CreationSpec.m; sourceTree = "<group>"; };
 		54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSecondaryIndexConfiguratorSpec.m; sourceTree = "<group>"; };
-		6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		7C9D26DC0359448FAE73014A /* libPods-YapModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.xcconfig"; path = "Pods/Pods-YapModelTests.xcconfig"; sourceTree = "<group>"; };
-		DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModel.xcconfig"; path = "Pods/Pods-YapModel.xcconfig"; sourceTree = "<group>"; };
-		EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModelTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapModelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD4A54E22C4C33899AD4B80A /* Pods_YapModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.release.xcconfig"; sourceTree = "<group>"; };
+		DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +97,6 @@
 				5475503618AF754A001C8220 /* CoreGraphics.framework in Frameworks */,
 				5475503818AF754A001C8220 /* UIKit.framework in Frameworks */,
 				5475503418AF754A001C8220 /* Foundation.framework in Frameworks */,
-				01EC376E33B5475392485473 /* libPods-YapModel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,37 +107,27 @@
 				5475505618AF754A001C8220 /* XCTest.framework in Frameworks */,
 				5475505818AF754A001C8220 /* UIKit.framework in Frameworks */,
 				5475505718AF754A001C8220 /* Foundation.framework in Frameworks */,
-				E86946581BE2489790C5810E /* libPods-YapModelTests.a in Frameworks */,
+				BEBEDE2D7580EADD3E1D5F32 /* Pods_YapModelTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3ED4249F89F9A03BBAEF6C3F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */,
+				D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		541CF3B919A6BF3B00127B45 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Matchers;
-			sourceTree = "<group>";
-		};
-		541CF3BB19A6C71F00127B45 /* DSL */ = {
-			isa = PBXGroup;
-			children = (
-				541CF3BC19A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.h */,
-				541CF3BD19A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m */,
-				541CF3BE19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.h */,
-				541CF3BF19A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m */,
-				541CF3C019A6C75B00127B45 /* YapDatabaseView+Creation.h */,
-				541CF3C119A6C75B00127B45 /* YapDatabaseView+Creation.m */,
-				541CF3CB19A6D15400127B45 /* YapDatabaseViewConfigurator.h */,
-				541CF3CC19A6D15400127B45 /* YapDatabaseViewConfigurator.m */,
-				541A5BF719A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.h */,
-				541A5BF819A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.m */,
-				541CF3C219A6C75B00127B45 /* YapModelMetaprogramming.h */,
-				541CF3C319A6C75B00127B45 /* YapModelMetaprogramming.m */,
-			);
-			name = DSL;
 			sourceTree = "<group>";
 		};
 		5475502718AF754A001C8220 = {
@@ -178,9 +137,7 @@
 				5475505B18AF754A001C8220 /* YapModelTests */,
 				5475503218AF754A001C8220 /* Frameworks */,
 				5475503118AF754A001C8220 /* Products */,
-				6C53472BBDCD49DCA88CFA2B /* Pods.xcconfig */,
-				C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */,
-				DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */,
+				3ED4249F89F9A03BBAEF6C3F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,9 +157,9 @@
 				5475503518AF754A001C8220 /* CoreGraphics.framework */,
 				5475503718AF754A001C8220 /* UIKit.framework */,
 				5475505518AF754A001C8220 /* XCTest.framework */,
-				3C51613289C2469D802FC96C /* libPods.a */,
-				EE305F38E44F4BB8991F30D2 /* libPods-YapModelTests.a */,
-				7C9D26DC0359448FAE73014A /* libPods-YapModel.a */,
+				CD4A54E22C4C33899AD4B80A /* Pods_YapModel.framework */,
+				9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */,
+				32029D4C3AA2EB3EC4271CE1 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,7 +167,6 @@
 		5475503918AF754A001C8220 /* YapModel */ = {
 			isa = PBXGroup;
 			children = (
-				5475506B18AF7890001C8220 /* Classes */,
 				5475504218AF754A001C8220 /* IGAppDelegate.h */,
 				5475504318AF754A001C8220 /* IGAppDelegate.m */,
 				5475504518AF754A001C8220 /* Main_iPhone.storyboard */,
@@ -263,20 +219,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5475506B18AF7890001C8220 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				541CF3BB19A6C71F00127B45 /* DSL */,
-				5475508618AFA4E6001C8220 /* YapModel.h */,
-				541CF3D019A6D79E00127B45 /* YapModel.m */,
-				5475507218AF7B7B001C8220 /* YapModelObject.h */,
-				5475507318AF7B7B001C8220 /* YapModelObject.m */,
-				5475508018AFA43A001C8220 /* YapModelObject+CRUD.h */,
-				5475508118AFA43A001C8220 /* YapModelObject+CRUD.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		5475507C18AF85CD001C8220 /* TestClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,11 +239,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5475506518AF754A001C8220 /* Build configuration list for PBXNativeTarget "YapModel" */;
 			buildPhases = (
-				38D10CE9AE054B8D9CB19717 /* Check Pods Manifest.lock */,
 				5475502C18AF754A001C8220 /* Sources */,
 				5475502D18AF754A001C8220 /* Frameworks */,
 				5475502E18AF754A001C8220 /* Resources */,
-				C3D2DD7D26F4429D8162F492 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -321,6 +261,7 @@
 				5475505118AF754A001C8220 /* Frameworks */,
 				5475505218AF754A001C8220 /* Resources */,
 				48680DB022D648C4984FEF6B /* Copy Pods Resources */,
+				B7FCC6E5AB3BEAAC1FB84815 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -339,7 +280,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IG;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Ignition Soft";
 				TargetAttributes = {
 					5475505318AF754A001C8220 = {
@@ -389,21 +330,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		38D10CE9AE054B8D9CB19717 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		48680DB022D648C4984FEF6B /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-YapModelTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8BA15C8C40B5470982AB250F /* Check Pods Manifest.lock */ = {
@@ -434,19 +360,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C3D2DD7D26F4429D8162F492 /* Copy Pods Resources */ = {
+		B7FCC6E5AB3BEAAC1FB84815 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-YapModel-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -456,18 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				541A5BF919A75115002A3DF8 /* YapDatabaseRelationshipConfigurator.m in Sources */,
 				5475504418AF754A001C8220 /* IGAppDelegate.m in Sources */,
-				541CF3C719A6C75B00127B45 /* YapModelMetaprogramming.m in Sources */,
-				541CF3C519A6C75B00127B45 /* YapDatabaseSecondaryIndexConfigurator.m in Sources */,
-				541CF3D119A6D79E00127B45 /* YapModel.m in Sources */,
 				5475504018AF754A001C8220 /* main.m in Sources */,
-				5475508218AFA43B001C8220 /* YapModelObject+CRUD.m in Sources */,
-				5475507418AF7B7B001C8220 /* YapModelObject.m in Sources */,
-				541CF3C419A6C75B00127B45 /* YapDatabaseSecondaryIndex+Creation.m in Sources */,
 				5475504D18AF754A001C8220 /* IGViewController.m in Sources */,
-				541CF3C619A6C75B00127B45 /* YapDatabaseView+Creation.m in Sources */,
-				541CF3CD19A6D15400127B45 /* YapDatabaseViewConfigurator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,7 +395,6 @@
 				54F2336B19A5A78F00CB3D73 /* TestHelper.m in Sources */,
 				54F2337A19A5EC5100CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m in Sources */,
 				5475507B18AF85C9001C8220 /* Person.m in Sources */,
-				54F2338419A60C3C00CB3D73 /* YapModelObject+CRUD.m in Sources */,
 				5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */,
 				54F2338319A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m in Sources */,
 				54F2337919A5EC0900CB3D73 /* YapModelObjectCRUDSpec.m in Sources */,
@@ -541,7 +457,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -581,7 +496,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -613,7 +527,6 @@
 		};
 		5475506618AF754A001C8220 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -629,7 +542,6 @@
 		};
 		5475506718AF754A001C8220 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE778EAC9F3A416992A1F933 /* Pods-YapModel.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -645,9 +557,8 @@
 		};
 		5475506918AF754A001C8220 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */;
+			baseConfigurationReference = DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YapModel.app/YapModel";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -670,9 +581,8 @@
 		};
 		5475506A18AF754A001C8220 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C790FA16C52B4386BAA6B487 /* Pods-YapModelTests.xcconfig */;
+			baseConfigurationReference = D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YapModel.app/YapModel";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

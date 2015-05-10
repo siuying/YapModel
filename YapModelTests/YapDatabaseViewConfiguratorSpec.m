@@ -8,7 +8,7 @@
 
 #import <Kiwi/Kiwi.h>
 #import "YapDatabaseViewConfigurator.h"
-#import "YapDatabaseView.h"
+#import <YapDatabase/YapDatabaseView.h>
 #import "YapModelObject.h"
 #import "TestHelper.h"
 
@@ -61,6 +61,21 @@ describe(@"YapDatabaseViewConfigurator", ^{
             YapDatabaseView* view = registeredExtensions[@"ItemView2"];
             [[view should] beKindOfClass:[YapDatabaseView class]];
         });
+        
+        it(@"should configure database with view using a string value with reverse sort marker", ^{
+            [YapDatabaseViewConfigurator configureViewWithClassName:@"ItemForView"
+                                                           viewName:@"ItemView2Reverse"
+                                                             params:@{@"sort": @"-name"}];
+            [YapDatabaseViewConfigurator setupViewsWithDatabase:database];
+            
+            NSDictionary* registeredExtensions = [database registeredExtensions];
+            NSArray* keys = [registeredExtensions allKeys];
+            [[keys should] containObjects:@"ItemView2Reverse", nil];
+            
+            YapDatabaseView* view = registeredExtensions[@"ItemView2Reverse"];
+            [[view should] beKindOfClass:[YapDatabaseView class]];
+        });
+        
     });
 });
 

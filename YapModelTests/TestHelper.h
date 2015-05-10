@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "YapDatabase.h"
-#import "YapDatabaseSecondaryIndex.h"
-#import "YapDatabaseExtension.h"
+@import Foundation;
+#import <YapDatabase/YapDatabase.h>
+
 
 extern YapDatabase*(^CreateDatabase)(void);
 extern void(^CleanupDatabase)(YapDatabase*);
