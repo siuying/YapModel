@@ -1,25 +1,25 @@
 PODS:
   - AutoCoding (2.2)
   - CocoaLumberjack (1.6.5.1):
-    - CocoaLumberjack/Core
-    - CocoaLumberjack/Extensions
+    - CocoaLumberjack/Core (= 1.6.5.1)
+    - CocoaLumberjack/Extensions (= 1.6.5.1)
   - CocoaLumberjack/Core (1.6.5.1)
   - CocoaLumberjack/Extensions (1.6.5.1):
     - CocoaLumberjack/Core
   - Kiwi (2.3.0)
   - libextobjc (0.4):
-    - libextobjc/EXTADT
-    - libextobjc/EXTConcreteProtocol
-    - libextobjc/EXTKeyPathCoding
-    - libextobjc/EXTNil
-    - libextobjc/EXTSafeCategory
-    - libextobjc/EXTScope
-    - libextobjc/EXTSelectorChecking
-    - libextobjc/EXTSynthesize
-    - libextobjc/NSInvocation+EXT
-    - libextobjc/NSMethodSignature+EXT
-    - libextobjc/RuntimeExtensions
-    - libextobjc/UmbrellaHeader
+    - libextobjc/EXTADT (= 0.4)
+    - libextobjc/EXTConcreteProtocol (= 0.4)
+    - libextobjc/EXTKeyPathCoding (= 0.4)
+    - libextobjc/EXTNil (= 0.4)
+    - libextobjc/EXTSafeCategory (= 0.4)
+    - libextobjc/EXTScope (= 0.4)
+    - libextobjc/EXTSelectorChecking (= 0.4)
+    - libextobjc/EXTSynthesize (= 0.4)
+    - libextobjc/NSInvocation+EXT (= 0.4)
+    - libextobjc/NSMethodSignature+EXT (= 0.4)
+    - libextobjc/RuntimeExtensions (= 0.4)
+    - libextobjc/UmbrellaHeader (= 0.4)
   - libextobjc/EXTADT (0.4):
     - libextobjc/RuntimeExtensions
   - libextobjc/EXTConcreteProtocol (0.4):
@@ -42,25 +42,23 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4)
   - libextobjc/UmbrellaHeader (0.4)
-  - YapDatabase (2.4.3):
-    - YapDatabase/standard
-  - YapDatabase/common (2.4.3):
-    - CocoaLumberjack (~> 1.6.3)
-  - YapDatabase/standard (2.4.3):
-    - YapDatabase/common
+  - YapDatabase (2.6.4):
+    - YapDatabase/standard (= 2.6.4)
+  - YapDatabase/standard (2.6.4):
+    - CocoaLumberjack (~> 1)
 
 DEPENDENCIES:
   - AutoCoding (>= 2.2)
   - CocoaLumberjack
   - Kiwi
   - libextobjc
-  - YapDatabase (>= 2.4)
+  - YapDatabase (>= 2.6.4)
 
 SPEC CHECKSUMS:
-  AutoCoding: 2a15d57acf78912b72cc3b3a472e614b2f112a18
-  CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
-  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
-  libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
-  YapDatabase: 2ec54726596299c88e09e899e8f17c15d7f6b18a
+  AutoCoding: 17baf547ff7ace02b7e802d09e67b3b7419a6a05
+  CocoaLumberjack: 5e26ebef5a48962d1713ae6cb01da30384f3f14e
+  Kiwi: 4c3988bd551f80f6ca0009f302f7c1a2e3777bf2
+  libextobjc: f2802d4262f6885570df9799747409ceb1de602c
+  YapDatabase: f9051e178a38f48d0f3a78562423a5bc969f1ca3
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.37.2

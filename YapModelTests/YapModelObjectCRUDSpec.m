@@ -104,7 +104,7 @@ describe(@"YapModelObject+CRUD", ^{
             });
             
             afterEach(^{
-                [database unregisterExtension:@"index"];
+                [database unregisterExtensionWithName:@"index"];
             });
             
             it(@"should find people with age < 16",  ^{
@@ -128,7 +128,7 @@ describe(@"YapModelObject+CRUD", ^{
             });
             
             afterEach(^{
-                [database unregisterExtension:@"index"];
+                [database unregisterExtensionWithName:@"index"];
             });
             
             it(@"should find first person with age < 16",  ^{

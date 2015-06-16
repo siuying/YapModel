@@ -31,16 +31,9 @@
 
 -(instancetype) initWithCollection:(NSString*)collection groupByKeys:(NSArray*)groupByKeys sortByKeys:(NSArray*)sortByKeys versionTag:(NSString*)versionTag
 {
-    
-    YapDatabaseViewBlockType groupingBlockType;
-    YapDatabaseViewGroupingBlock groupingBlock;
-    YapDatabaseViewBlockType sortingBlockType;
-    YapDatabaseViewSortingBlock sortingBlock;
-    YapDatabaseViewOptions* options;
-    
+    YapDatabaseViewGrouping* grouping;
     if (groupByKeys && groupByKeys.count > 0) {
-        groupingBlockType = YapDatabaseViewBlockTypeWithObject;
-        groupingBlock = ^NSString*(NSString *collection, NSString *key, id object){
+        grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(NSString *collection, NSString *key, id object) {
             NSMutableArray* groupByValues = [NSMutableArray array];
             [groupByKeys enumerateObjectsUsingBlock:^(NSString* groupBySelector, NSUInteger idx, BOOL *stop) {
                 id group = [object valueForKey:groupBySelector];
@@ -51,18 +44,16 @@
                 }
             }];
             return [groupByValues componentsJoinedByString:@"-"];
-        };
+        }];
     } else {
-        groupingBlockType = YapDatabaseViewBlockTypeWithKey;
-        groupingBlock = ^NSString*(NSString *key, id object){
+        grouping = [YapDatabaseViewGrouping withKeyBlock:^NSString *(NSString *collection, NSString *key) {
             return @"all";
-        };
+        }];
     }
     
+    YapDatabaseViewSorting* sorting;
     if (sortByKeys && sortByKeys.count > 0) {
-        sortingBlockType = YapDatabaseViewBlockTypeWithObject;
-        sortingBlock = ^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1,
-                                           NSString *collection2, NSString *key2, id object2) {
+        sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
             __block NSComparisonResult result = NSOrderedSame;
             [sortByKeys enumerateObjectsUsingBlock:^(NSString* sortBySelector, NSUInteger idx, BOOL *stop) {
                 NSComparisonResult _result = [[object1 valueForKey:sortBySelector] compare:[object2 valueForKey:sortBySelector]];
@@ -72,24 +63,19 @@
                 }
             }];
             return result;
-        };
+        }];
     } else {
-        sortingBlockType = YapDatabaseViewBlockTypeWithKey;
-        sortingBlock = ^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1,
-                                           NSString *collection2, NSString *key2) {
+        sorting = [YapDatabaseViewSorting withKeyBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, NSString *collection2, NSString *key2) {
             return NSOrderedSame;
-        };
+        }];
     }
 
-    options = [[YapDatabaseViewOptions alloc] init];
-    options.allowedCollections = [NSSet setWithArray:@[collection]];
-    
-    return [[YapDatabaseView alloc] initWithGroupingBlock:groupingBlock
-                                        groupingBlockType:groupingBlockType
-                                             sortingBlock:sortingBlock
-                                         sortingBlockType:sortingBlockType
-                                               versionTag:versionTag
-                                                  options:options];
+    YapDatabaseViewOptions* options = [[YapDatabaseViewOptions alloc] init];
+    options.allowedCollections = [[YapWhitelistBlacklist alloc] initWithWhitelist:[NSSet setWithArray:@[collection]]];
+    return [[YapDatabaseView alloc] initWithGrouping:grouping
+                                             sorting:sorting
+                                          versionTag:versionTag
+                                             options:options];
 }
 
 @end
