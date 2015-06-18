@@ -33,4 +33,10 @@
     return [YapDatabaseRelationshipConfigurator edgesWithInstance:self];
 }
 
+#pragma mark  - YapModelViewProvider
++(void) registerViewsWithDatabase:(YapDatabase*)database
+{
+    //override me
+}
+
 @end

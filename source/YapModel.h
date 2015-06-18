@@ -11,6 +11,7 @@
 #import "YapDatabaseSecondaryIndex+Creation.h"
 #import "YapModelObject+CRUD.h"
 #import "YapModelMetaprogramming.h"
+#import "YapModelViewProvider.h"
 
 @class YapDatabase;
 

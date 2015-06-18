@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "YapModelMetaprogramming.h"
+#import "YapModelViewProvider.h"
 
-
-
-@interface YapModelObject : NSObject
+@interface YapModelObject : NSObject <YapModelViewProvider>
 
 @property (nonatomic, copy) NSString* key;
 

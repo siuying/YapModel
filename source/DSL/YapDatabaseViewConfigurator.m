@@ -9,8 +9,11 @@
 #import "YapDatabaseViewConfigurator.h"
 #import "YapDatabaseView+Creation.h"
 #import "YapDatabase.h"
+#import "YapModelViewProvider.h"
 
 static NSMutableDictionary* _viewsConfiguration;
+static NSMutableArray* _viewsProviders;
+
 NSString* const YapDatabaseViewConfiguratorGroupKey = @"group";
 NSString* const YapDatabaseViewConfiguratorSortKey = @"sort";
 
@@ -19,6 +22,7 @@ NSString* const YapDatabaseViewConfiguratorSortKey = @"sort";
 +(void) initialize
 {
     _viewsConfiguration = [NSMutableDictionary dictionary];
+    _viewsProviders = [NSMutableArray array];
 }
 
 +(NSDictionary*) viewsConfigurationWithClassName:(NSString*)className
@@ -55,6 +59,21 @@ NSString* const YapDatabaseViewConfiguratorSortKey = @"sort";
             }
         }];
     }];
+    
+    [_viewsProviders enumerateObjectsUsingBlock:^(NSString * className, NSUInteger idx, BOOL *stop) {
+        Class<YapModelViewProvider> generator = NSClassFromString(className);
+        if([(id)generator respondsToSelector:@selector(registerViewsWithDatabase:)]) {
+            [generator registerViewsWithDatabase:database];
+        }
+    }];
+}
+
+
++(void) registerViewProviderWithClassName:(NSString*)className
+{
+    if(![_viewsProviders containsObject:className]) {
+        [_viewsProviders addObject:className];
+    }
 }
 
 #pragma mark - Private

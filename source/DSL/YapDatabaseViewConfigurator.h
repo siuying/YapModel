@@ -29,4 +29,6 @@ extern NSString* const YapDatabaseViewConfiguratorSortKey;
                             params:(NSDictionary*)params;
 
 
++(void) registerViewProviderWithClassName:(NSString*)className;
+
 @end
