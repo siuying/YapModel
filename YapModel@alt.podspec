@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
                    Alternative fork with more fancy add ons.
                    DESC
 
-  s.homepage     = "https://github.com/siuying/YapModel"
+  s.homepage     = "https://github.com/skeeet/YapModel"
   s.license      = { :type => 'MIT', :file => 'LICENSE.txt' }
 
   s.authors             = { "Francis Chong" => "francis@ignition.hk", "Aleksei Shevchenko" => "i.am.skeeet@gmail.com" }
