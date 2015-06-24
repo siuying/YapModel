@@ -1,11 +1,12 @@
 Pod::Spec.new do |s|
-  s.name         = "YapModel"
+  s.name         = "YapModel@alt"
   s.version      = "0.8.1"
   s.summary      = "YapModel is a DSL for working with YapDatabase."
 
   s.description  = <<-DESC
                    YapModel is a DSL for working with YapDatabase.
                    The syntax is borrowed from Ruby on Rails and inspired by ObjectiveRecord.
+                   Alternative fork with more fancy add ons.
                    DESC
 
   s.homepage     = "https://github.com/siuying/YapModel"
