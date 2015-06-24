@@ -140,8 +140,14 @@ Create simple view:
 // sort by year in descending order, then by name
 @view(Car, CarByYear, @"group": @[@"year"], @"sort": @[@"-year", @"name"]);
 
+//create YapSearchResultsView, based on CarByName, and make "name" searchable
+@searchView(Car, CarViewNameSearch, @"parent": @"CarByName", @"properties": @[@"name"]);
+
 @end
 ```
+
+
+
 
 ### Relationship
 
