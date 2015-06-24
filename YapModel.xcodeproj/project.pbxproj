@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0B1FAF1B3B342A009968FA /* YapDatabaseSearchViewConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B1FAE1B3B342A009968FA /* YapDatabaseSearchViewConfiguratorSpec.m */; };
 		541CF3B819A6BDB600127B45 /* YapModelMetaprogrammingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3B719A6BDB600127B45 /* YapModelMetaprogrammingSpec.m */; };
 		541CF3CF19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */; };
 		5427C3F418BDDF2E00A1B48C /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5427C3F318BDDF2E00A1B48C /* Employee.m */; };
@@ -33,7 +34,8 @@
 		54F2337919A5EC0900CB3D73 /* YapModelObjectCRUDSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5475507718AF847A001C8220 /* YapModelObjectCRUDSpec.m */; };
 		54F2337A19A5EC5100CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */; };
 		54F2338319A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */; };
-		BEBEDE2D7580EADD3E1D5F32 /* Pods_YapModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9BBC2596A18C4471DD0F9A2D /* libPods-YapModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51D41EF29497664BBAB36F20 /* libPods-YapModel.a */; };
+		F6984529D8A6B6A5E18D148B /* libPods-YapModelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C02BE26BA558BF241C515F1 /* libPods-YapModelTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32029D4C3AA2EB3EC4271CE1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C02BE26BA558BF241C515F1 /* libPods-YapModelTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModelTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F0B1FAE1B3B342A009968FA /* YapDatabaseSearchViewConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSearchViewConfiguratorSpec.m; sourceTree = "<group>"; };
+		451ADCB80CD478E411D766CE /* Pods-YapModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YapModel/Pods-YapModel.debug.xcconfig"; sourceTree = "<group>"; };
+		51D41EF29497664BBAB36F20 /* libPods-YapModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapModel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		541CF3B719A6BDB600127B45 /* YapModelMetaprogrammingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelMetaprogrammingSpec.m; sourceTree = "<group>"; };
 		541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseViewConfiguratorSpec.m; sourceTree = "<group>"; };
 		5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapModelSpec.m; sourceTree = "<group>"; };
@@ -83,10 +88,9 @@
 		54F2336A19A5A78F00CB3D73 /* TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelper.m; sourceTree = "<group>"; };
 		54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSecondaryIndex_CreationSpec.m; sourceTree = "<group>"; };
 		54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YapDatabaseSecondaryIndexConfiguratorSpec.m; sourceTree = "<group>"; };
-		9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapModelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD4A54E22C4C33899AD4B80A /* Pods_YapModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.release.xcconfig"; sourceTree = "<group>"; };
-		DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.debug.xcconfig"; sourceTree = "<group>"; };
+		74F4E7B26EB8713B187ADFE4 /* Pods-YapModel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModel.release.xcconfig"; path = "Pods/Target Support Files/Pods-YapModel/Pods-YapModel.release.xcconfig"; sourceTree = "<group>"; };
+		FCB05E2CF226C49C6FDEF934 /* Pods-YapModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD3393B21EE09C5F647AA0EE /* Pods-YapModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapModelTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				5475503618AF754A001C8220 /* CoreGraphics.framework in Frameworks */,
 				5475503818AF754A001C8220 /* UIKit.framework in Frameworks */,
 				5475503418AF754A001C8220 /* Foundation.framework in Frameworks */,
+				9BBC2596A18C4471DD0F9A2D /* libPods-YapModel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,18 +112,20 @@
 				5475505618AF754A001C8220 /* XCTest.framework in Frameworks */,
 				5475505818AF754A001C8220 /* UIKit.framework in Frameworks */,
 				5475505718AF754A001C8220 /* Foundation.framework in Frameworks */,
-				BEBEDE2D7580EADD3E1D5F32 /* Pods_YapModelTests.framework in Frameworks */,
+				F6984529D8A6B6A5E18D148B /* libPods-YapModelTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3ED4249F89F9A03BBAEF6C3F /* Pods */ = {
+		26456A9D8E8505B50918954D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */,
-				D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */,
+				451ADCB80CD478E411D766CE /* Pods-YapModel.debug.xcconfig */,
+				74F4E7B26EB8713B187ADFE4 /* Pods-YapModel.release.xcconfig */,
+				FCB05E2CF226C49C6FDEF934 /* Pods-YapModelTests.debug.xcconfig */,
+				FD3393B21EE09C5F647AA0EE /* Pods-YapModelTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -137,7 +144,7 @@
 				5475505B18AF754A001C8220 /* YapModelTests */,
 				5475503218AF754A001C8220 /* Frameworks */,
 				5475503118AF754A001C8220 /* Products */,
-				3ED4249F89F9A03BBAEF6C3F /* Pods */,
+				26456A9D8E8505B50918954D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,9 +164,8 @@
 				5475503518AF754A001C8220 /* CoreGraphics.framework */,
 				5475503718AF754A001C8220 /* UIKit.framework */,
 				5475505518AF754A001C8220 /* XCTest.framework */,
-				CD4A54E22C4C33899AD4B80A /* Pods_YapModel.framework */,
-				9607ADC77A3AB8471B13FF87 /* Pods_YapModelTests.framework */,
-				32029D4C3AA2EB3EC4271CE1 /* Pods.framework */,
+				51D41EF29497664BBAB36F20 /* libPods-YapModel.a */,
+				1C02BE26BA558BF241C515F1 /* libPods-YapModelTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 				5427C3F018BDDC2D00A1B48C /* YapModelSpec.m */,
 				54F2336719A5A76100CB3D73 /* YapDatabaseView+CreationSpec.m */,
 				541CF3CE19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m */,
+				1F0B1FAE1B3B342A009968FA /* YapDatabaseSearchViewConfiguratorSpec.m */,
 				54F2337219A5E45800CB3D73 /* YapDatabaseSecondaryIndex_CreationSpec.m */,
 				54F2338219A609B900CB3D73 /* YapDatabaseSecondaryIndexConfiguratorSpec.m */,
 				542FD7F319A756D800C70A62 /* YapDatabaseRelationshipConfiguratorSpec.m */,
@@ -239,9 +246,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5475506518AF754A001C8220 /* Build configuration list for PBXNativeTarget "YapModel" */;
 			buildPhases = (
+				1A311F3EE44B33738168F475 /* Check Pods Manifest.lock */,
 				5475502C18AF754A001C8220 /* Sources */,
 				5475502D18AF754A001C8220 /* Frameworks */,
 				5475502E18AF754A001C8220 /* Resources */,
+				123709F4A03F13BF8CD8A180 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,12 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5475506818AF754A001C8220 /* Build configuration list for PBXNativeTarget "YapModelTests" */;
 			buildPhases = (
-				8BA15C8C40B5470982AB250F /* Check Pods Manifest.lock */,
+				30D800A58B42195311D4C1E6 /* Check Pods Manifest.lock */,
 				5475505018AF754A001C8220 /* Sources */,
 				5475505118AF754A001C8220 /* Frameworks */,
 				5475505218AF754A001C8220 /* Resources */,
-				48680DB022D648C4984FEF6B /* Copy Pods Resources */,
-				B7FCC6E5AB3BEAAC1FB84815 /* Embed Pods Frameworks */,
+				38777052F08C2B15DCA8C80C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -330,7 +338,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		48680DB022D648C4984FEF6B /* Copy Pods Resources */ = {
+		123709F4A03F13BF8CD8A180 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -342,10 +350,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModel/Pods-YapModel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8BA15C8C40B5470982AB250F /* Check Pods Manifest.lock */ = {
+		1A311F3EE44B33738168F475 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,19 +368,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B7FCC6E5AB3BEAAC1FB84815 /* Embed Pods Frameworks */ = {
+		30D800A58B42195311D4C1E6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		38777052F08C2B15DCA8C80C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -403,6 +426,7 @@
 				541CF3CF19A6D55200127B45 /* YapDatabaseViewConfiguratorSpec.m in Sources */,
 				5475507F18AF8878001C8220 /* Company.m in Sources */,
 				54F2337819A5EC0700CB3D73 /* YapModelSpec.m in Sources */,
+				1F0B1FAF1B3B342A009968FA /* YapDatabaseSearchViewConfiguratorSpec.m in Sources */,
 				541CF3B819A6BDB600127B45 /* YapModelMetaprogrammingSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,6 +551,7 @@
 		};
 		5475506618AF754A001C8220 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 451ADCB80CD478E411D766CE /* Pods-YapModel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -542,6 +567,7 @@
 		};
 		5475506718AF754A001C8220 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74F4E7B26EB8713B187ADFE4 /* Pods-YapModel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -557,7 +583,7 @@
 		};
 		5475506918AF754A001C8220 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFC2319FB9E2B1452C52DE61 /* Pods-YapModelTests.debug.xcconfig */;
+			baseConfigurationReference = FCB05E2CF226C49C6FDEF934 /* Pods-YapModelTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YapModel.app/YapModel";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -581,7 +607,7 @@
 		};
 		5475506A18AF754A001C8220 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1FF38E34BC7289B662075B8 /* Pods-YapModelTests.release.xcconfig */;
+			baseConfigurationReference = FD3393B21EE09C5F647AA0EE /* Pods-YapModelTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YapModel.app/YapModel";
 				FRAMEWORK_SEARCH_PATHS = (

@@ -1,15 +1,15 @@
 platform :ios, 8.0
-use_frameworks!
+#use_frameworks!
 
-# 
-# target 'YapModel' do
-# end
+
+target 'YapModel' do
+  pod 'YapDatabase', '>= 2.6.4'
+  pod 'AutoCoding', '>= 2.2'
+  pod 'CocoaLumberjack'
+  pod 'libextobjc'
+end
 
 target "YapModelTests" do
- pod 'YapModel', :path=>'./'
- pod 'YapDatabase', '>= 2.4'
- pod 'AutoCoding', '>= 2.2'
- pod 'CocoaLumberjack'
- pod 'libextobjc'
+  pod 'YapModel', :path=>'./'
   pod 'Kiwi'
 end

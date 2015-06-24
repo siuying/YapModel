@@ -12,6 +12,7 @@
 #import "YapModel.h"
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapDatabaseViewConfigurator.h"
+#import "YapDatabaseSearchViewConfigurator.h"
 
 @implementation YapModel
 
@@ -19,6 +20,10 @@
 {
     [YapDatabaseSecondaryIndexConfigurator setupIndicesWithDatabase:database];
     [YapDatabaseViewConfigurator setupViewsWithDatabase:database];
+    [YapDatabaseSearchViewConfigurator setupViewsWithDatabase:database];
+    
+    [YapDatabaseViewConfigurator setupAdditionalViewsFromViewProvidersWithDatabase:database];
+    
 }
 
 @end

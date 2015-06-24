@@ -59,7 +59,10 @@ NSString* const YapDatabaseViewConfiguratorSortKey = @"sort";
             }
         }];
     }];
-    
+}
+
++(void) setupAdditionalViewsFromViewProvidersWithDatabase:(YapDatabase*)database
+{
     [_viewsProviders enumerateObjectsUsingBlock:^(NSString * className, NSUInteger idx, BOOL *stop) {
         Class<YapModelViewProvider> generator = NSClassFromString(className);
         if([(id)generator respondsToSelector:@selector(registerViewsWithDatabase:)]) {

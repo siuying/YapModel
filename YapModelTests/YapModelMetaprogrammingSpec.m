@@ -11,6 +11,7 @@
 
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapDatabaseViewConfigurator.h"
+#import "YapDatabaseSearchViewConfigurator.h"
 #import "YapDatabaseRelationshipConfigurator.h"
 
 #import "YapModelObject.h"
@@ -46,6 +47,7 @@
 // view meta programming
 @view(Car, CarView, @"group": @[@"age"], @"sort": @[@"price"]);
 @view(Car, CarViewReverseSort, @"group": @[@"age"], @"sort": @[@"-price"]);
+@searchView(Car, CarViewNameSearch, @"parent": @"CarView", @"properties": @[@"name"]);
 @end
 
 @implementation Car
@@ -88,6 +90,19 @@ describe(@"YapModelMetaprogramming", ^{
             });
         });
     });
+    
+    
+    describe(@"YapDatabaseSearchViewConfigurator", ^{
+        context(@"+viewsConfigurationWithClass:", ^{
+            it(@"should return config from metaprogramming", ^{
+                NSDictionary* viewConfig = [YapDatabaseSearchViewConfigurator viewsConfigurationWithClassName:NSStringFromClass([Car class])];
+                NSDictionary* carViewNameSeachConfig = viewConfig[@"CarViewNameSearch"];
+                [[carViewNameSeachConfig[@"parent"] should] equal:@"CarView"];
+                [[carViewNameSeachConfig[@"properties"] should] equal:@[@"name"]];
+            });
+        });
+    });
+    
     
     
     describe(@"YapDatabaseRelationshipConfigurator", ^{

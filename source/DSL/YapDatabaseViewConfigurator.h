@@ -22,6 +22,13 @@ extern NSString* const YapDatabaseViewConfiguratorSortKey;
  */
 +(void) setupViewsWithDatabase:(YapDatabase*)database;
 
+/**
+ *  Setup additional views from view providers
+ *
+ *  @param database The database to configure
+ */
++(void) setupAdditionalViewsFromViewProvidersWithDatabase:(YapDatabase*)database;
+
 +(NSDictionary*) viewsConfigurationWithClassName:(NSString*)className;
 
 +(void) configureViewWithClassName:(NSString*)className

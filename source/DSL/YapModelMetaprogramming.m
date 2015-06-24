@@ -10,6 +10,7 @@
 #import "YapDatabaseSecondaryIndexConfigurator.h"
 #import "YapDatabaseViewConfigurator.h"
 #import "YapDatabaseRelationshipConfigurator.h"
+#import "YapDatabaseSearchViewConfigurator.h"
 
 void ym_addIndexToClass(NSString* targetClassName, NSString* indexName, NSDictionary* indexSelectors){
     [YapDatabaseSecondaryIndexConfigurator configureIndexWithClassName:targetClassName
@@ -78,3 +79,9 @@ void ym_addHasOneFile(NSString* targetClassName, NSString* filePathKey, NSString
                                                                       nodeDeleteRules:nodeRules];
 }
 
+void ym_addSearchResultsViewToClass(NSString* targetClassName, NSString* viewName, NSDictionary* params)
+{
+    [YapDatabaseSearchViewConfigurator configureViewWithClassName:targetClassName
+                                                         viewName:viewName
+                                                           params:params];
+}

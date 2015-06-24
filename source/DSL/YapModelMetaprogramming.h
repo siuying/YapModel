@@ -138,3 +138,19 @@ void ym_addBelongsTo(NSString* targetClassName, NSString* parentKey, NSString* e
 
 void ym_addHasOneFile(NSString* targetClassName, NSString* filePathKey, NSString* edgeName, YDB_NodeDeleteRules nodeRules);
 
+
+
+#define searchView(CLASS, NAME, ...) \
+property (nonatomic, readonly) unsigned char metamacro_concat(NAME, _ym_grp_marker); \
+@end \
+\
+__attribute__((constructor)) \
+static void metamacro_concat(ym_grp_apply, NAME) (void) { \
+NSString* className = [NSString stringWithUTF8String:#CLASS]; \
+NSDictionary* params = @{ __VA_ARGS__ }; \
+ym_addSearchResultsViewToClass(className, @#NAME, params);\
+} \
+\
+@interface CLASS ()
+void ym_addSearchResultsViewToClass(NSString* targetClassName, NSString* viewName, NSDictionary* properties);
+

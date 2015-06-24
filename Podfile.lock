@@ -41,33 +41,40 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - YapDatabase (2.6.2):
-    - YapDatabase/standard (= 2.6.2)
-  - YapDatabase/standard (2.6.2):
+  - SQLCipher/common (3.1.0)
+  - SQLCipher/fts (3.1.0):
+    - SQLCipher/common
+  - YapDatabase (2.6.4):
+    - YapDatabase/standard (= 2.6.4)
+  - YapDatabase/SQLCipher (2.6.4):
+    - CocoaLumberjack (~> 1)
+    - SQLCipher/fts
+  - YapDatabase/standard (2.6.4):
     - CocoaLumberjack (~> 1)
   - YapModel (0.8.0):
     - AutoCoding (~> 2.2)
     - libextobjc
-    - YapDatabase (>= 2.6)
+    - YapDatabase/SQLCipher (~> 2.6)
 
 DEPENDENCIES:
   - AutoCoding (>= 2.2)
   - CocoaLumberjack
   - Kiwi
   - libextobjc
-  - YapDatabase (>= 2.4)
+  - YapDatabase (>= 2.6.4)
   - YapModel (from `./`)
 
 EXTERNAL SOURCES:
   YapModel:
-    :path: ./
+    :path: "./"
 
 SPEC CHECKSUMS:
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  YapDatabase: 2898ddb5dfbef699539a2a673bf900831f4eca8b
-  YapModel: 6244e15072a8a4dc8728adf3b2bbe7a30e26bd58
+  SQLCipher: c44fcca49c31483c2489cfb79aa7a69407f3794a
+  YapDatabase: f9051e178a38f48d0f3a78562423a5bc969f1ca3
+  YapModel: 02954b2332b1e90341b34f493b57c9b871aaca3e
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2
