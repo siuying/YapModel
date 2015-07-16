@@ -28,8 +28,11 @@
                     [dict setObject:indexedValue forKey:property];
                 } else if ([indexedValue isKindOfClass:[NSDate class]]) {
                     [dict setObject:@([(NSDate*)indexedValue timeIntervalSince1970]) forKey:property];
-                } else {
+                } else if(indexedValue) {
                     [dict setObject:[indexedValue description] forKey:property];
+                }
+                else {
+                    [dict removeObjectForKey:property];
                 }
             }];
             return;

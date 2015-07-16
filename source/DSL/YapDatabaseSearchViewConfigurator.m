@@ -57,7 +57,8 @@ NSString* const YapDatabaseFullTextSearchExtensionName = @"fts";
         
         [properties enumerateObjectsUsingBlock:^(NSString* property, NSUInteger idx, BOOL *stop) {
             id value = [object valueForKey:property];
-            [dict setObject:value forKey:property];
+            if(value) [dict setObject:value forKey:property];
+            else [dict removeObjectForKey:property];
         }];
     }];
     
