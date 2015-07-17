@@ -72,6 +72,17 @@
  */
 - (void)saveWithTransaction:(YapDatabaseReadWriteTransaction*)transaction;
 
+
+/**
+ * Create or update this object in given transaction, optionally keeping it's existing metadata
+ *
+ * If the key is set, update the current object in database.
+ * If the key is not set, set it to a new UUID.
+ *
+ * @param transaction the transaction.
+ */
+- (void)saveWithTransaction:(YapDatabaseReadWriteTransaction*)transaction keepMetadata:(BOOL)keepMetadata;
+
 /**
  * Delete this object in given transaction.
  *
@@ -110,6 +121,14 @@
  * @param transaction the transaction.
  */
 - (void)update:(NSDictionary *)attributes withTransaction:(YapDatabaseReadWriteTransaction*)transaction;
+
+/**
+ * Update an object using given transaction with the given attributes, optionally keeping it's existing metadata.
+ *
+ * @param attributes the attributes to set to update.
+ * @param transaction the transaction.
+ */
+- (void)update:(NSDictionary *)attributes withTransaction:(YapDatabaseReadWriteTransaction*)transaction keepMetadata:(BOOL)keepMetadata;
 
 /**
  * Get all objects of the collection in given transaction.

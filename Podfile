@@ -10,6 +10,6 @@ target 'YapModel' do
 end
 
 target "YapModelTests" do
-  pod 'YapModel', :path=>'./'
+  pod 'YapModel@alt', :path=>'./'
   pod 'Kiwi'
 end

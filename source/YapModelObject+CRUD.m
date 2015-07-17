@@ -67,11 +67,27 @@
 
 - (void)saveWithTransaction:(YapDatabaseReadWriteTransaction*)transaction
 {
+    [self saveWithTransaction:transaction keepMetadata:YES];
+}
+
+- (void)saveWithTransaction:(YapDatabaseReadWriteTransaction*)transaction keepMetadata:(BOOL)keepMetadata
+{
     if (!self.key) {
         self.key = [[NSUUID UUID] UUIDString];
     }
-    [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName]];
+    if(keepMetadata)
+    {
+        id metadata = nil;
+        [transaction getObject:NULL metadata:&metadata forKey:self.key inCollection:[[self class] collectionName]];
+        [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName] withMetadata:metadata];
+    }
+    else
+    {
+        [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName]];
+    }
 }
+
+
 
 - (void)deleteWithTransaction:(YapDatabaseReadWriteTransaction*)transaction
 {
@@ -101,10 +117,26 @@
 
 - (void)update:(NSDictionary *)attributes withTransaction:(YapDatabaseReadWriteTransaction*)transaction
 {
+    [self update:attributes withTransaction:transaction keepMetadata:YES];
+}
+
+- (void)update:(NSDictionary *)attributes withTransaction:(YapDatabaseReadWriteTransaction*)transaction keepMetadata:(BOOL)keepMetadata
+{
     [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL *stop) {
         [self setValue:obj forKey:key];
     }];
-    [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName]];
+    
+    if(keepMetadata)
+    {
+        id metadata = nil;
+        [transaction getObject:NULL metadata:&metadata forKey:self.key inCollection:[[self class] collectionName]];
+        [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName]];
+    }
+    else
+    {
+        [transaction setObject:self forKey:self.key inCollection:[[self class] collectionName]];
+    }
+    
 }
 
 + (NSArray *)allWithTransaction:(YapDatabaseReadTransaction*)transaction
