@@ -153,9 +153,9 @@ static NSMutableDictionary* _configuration;
                 if (![file isKindOfClass:[NSString class]]) {
                     [NSException raise:NSInternalInconsistencyException format:@"the file (%@) is not string", file];
                 }
-
+                
                 YapDatabaseRelationshipEdge *edge = [YapDatabaseRelationshipEdge edgeWithName:edgeName
-                                                                          destinationFilePath:file
+                                                                           destinationFileURL:[NSURL fileURLWithPath:file]
                                                                               nodeDeleteRules:rule.integerValue];
 
                 [edges addObject:edge];
