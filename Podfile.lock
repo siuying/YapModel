@@ -1,64 +1,105 @@
 PODS:
-  - AutoCoding (2.2)
-  - CocoaLumberjack (1.6.5.1):
-    - CocoaLumberjack/Core (= 1.6.5.1)
-    - CocoaLumberjack/Extensions (= 1.6.5.1)
-  - CocoaLumberjack/Core (1.6.5.1)
-  - CocoaLumberjack/Extensions (1.6.5.1):
+  - AutoCoding (2.2.1)
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
-  - Kiwi (2.3.0)
-  - libextobjc (0.4):
-    - libextobjc/EXTADT (= 0.4)
-    - libextobjc/EXTConcreteProtocol (= 0.4)
-    - libextobjc/EXTKeyPathCoding (= 0.4)
-    - libextobjc/EXTNil (= 0.4)
-    - libextobjc/EXTSafeCategory (= 0.4)
-    - libextobjc/EXTScope (= 0.4)
-    - libextobjc/EXTSelectorChecking (= 0.4)
-    - libextobjc/EXTSynthesize (= 0.4)
-    - libextobjc/NSInvocation+EXT (= 0.4)
-    - libextobjc/NSMethodSignature+EXT (= 0.4)
-    - libextobjc/RuntimeExtensions (= 0.4)
-    - libextobjc/UmbrellaHeader (= 0.4)
-  - libextobjc/EXTADT (0.4):
+  - CocoaLumberjack/Extensions (2.2.0):
+    - CocoaLumberjack/Default
+  - Kiwi (2.4.0)
+  - libextobjc (0.4.1):
+    - libextobjc/EXTADT (= 0.4.1)
+    - libextobjc/EXTConcreteProtocol (= 0.4.1)
+    - libextobjc/EXTKeyPathCoding (= 0.4.1)
+    - libextobjc/EXTNil (= 0.4.1)
+    - libextobjc/EXTSafeCategory (= 0.4.1)
+    - libextobjc/EXTScope (= 0.4.1)
+    - libextobjc/EXTSelectorChecking (= 0.4.1)
+    - libextobjc/EXTSynthesize (= 0.4.1)
+    - libextobjc/NSInvocation+EXT (= 0.4.1)
+    - libextobjc/NSMethodSignature+EXT (= 0.4.1)
+    - libextobjc/RuntimeExtensions (= 0.4.1)
+    - libextobjc/UmbrellaHeader (= 0.4.1)
+  - libextobjc/EXTADT (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTConcreteProtocol (0.4):
+  - libextobjc/EXTConcreteProtocol (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTKeyPathCoding (0.4):
+  - libextobjc/EXTKeyPathCoding (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTNil (0.4):
+  - libextobjc/EXTNil (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSafeCategory (0.4):
+  - libextobjc/EXTSafeCategory (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTScope (0.4):
+  - libextobjc/EXTScope (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSelectorChecking (0.4):
+  - libextobjc/EXTSelectorChecking (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSynthesize (0.4):
+  - libextobjc/EXTSynthesize (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/NSInvocation+EXT (0.4):
+  - libextobjc/NSInvocation+EXT (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/NSMethodSignature+EXT (0.4):
+  - libextobjc/NSMethodSignature+EXT (0.4.1):
     - libextobjc/RuntimeExtensions
-  - libextobjc/RuntimeExtensions (0.4)
-  - libextobjc/UmbrellaHeader (0.4)
-  - YapDatabase (2.6.4):
-    - YapDatabase/standard (= 2.6.4)
-  - YapDatabase/standard (2.6.4):
-    - CocoaLumberjack (~> 1)
+  - libextobjc/RuntimeExtensions (0.4.1)
+  - libextobjc/UmbrellaHeader (0.4.1)
+  - YapDatabase (2.8.1):
+    - YapDatabase/Standard (= 2.8.1)
+  - YapDatabase/Standard (2.8.1):
+    - YapDatabase/Standard/Core (= 2.8.1)
+    - YapDatabase/Standard/Extensions (= 2.8.1)
+  - YapDatabase/Standard/Core (2.8.1):
+    - CocoaLumberjack (~> 2)
+  - YapDatabase/Standard/Extensions (2.8.1):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/CloudKit (= 2.8.1)
+    - YapDatabase/Standard/Extensions/ConnectionProxy (= 2.8.1)
+    - YapDatabase/Standard/Extensions/FilteredViews (= 2.8.1)
+    - YapDatabase/Standard/Extensions/FullTextSearch (= 2.8.1)
+    - YapDatabase/Standard/Extensions/Hooks (= 2.8.1)
+    - YapDatabase/Standard/Extensions/Relationships (= 2.8.1)
+    - YapDatabase/Standard/Extensions/RTreeIndex (= 2.8.1)
+    - YapDatabase/Standard/Extensions/SearchResults (= 2.8.1)
+    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.1)
+    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.1)
+    - YapDatabase/Standard/Extensions/Views (= 2.8.1)
+  - YapDatabase/Standard/Extensions/CloudKit (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/ConnectionProxy (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/FilteredViews (2.8.1):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/Views
+  - YapDatabase/Standard/Extensions/FullTextSearch (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Hooks (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Relationships (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/RTreeIndex (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/SearchResults (2.8.1):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/FullTextSearch
+    - YapDatabase/Standard/Extensions/Views
+  - YapDatabase/Standard/Extensions/SecondaryIndex (2.8.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Views (2.8.1):
+    - YapDatabase/Standard/Core
 
 DEPENDENCIES:
   - AutoCoding (>= 2.2)
   - CocoaLumberjack
   - Kiwi
   - libextobjc
-  - YapDatabase (>= 2.6.4)
+  - YapDatabase (>= 2.8.0)
 
 SPEC CHECKSUMS:
-  AutoCoding: 17baf547ff7ace02b7e802d09e67b3b7419a6a05
-  CocoaLumberjack: 5e26ebef5a48962d1713ae6cb01da30384f3f14e
-  Kiwi: 4c3988bd551f80f6ca0009f302f7c1a2e3777bf2
-  libextobjc: f2802d4262f6885570df9799747409ceb1de602c
-  YapDatabase: f9051e178a38f48d0f3a78562423a5bc969f1ca3
+  AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  YapDatabase: 861c720d5850a59f9e5c0bad0fd95334012b9dc9
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0

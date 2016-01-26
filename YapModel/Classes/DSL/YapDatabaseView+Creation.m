@@ -33,7 +33,7 @@
 {
     YapDatabaseViewGrouping* grouping;
     if (groupByKeys && groupByKeys.count > 0) {
-        grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(NSString *collection, NSString *key, id object) {
+        grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(YapDatabaseReadTransaction *transaction, NSString *collection, NSString *key, id object) {
             NSMutableArray* groupByValues = [NSMutableArray array];
             [groupByKeys enumerateObjectsUsingBlock:^(NSString* groupBySelector, NSUInteger idx, BOOL *stop) {
                 id group = [object valueForKey:groupBySelector];
@@ -46,14 +46,14 @@
             return [groupByValues componentsJoinedByString:@"-"];
         }];
     } else {
-        grouping = [YapDatabaseViewGrouping withKeyBlock:^NSString *(NSString *collection, NSString *key) {
+        grouping = [YapDatabaseViewGrouping withKeyBlock:^NSString *(YapDatabaseReadTransaction *transaction, NSString *collection, NSString *key) {
             return @"all";
         }];
     }
     
     YapDatabaseViewSorting* sorting;
     if (sortByKeys && sortByKeys.count > 0) {
-        sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
+        sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(YapDatabaseReadTransaction *transaction, NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
             __block NSComparisonResult result = NSOrderedSame;
             [sortByKeys enumerateObjectsUsingBlock:^(NSString* sortBySelector, NSUInteger idx, BOOL *stop) {
                 NSComparisonResult _result = [[object1 valueForKey:sortBySelector] compare:[object2 valueForKey:sortBySelector]];
@@ -65,7 +65,7 @@
             return result;
         }];
     } else {
-        sorting = [YapDatabaseViewSorting withKeyBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, NSString *collection2, NSString *key2) {
+        sorting = [YapDatabaseViewSorting withKeyBlock:^NSComparisonResult(YapDatabaseReadTransaction *transaction, NSString *group, NSString *collection1, NSString *key1, NSString *collection2, NSString *key2) {
             return NSOrderedSame;
         }];
     }

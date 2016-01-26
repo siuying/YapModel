@@ -155,9 +155,8 @@ static NSMutableDictionary* _configuration;
                 }
 
                 YapDatabaseRelationshipEdge *edge = [YapDatabaseRelationshipEdge edgeWithName:edgeName
-                                                                          destinationFilePath:file
+                                                                           destinationFileURL:[NSURL fileURLWithPath:file]
                                                                               nodeDeleteRules:rule.integerValue];
-
                 [edges addObject:edge];
             }
         }

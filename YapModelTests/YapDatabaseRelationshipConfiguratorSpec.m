@@ -160,7 +160,7 @@ describe(@"YapDatabaseRelationshipConfigurator", ^{
             
             YapDatabaseRelationshipEdge* edge = [edges firstObject];
             [[edge.name should] equal:@"imageFile"];
-            [[edge.destinationFilePath should] equal:item1.imageFilePath];
+            [[edge.destinationFileURL should] equal:[NSURL fileURLWithPath:item1.imageFilePath]];
             [[theValue(edge.nodeDeleteRules) should] equal:theValue(YDB_DeleteDestinationIfAllSourcesDeleted)];
         });
     });
