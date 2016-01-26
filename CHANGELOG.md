@@ -1,5 +1,10 @@
 # Changelog
 
+1.0.0
+-----
+
++ Bump YapDatabase support to 2.8
+
 0.2.1 2014-02-16
 ------------------
 

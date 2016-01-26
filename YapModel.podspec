@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
-  s.version      = "0.7.0"
+  s.version      = "1.0.0"
   s.summary      = "YapModel is a DSL for working with YapDatabase."
 
   s.description  = <<-DESC
