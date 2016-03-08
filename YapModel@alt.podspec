@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files  = 'source/**/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'YapDatabase/SQLCipher', ~> 2.8.3'
+  s.dependency 'YapDatabase/SQLCipher', '~> 2.8.3'
   s.dependency 'AutoCoding', '~> 2.2'
   s.dependency 'libextobjc'
 end
