@@ -3,7 +3,7 @@ platform :ios, 8.0
 
 
 target 'YapModel' do
-  pod 'YapDatabase', '>= 2.6.4'
+  pod 'YapDatabase', '>= 2.8.3'
   pod 'AutoCoding', '>= 2.2'
   pod 'CocoaLumberjack'
   pod 'libextobjc'

@@ -67,6 +67,9 @@ NSString* const YapDatabaseFullTextSearchExtensionName = @"fts";
         [searchableProperties addObjectsFromArray:properties];
     }];
     
+    //nothing to do, bail out
+    if(!searchableProperties.count) return;
+    
     YapDatabaseFullTextSearch *fts = [[YapDatabaseFullTextSearch alloc] initWithColumnNames:searchableProperties handler:handler];
     
     if (![database registerExtension:fts withName:YapDatabaseFullTextSearchExtensionName])

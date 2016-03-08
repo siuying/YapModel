@@ -1,11 +1,14 @@
 PODS:
   - AutoCoding (2.2.1)
-  - CocoaLumberjack (1.9.2):
-    - CocoaLumberjack/Extensions (= 1.9.2)
-  - CocoaLumberjack/Core (1.9.2)
-  - CocoaLumberjack/Extensions (1.9.2):
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
-  - Kiwi (2.3.1)
+  - CocoaLumberjack/Extensions (2.2.0):
+    - CocoaLumberjack/Default
+  - Kiwi (2.4.0)
   - libextobjc (0.4.1):
     - libextobjc/EXTADT (= 0.4.1)
     - libextobjc/EXTConcreteProtocol (= 0.4.1)
@@ -41,27 +44,105 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - SQLCipher/common (3.1.0)
-  - SQLCipher/fts (3.1.0):
+  - SQLCipher/common (3.3.1)
+  - SQLCipher/fts (3.3.1):
     - SQLCipher/common
-  - YapDatabase (2.6.5):
-    - YapDatabase/standard (= 2.6.5)
-  - YapDatabase/SQLCipher (2.6.5):
-    - CocoaLumberjack (~> 1)
+  - YapDatabase (2.8.3):
+    - YapDatabase/Standard (= 2.8.3)
+  - YapDatabase/SQLCipher (2.8.3):
+    - YapDatabase/SQLCipher/Core (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions (= 2.8.3)
+  - YapDatabase/SQLCipher/Core (2.8.3):
+    - CocoaLumberjack (~> 2)
     - SQLCipher/fts
-  - YapDatabase/standard (2.6.5):
-    - CocoaLumberjack (~> 1)
-  - YapModel@alt (0.8.1):
+  - YapDatabase/SQLCipher/Extensions (2.8.3):
+    - YapDatabase/SQLCipher/Core
+    - YapDatabase/SQLCipher/Extensions/CloudKit (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/ConnectionProxy (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/FilteredViews (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/FullTextSearch (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/Hooks (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/Relationships (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/RTreeIndex (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/SearchResults (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/SecondaryIndex (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/SecondaryIndex (= 2.8.3)
+    - YapDatabase/SQLCipher/Extensions/Views (= 2.8.3)
+  - YapDatabase/SQLCipher/Extensions/CloudKit (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/ConnectionProxy (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/FilteredViews (2.8.3):
+    - YapDatabase/SQLCipher/Core
+    - YapDatabase/SQLCipher/Extensions/Views
+  - YapDatabase/SQLCipher/Extensions/FullTextSearch (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/Hooks (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/Relationships (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/RTreeIndex (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/SearchResults (2.8.3):
+    - YapDatabase/SQLCipher/Core
+    - YapDatabase/SQLCipher/Extensions/FullTextSearch
+    - YapDatabase/SQLCipher/Extensions/Views
+  - YapDatabase/SQLCipher/Extensions/SecondaryIndex (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/SQLCipher/Extensions/Views (2.8.3):
+    - YapDatabase/SQLCipher/Core
+  - YapDatabase/Standard (2.8.3):
+    - YapDatabase/Standard/Core (= 2.8.3)
+    - YapDatabase/Standard/Extensions (= 2.8.3)
+  - YapDatabase/Standard/Core (2.8.3):
+    - CocoaLumberjack (~> 2)
+  - YapDatabase/Standard/Extensions (2.8.3):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/CloudKit (= 2.8.3)
+    - YapDatabase/Standard/Extensions/ConnectionProxy (= 2.8.3)
+    - YapDatabase/Standard/Extensions/FilteredViews (= 2.8.3)
+    - YapDatabase/Standard/Extensions/FullTextSearch (= 2.8.3)
+    - YapDatabase/Standard/Extensions/Hooks (= 2.8.3)
+    - YapDatabase/Standard/Extensions/Relationships (= 2.8.3)
+    - YapDatabase/Standard/Extensions/RTreeIndex (= 2.8.3)
+    - YapDatabase/Standard/Extensions/SearchResults (= 2.8.3)
+    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.3)
+    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.3)
+    - YapDatabase/Standard/Extensions/Views (= 2.8.3)
+  - YapDatabase/Standard/Extensions/CloudKit (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/ConnectionProxy (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/FilteredViews (2.8.3):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/Views
+  - YapDatabase/Standard/Extensions/FullTextSearch (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Hooks (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Relationships (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/RTreeIndex (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/SearchResults (2.8.3):
+    - YapDatabase/Standard/Core
+    - YapDatabase/Standard/Extensions/FullTextSearch
+    - YapDatabase/Standard/Extensions/Views
+  - YapDatabase/Standard/Extensions/SecondaryIndex (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Views (2.8.3):
+    - YapDatabase/Standard/Core
+  - YapModel@alt (0.8.7):
     - AutoCoding (~> 2.2)
     - libextobjc
-    - YapDatabase/SQLCipher (~> 2.6)
+    - YapDatabase/SQLCipher (>= 2.8.3)
 
 DEPENDENCIES:
   - AutoCoding (>= 2.2)
   - CocoaLumberjack
   - Kiwi
   - libextobjc
-  - YapDatabase (>= 2.6.4)
+  - YapDatabase (>= 2.8.3)
   - YapModel@alt (from `./`)
 
 EXTERNAL SOURCES:
@@ -70,11 +151,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
-  CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
-  Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  SQLCipher: c44fcca49c31483c2489cfb79aa7a69407f3794a
-  YapDatabase: 814f9ff862a95c1e581d93335a4020482b69155b
-  YapModel@alt: 89b79a3a076549f1f17b54c38a9378f59429c18e
+  SQLCipher: d490d2effe735895d2204d25a154b1e722278421
+  YapDatabase: 15b6867a07ff30eac3af28794cd2262b4d0ca4ca
+  YapModel@alt: 82a49313757b5fe0dca0997ee70e6f40fb09a49b
 
-COCOAPODS: 0.38.0.beta.2
+COCOAPODS: 0.39.0

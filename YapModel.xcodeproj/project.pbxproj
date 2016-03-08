@@ -251,6 +251,7 @@
 				5475502D18AF754A001C8220 /* Frameworks */,
 				5475502E18AF754A001C8220 /* Resources */,
 				123709F4A03F13BF8CD8A180 /* Copy Pods Resources */,
+				57797415048D7D587176E2A9 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +271,7 @@
 				5475505118AF754A001C8220 /* Frameworks */,
 				5475505218AF754A001C8220 /* Resources */,
 				38777052F08C2B15DCA8C80C /* Copy Pods Resources */,
+				F7A97386501545555E8A27C2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,6 +398,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57797415048D7D587176E2A9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModel/Pods-YapModel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7A97386501545555E8A27C2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YapModelTests/Pods-YapModelTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
