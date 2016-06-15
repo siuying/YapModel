@@ -7,7 +7,7 @@
 //
 
 #import "YapDatabaseView+Creation.h"
-#import "YapWhitelistBlacklist.h"
+#import <YapDatabase/YapWhitelistBlacklist.h>
 
 #define YapDatabaseViewCreate(collection, groupBy, sortBy, version)
 

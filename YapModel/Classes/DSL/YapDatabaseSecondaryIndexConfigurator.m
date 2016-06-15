@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
+
 #import "YapDatabaseSecondaryIndexConfigurator.h"
-#import "YapDatabaseSecondaryIndex.h"
 #import "YapDatabaseSecondaryIndex+Creation.h"
-#import "YapDatabase.h"
 
 static NSMutableDictionary* _indicesConfiguration;
 

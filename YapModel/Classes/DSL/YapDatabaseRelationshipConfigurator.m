@@ -7,9 +7,9 @@
 //
 
 #import "YapDatabaseRelationshipConfigurator.h"
-#import "YapDatabaseRelationshipEdge.h"
-#import "YapDatabaseRelationship.h"
-#import "YapDatabase.h"
+#import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseRelationship.h>
+#import <YapDatabase/YapDatabaseRelationshipEdge.h>
 #import <objc/runtime.h>
 
 static NSMutableDictionary* _configuration;
