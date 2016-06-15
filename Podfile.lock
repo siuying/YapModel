@@ -1,12 +1,12 @@
 PODS:
   - AutoCoding (2.2.1)
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
+  - CocoaLumberjack (2.3.0):
+    - CocoaLumberjack/Default (= 2.3.0)
+    - CocoaLumberjack/Extensions (= 2.3.0)
+  - CocoaLumberjack/Core (2.3.0)
+  - CocoaLumberjack/Default (2.3.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
+  - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
   - Kiwi (2.4.0)
   - libextobjc (0.4.1):
@@ -44,48 +44,56 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - YapDatabase (2.8.1):
-    - YapDatabase/Standard (= 2.8.1)
-  - YapDatabase/Standard (2.8.1):
-    - YapDatabase/Standard/Core (= 2.8.1)
-    - YapDatabase/Standard/Extensions (= 2.8.1)
-  - YapDatabase/Standard/Core (2.8.1):
+  - Reachability (3.2)
+  - YapDatabase (2.9.1):
+    - YapDatabase/Standard (= 2.9.1)
+  - YapDatabase/Standard (2.9.1):
+    - YapDatabase/Standard/Core (= 2.9.1)
+    - YapDatabase/Standard/Extensions (= 2.9.1)
+  - YapDatabase/Standard/Core (2.9.1):
     - CocoaLumberjack (~> 2)
-  - YapDatabase/Standard/Extensions (2.8.1):
+  - YapDatabase/Standard/Extensions (2.9.1):
     - YapDatabase/Standard/Core
-    - YapDatabase/Standard/Extensions/CloudKit (= 2.8.1)
-    - YapDatabase/Standard/Extensions/ConnectionProxy (= 2.8.1)
-    - YapDatabase/Standard/Extensions/FilteredViews (= 2.8.1)
-    - YapDatabase/Standard/Extensions/FullTextSearch (= 2.8.1)
-    - YapDatabase/Standard/Extensions/Hooks (= 2.8.1)
-    - YapDatabase/Standard/Extensions/Relationships (= 2.8.1)
-    - YapDatabase/Standard/Extensions/RTreeIndex (= 2.8.1)
-    - YapDatabase/Standard/Extensions/SearchResults (= 2.8.1)
-    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.1)
-    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.8.1)
-    - YapDatabase/Standard/Extensions/Views (= 2.8.1)
-  - YapDatabase/Standard/Extensions/CloudKit (2.8.1):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/ConnectionProxy (2.8.1):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/FilteredViews (2.8.1):
+    - YapDatabase/Standard/Extensions/ActionManager (= 2.9.1)
+    - YapDatabase/Standard/Extensions/CloudKit (= 2.9.1)
+    - YapDatabase/Standard/Extensions/ConnectionProxy (= 2.9.1)
+    - YapDatabase/Standard/Extensions/CrossProcessNotification (= 2.9.1)
+    - YapDatabase/Standard/Extensions/FilteredViews (= 2.9.1)
+    - YapDatabase/Standard/Extensions/FullTextSearch (= 2.9.1)
+    - YapDatabase/Standard/Extensions/Hooks (= 2.9.1)
+    - YapDatabase/Standard/Extensions/Relationships (= 2.9.1)
+    - YapDatabase/Standard/Extensions/RTreeIndex (= 2.9.1)
+    - YapDatabase/Standard/Extensions/SearchResults (= 2.9.1)
+    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.9.1)
+    - YapDatabase/Standard/Extensions/Views (= 2.9.1)
+  - YapDatabase/Standard/Extensions/ActionManager (2.9.1):
+    - Reachability (~> 3)
     - YapDatabase/Standard/Core
     - YapDatabase/Standard/Extensions/Views
-  - YapDatabase/Standard/Extensions/FullTextSearch (2.8.1):
+  - YapDatabase/Standard/Extensions/CloudKit (2.9.1):
     - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Hooks (2.8.1):
+  - YapDatabase/Standard/Extensions/ConnectionProxy (2.9.1):
     - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Relationships (2.8.1):
+  - YapDatabase/Standard/Extensions/CrossProcessNotification (2.9.1):
     - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/RTreeIndex (2.8.1):
+  - YapDatabase/Standard/Extensions/FilteredViews (2.9.1):
     - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/SearchResults (2.8.1):
+    - YapDatabase/Standard/Extensions/Views
+  - YapDatabase/Standard/Extensions/FullTextSearch (2.9.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Hooks (2.9.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/Relationships (2.9.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/RTreeIndex (2.9.1):
+    - YapDatabase/Standard/Core
+  - YapDatabase/Standard/Extensions/SearchResults (2.9.1):
     - YapDatabase/Standard/Core
     - YapDatabase/Standard/Extensions/FullTextSearch
     - YapDatabase/Standard/Extensions/Views
-  - YapDatabase/Standard/Extensions/SecondaryIndex (2.8.1):
+  - YapDatabase/Standard/Extensions/SecondaryIndex (2.9.1):
     - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Views (2.8.1):
+  - YapDatabase/Standard/Extensions/Views (2.9.1):
     - YapDatabase/Standard/Core
 
 DEPENDENCIES:
@@ -97,9 +105,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  YapDatabase: 861c720d5850a59f9e5c0bad0fd95334012b9dc9
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: f2cdb86e9bcf5be38cc4c16a150fdd4dd0daabf8
+
+COCOAPODS: 1.0.1

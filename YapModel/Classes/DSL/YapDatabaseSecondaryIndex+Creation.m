@@ -20,7 +20,7 @@
         [setup addColumn:property withType:type];
     }];
 
-    return [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup handler:[YapDatabaseSecondaryIndexHandler withObjectBlock:^(NSMutableDictionary *dict, NSString *collection, NSString *key, id object) {
+    return [[YapDatabaseSecondaryIndex alloc] initWithSetup:setup handler:[YapDatabaseSecondaryIndexHandler withObjectBlock:^(YapDatabaseReadTransaction *transaction, NSMutableDictionary *dict, NSString *collection, NSString *key, id object) {
         if ([object isMemberOfClass:clazz]) {
             [properties enumerateKeysAndObjectsUsingBlock:^(NSString* property, NSNumber* typeValue, BOOL *stop) {
                 id indexedValue = [object valueForKey:property];

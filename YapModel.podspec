@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YapModel"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.summary      = "YapModel is a DSL for working with YapDatabase."
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files  = 'YapModel/Classes/**/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency 'YapDatabase', '>= 2.8'
+  s.dependency 'YapDatabase', '>= 2.8.3'
   s.dependency 'AutoCoding', '~> 2.2'
   s.dependency 'libextobjc'
 end
