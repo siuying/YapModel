@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <libextobjc/extobjc.h>
-#import "YapDatabaseRelationshipEdge.h"
+#import <YapDatabase/YapDatabaseRelationshipEdge.h>
 
 #define index(CLASS, NAME, ...) \
     property (nonatomic, readonly) unsigned char metamacro_concat(NAME, _ym_index_marker); \

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YapDatabaseSecondaryIndex.h"
+#import <YapDatabase/YapDatabaseSecondaryIndex.h>
 
 @class YapDatabase;
 

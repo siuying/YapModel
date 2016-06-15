@@ -9,6 +9,7 @@
 #import "YapDatabaseViewConfigurator.h"
 #import "YapDatabaseView+Creation.h"
 #import <YapDatabase/YapDatabase.h>
+#import <YapDatabase/YapDatabaseView.h>
 
 static NSMutableDictionary* _viewsConfiguration;
 NSString* const YapDatabaseViewConfiguratorGroupKey = @"group";
